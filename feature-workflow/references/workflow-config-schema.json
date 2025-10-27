@@ -1,0 +1,153 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Feature Workflow Configuration",
+  "description": "Configuration schema for feature-workflow orchestrator",
+  "type": "object",
+  "properties": {
+    "workflow": {
+      "type": "object",
+      "description": "Global workflow settings",
+      "properties": {
+        "phases": {
+          "type": "array",
+          "description": "Phases to execute in order",
+          "items": {
+            "type": "string",
+            "enum": ["research", "plan", "implement", "test", "fix"]
+          },
+          "default": ["research", "plan", "implement", "test", "fix"]
+        },
+        "skip_phases": {
+          "type": "array",
+          "description": "Phases to skip",
+          "items": {
+            "type": "string",
+            "enum": ["research", "plan", "implement", "test", "fix"]
+          },
+          "default": []
+        },
+        "stop_after": {
+          "type": ["string", "null"],
+          "description": "Stop after this phase",
+          "enum": ["research", "plan", "implement", "test", "fix", null],
+          "default": null
+        },
+        "auto_iterate": {
+          "type": "boolean",
+          "description": "Automatically iterate fix-test loop",
+          "default": true
+        },
+        "max_iterations": {
+          "type": "integer",
+          "description": "Maximum fix-test iterations",
+          "minimum": 1,
+          "maximum": 10,
+          "default": 3
+        },
+        "parallel_implementation": {
+          "type": "boolean",
+          "description": "Implement multiple steps in parallel worktrees (advanced)",
+          "default": false
+        }
+      }
+    },
+    "research": {
+      "type": "object",
+      "description": "Research phase configuration",
+      "properties": {
+        "create_poc": {
+          "type": "string",
+          "description": "When to create POC",
+          "enum": ["always", "if_needed", "never"],
+          "default": "if_needed"
+        },
+        "output_file": {
+          "type": "string",
+          "description": "Findings document filename",
+          "default": "findings.md"
+        }
+      }
+    },
+    "planning": {
+      "type": "object",
+      "description": "Planning phase configuration",
+      "properties": {
+        "output_file": {
+          "type": "string",
+          "description": "Plan document filename",
+          "default": "Plan.md"
+        },
+        "validate": {
+          "type": "boolean",
+          "description": "Run validate_plan.py after generation",
+          "default": true
+        }
+      }
+    },
+    "implementation": {
+      "type": "object",
+      "description": "Implementation phase configuration",
+      "properties": {
+        "use_worktree": {
+          "type": "boolean",
+          "description": "Create git worktree for implementation",
+          "default": false
+        },
+        "worktree_name": {
+          "type": ["string", "null"],
+          "description": "Worktree name (auto-generated if null)",
+          "default": null
+        },
+        "build_after_each_step": {
+          "type": "boolean",
+          "description": "Build after each implementation step",
+          "default": false
+        },
+        "test_after_each_step": {
+          "type": "boolean",
+          "description": "Run tests after each step",
+          "default": false
+        }
+      }
+    },
+    "testing": {
+      "type": "object",
+      "description": "Testing phase configuration",
+      "properties": {
+        "test_plan_file": {
+          "type": "string",
+          "description": "Test plan filename",
+          "default": "test-plan.md"
+        },
+        "failure_report_file": {
+          "type": "string",
+          "description": "Failure report filename",
+          "default": "test-failures.md"
+        },
+        "stop_on_first_failure": {
+          "type": "boolean",
+          "description": "Stop testing on first failure (for debugging)",
+          "default": false
+        }
+      }
+    },
+    "fixing": {
+      "type": "object",
+      "description": "Fixing phase configuration",
+      "properties": {
+        "max_fix_iterations": {
+          "type": "integer",
+          "description": "Maximum fix attempts",
+          "minimum": 1,
+          "maximum": 10,
+          "default": 3
+        },
+        "auto_retest": {
+          "type": "boolean",
+          "description": "Automatically re-run tests after fixes",
+          "default": true
+        }
+      }
+    }
+  }
+}
