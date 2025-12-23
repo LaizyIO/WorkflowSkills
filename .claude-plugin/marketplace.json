@@ -5,24 +5,26 @@
     "email": "guillaume@bovis.com"
   },
   "metadata": {
-    "description": "Complete workflow suite for feature implementation with research, planning, implementation, testing, and fixing phases",
-    "version": "1.0.0"
+    "description": "Complete workflow suite for feature implementation with specification, research, planning, implementation, testing, fixing, and critical review phases",
+    "version": "1.2.0"
   },
   "plugins": [
     {
       "name": "feature-workflow-suite",
-      "description": "Complete feature implementation workflow suite with 8 specialized skills covering research, planning, implementation, testing, fixing, git workflow, and test planning",
+      "description": "Complete feature implementation workflow suite with 10 specialized skills covering specification, research, planning, implementation, testing, fixing, git workflow, test planning, and critical review/challenge",
       "source": "./",
       "strict": false,
       "skills": [
         "./feature-workflow",
+        "./feature-specification",
         "./feature-research",
         "./implementation-planner",
         "./feature-implementer",
         "./test-plan-generator",
         "./test-executor",
         "./test-fixer",
-        "./git-workflow-manager"
+        "./git-workflow-manager",
+        "./workflow-challenger"
       ]
     }
   ]

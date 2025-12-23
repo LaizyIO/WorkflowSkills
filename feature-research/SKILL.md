@@ -1,19 +1,30 @@
 ---
 name: feature-research
-description: Guide interactive research and POC creation to understand features deeply. This skill should be used when planning to implement a new feature and needing to research design patterns, understand integration points in the codebase, consult documentation via MCP Deep Wiki, or create minimal POCs to validate concepts. The skill facilitates an iterative conversation-driven research process.
+description: Guide interactive research and POC creation to understand features deeply. This skill should be used when planning to implement a new feature and needing to research design patterns, understand integration points in the codebase, consult documentation via MCP Deep Wiki, or create minimal POCs to validate concepts. Can receive CDC.md from feature-specification as input for clear requirements.
 ---
 
 # Feature Research Skill
 
 ## Purpose
 
-Guide interactive research and understanding of features through conversation, documentation consultation, and selective proof-of-concept (POC) creation. This skill transforms feature ideas into well-understood, documented specifications ready for implementation planning.
+Guide interactive research and understanding of features through conversation, documentation consultation, and selective proof-of-concept (POC) creation. This skill transforms feature ideas into well-understood, documented technical specifications ready for implementation planning.
+
+**Note:** This skill focuses on TECHNICAL research (HOW to implement). For requirement clarification (WHAT to implement), use `feature-specification` first.
+
+## Input
+
+This skill can receive:
+- **CDC.md** (from `feature-specification`) - Provides clear, validated requirements to guide research
+- **Direct feature request** - If requirements are already clear
+
+When CDC.md exists, use it as the source of truth for requirements and focus research on technical implementation.
 
 ## When to Use This Skill
 
 Use this skill when:
 
-- Starting a new feature implementation and needing to understand requirements deeply
+- CDC.md is ready and technical research is needed
+- Starting a new feature implementation with clear requirements
 - Researching design patterns or architectural approaches for a feature
 - Needing to understand how a feature integrates with existing codebase
 - Consulting up-to-date documentation for frameworks, libraries, or APIs

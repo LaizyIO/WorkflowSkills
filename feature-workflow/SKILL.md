@@ -1,13 +1,15 @@
 ---
 name: feature-workflow
-description: Orchestrate complete or partial feature implementation workflow with configurable phases. This skill should be used to run the full workflow (research → plan → implement → test → fix) or specific phases, coordinating between all feature-implementation skills automatically.
+description: Orchestrate complete or partial feature implementation workflow with configurable phases. This skill should be used to run the full workflow (specification → research → plan → implement → test → fix) or specific phases, coordinating between all feature-implementation skills automatically.
 ---
 
 # Feature Workflow Orchestrator Skill
 
 ## Purpose
 
-Orchestrate the complete feature implementation workflow or run specific phases, coordinating between `feature-research`, `implementation-planner`, `feature-implementer`, `test-executor`, and `test-fixer` skills. Manages state passing between phases and enables both autonomous and manual workflows.
+Orchestrate the complete feature implementation workflow or run specific phases, coordinating between `feature-specification`, `feature-research`, `implementation-planner`, `feature-implementer`, `test-executor`, and `test-fixer` skills. Manages state passing between phases and enables both autonomous and manual workflows.
+
+**Support skill:** `workflow-challenger` can be invoked at any stage to challenge decisions, identify gaps, and verify coherence.
 
 ## When to Use This Skill
 
@@ -21,17 +23,19 @@ Use this skill when:
 
 ## Workflow Phases
 
-The feature implementation workflow consists of 5 phases:
+The feature implementation workflow consists of 6 phases:
 
 ```
+Phase 0: Specification (feature-specification)
+   ↓ CDC.md
 Phase 1: Research (feature-research)
-   ↓
+   ↓ findings.md
 Phase 2: Planning (implementation-planner)
-   ↓
+   ↓ Plan.md
 Phase 3: Implementation (feature-implementer)
-   ↓
+   ↓ code + test-plan.md
 Phase 4: Testing (test-executor)
-   ↓
+   ↓ test-failures.md (if failures)
 Phase 5: Fixing (test-fixer)
    ↓
    └─→ If tests still fail, loop back to Phase 5
@@ -41,12 +45,13 @@ Phase 5: Fixing (test-fixer)
 
 ### Mode 1: Full Workflow (Autonomous)
 
-Execute all 5 phases automatically:
+Execute all 6 phases automatically:
 
 ```
 User: "Implement email notifications feature"
 
 Orchestrator:
+0. Specification → CDC.md (iterative clarification)
 1. Research → findings.md
 2. Plan → Plan.md
 3. Implement → code + test-plan.md
@@ -56,9 +61,9 @@ Orchestrator:
 ```
 
 **Use When:**
-- Starting from scratch
-- Want hands-off implementation
-- Feature is well-defined
+- Starting from scratch with unclear requirements
+- Want complete hands-off implementation
+- Need to clarify feature scope before research
 
 ### Mode 2: Partial Workflow
 
@@ -142,12 +147,17 @@ Workflow behavior is configurable via JSON or interactive prompts.
 ```json
 {
   "workflow": {
-    "phases": ["research", "plan", "implement", "test", "fix"],
+    "phases": ["specification", "research", "plan", "implement", "test", "fix"],
     "skip_phases": [],
     "stop_after": null,
     "auto_iterate": true,
     "max_iterations": 3,
     "parallel_implementation": false
+  },
+  "specification": {
+    "output_file": "CDC.md",
+    "require_approval": true,
+    "max_question_iterations": 5
   },
   "research": {
     "create_poc": "if_needed",
@@ -179,12 +189,18 @@ Workflow behavior is configurable via JSON or interactive prompts.
 
 **Global Options:**
 
-- **`phases`**: List of phases to run (default: all)
-- **`skip_phases`**: Phases to skip (e.g., `["research"]`)
-- **`stop_after`**: Stop after specific phase (e.g., `"plan"` to stop before implementation)
+- **`phases`**: List of phases to run (default: all including specification)
+- **`skip_phases`**: Phases to skip (e.g., `["specification"]` if requirements are clear)
+- **`stop_after`**: Stop after specific phase (e.g., `"specification"` to get CDC only)
 - **`auto_iterate`**: Automatically iterate fix→test loop (default: true)
 - **`max_iterations`**: Max fix-test iterations before stopping (default: 3)
 - **`parallel_implementation`**: Implement multiple steps in parallel worktrees (advanced)
+
+**Specification Options:**
+
+- **`output_file`**: CDC document filename (default: "CDC.md")
+- **`require_approval`**: Require user approval before proceeding (default: true)
+- **`max_question_iterations`**: Max questioning rounds (default: 5)
 
 **Research Options:**
 
@@ -272,7 +288,11 @@ Workflow behavior is configurable via JSON or interactive prompts.
 Each phase produces output used by the next:
 
 ```
+Phase 0 (Specification):
+  Output: CDC.md
+  ↓
 Phase 1 (Research):
+  Input: CDC.md (optional, provides clear requirements)
   Output: findings.md
   ↓
 Phase 2 (Planning):
@@ -296,6 +316,7 @@ Phase 5 (Fixing):
 ```
 
 **State Files:**
+- `CDC.md` - Specification document (Cahier Des Charges)
 - `findings.md` - Research results
 - `Plan.md` - Implementation plan
 - `test-plan.md` - Test plan
@@ -304,11 +325,30 @@ Phase 5 (Fixing):
 
 ## Orchestration Logic
 
+### Phase 0: Specification
+
+**Invocation:**
+```
+Use feature-specification skill:
+  - Analyze project context
+  - Iterative questioning with user
+  - Be force of proposal
+  - Generate CDC.md
+```
+
+**Validation:**
+- Ensure CDC.md exists
+- Check all sections are complete
+- Check user approval obtained
+
+**Next:** Proceed to Research (or skip to Planning if research not needed)
+
 ### Phase 1: Research
 
 **Invocation:**
 ```
 Use feature-research skill:
+  - Read CDC.md for clear requirements
   - Interactive research with user
   - Consult MCP Deep Wiki
   - Create POC if needed
@@ -514,20 +554,23 @@ User provides feature request, orchestrator asks questions:
 User: "Implement email notifications"
 
 Orchestrator:
-  Q1: "Start from research or have findings already?"
-  User: "Start from research"
+  Q1: "Do you need to clarify requirements first (specification phase)?"
+  User: "Yes, requirements are not clear"
 
-  Q2: "Create POC if needed?"
+  Q2: "Start from research or have findings already?"
+  User: "Start from research after specification"
+
+  Q3: "Create POC if needed?"
   User: "Yes, if uncertain"
 
-  Q3: "Use git worktree for implementation?"
+  Q4: "Use git worktree for implementation?"
   User: "No, use main worktree"
 
-  Q4: "Auto-iterate on test failures?"
+  Q5: "Auto-iterate on test failures?"
   User: "Yes, max 3 iterations"
 
 Orchestrator: "Starting workflow with your preferences..."
-[Executes phases]
+[Executes phases starting from specification]
 ```
 
 ### Config File Mode
@@ -597,6 +640,47 @@ User invokes: feature-workflow (full)
 User invokes: feature-research (manual)
 User invokes: feature-workflow --skip research (automated from planning onwards)
 ```
+
+## Critical Review with Challenger
+
+The `workflow-challenger` skill can be invoked at any point to perform critical review:
+
+### When to Use Challenger
+
+- **After specification:** Verify CDC completeness before research
+- **After research:** Challenge technical decisions and alternatives
+- **After planning:** Verify plan coherence with requirements
+- **Before implementation:** Catch missing details early
+- **After test failures:** Understand root causes
+- **Anytime:** When something feels incomplete or uncertain
+
+### Challenger Integration
+
+```
+Phase 0: Specification → [Challenge CDC?] → Phase 1: Research
+Phase 1: Research → [Challenge Findings?] → Phase 2: Planning
+Phase 2: Planning → [Challenge Plan?] → Phase 3: Implementation
+...
+```
+
+### Invocation Examples
+
+```
+User: "Challenge the CDC before we start research"
+→ [workflow-challenger reviews CDC.md]
+→ Produces challenge report with gaps and questions
+
+User: "Something feels off about this plan, can you review it?"
+→ [workflow-challenger analyzes Plan.md vs CDC.md vs codebase]
+→ Identifies incoherences and missing elements
+```
+
+### What Challenger Analyzes
+
+- **Documents:** CDC.md, findings.md, Plan.md, test-plan.md
+- **Codebase:** Existing patterns, components, conventions
+- **Project docs:** [DOC]-* folders, architecture documentation
+- **Coherence:** Cross-document consistency
 
 ## Bundled Resources
 
