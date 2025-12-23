@@ -29,6 +29,35 @@ Use this skill:
 - Anytime something feels incomplete or uncertain
 - When user wants a second opinion on approach
 
+## IMPORTANT: User Interaction
+
+**Use the `AskUserQuestion` tool when clarification is needed on identified gaps.**
+
+After analysis, use AskUserQuestion to:
+- Confirm critical issues need resolution
+- Get user input on ambiguous findings
+- Prioritize which gaps to address first
+
+```
+AskUserQuestion:
+  questions:
+    - question: "I found that the CDC doesn't address error handling. How should we proceed?"
+      header: "Gap Found"
+      options:
+        - label: "Add to CDC now"
+          description: "Update the specification before continuing"
+        - label: "Note for later"
+          description: "Document as known gap, address during implementation"
+        - label: "Not needed"
+          description: "This case won't occur in practice"
+      multiSelect: false
+```
+
+This ensures:
+- User is aware of identified issues
+- Clear decision-making on how to proceed
+- Gaps are explicitly acknowledged or resolved
+
 ## Analysis Sources
 
 The challenger analyzes multiple sources to build comprehensive context:

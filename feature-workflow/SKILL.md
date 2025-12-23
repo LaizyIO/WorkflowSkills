@@ -11,6 +11,37 @@ Orchestrate the complete feature implementation workflow or run specific phases,
 
 **Support skill:** `workflow-challenger` can be invoked at any stage to challenge decisions, identify gaps, and verify coherence.
 
+## IMPORTANT: User Interaction
+
+**ALWAYS use the `AskUserQuestion` tool for workflow configuration questions.**
+
+When starting a workflow or needing user decisions, use structured questions:
+
+```
+AskUserQuestion:
+  questions:
+    - question: "Do you need to clarify requirements first?"
+      header: "Specification"
+      options:
+        - label: "Yes, start with CDC"
+          description: "Requirements are unclear, need specification phase"
+        - label: "No, requirements are clear"
+          description: "Skip specification, go directly to research"
+      multiSelect: false
+    - question: "Should we create a POC during research?"
+      header: "POC"
+      options:
+        - label: "If needed"
+          description: "Create POC only if technical feasibility is uncertain"
+        - label: "Always"
+          description: "Always create POC for validation"
+        - label: "Never"
+          description: "Skip POC, documentation is sufficient"
+      multiSelect: false
+```
+
+This ensures clear workflow configuration with explicit user choices.
+
 ## When to Use This Skill
 
 Use this skill when:

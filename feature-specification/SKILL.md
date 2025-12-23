@@ -13,6 +13,38 @@ Transform vague or incomplete requests into comprehensive, validated specificati
 - `feature-specification` = WHAT to do (define precisely)
 - `feature-research` = HOW to do it (technical research)
 
+## IMPORTANT: User Interaction
+
+**ALWAYS use the `AskUserQuestion` tool to ask questions to the user.**
+
+This tool allows structured questioning with multiple choice options:
+- Ask 1-4 questions at a time
+- Provide 2-4 options per question with descriptions
+- User can select options or provide custom "Other" response
+- Use `multiSelect: true` when multiple answers are valid
+
+**Example usage:**
+```
+AskUserQuestion:
+  questions:
+    - question: "Who are the primary users of this feature?"
+      header: "Users"
+      options:
+        - label: "Internal employees"
+          description: "Staff members using internal tools"
+        - label: "External customers"
+          description: "End users of the product"
+        - label: "Administrators"
+          description: "Users with elevated privileges"
+      multiSelect: true
+```
+
+**Why this matters:**
+- Structured questions are clearer for users
+- Options help users think through possibilities
+- Responses are unambiguous
+- Conversation stays focused
+
 ## Specification Workflow
 
 ### Phase 1: Initial Context Analysis

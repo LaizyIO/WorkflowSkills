@@ -19,6 +19,28 @@ This skill can receive:
 
 When CDC.md exists, use it as the source of truth for requirements and focus research on technical implementation.
 
+## IMPORTANT: User Interaction
+
+**ALWAYS use the `AskUserQuestion` tool when asking clarifying questions.**
+
+```
+AskUserQuestion:
+  questions:
+    - question: "Should we create a POC to validate this approach?"
+      header: "POC"
+      options:
+        - label: "Yes, create POC"
+          description: "Validate technical feasibility before proceeding"
+        - label: "No, skip POC"
+          description: "Documentation is sufficient, proceed to planning"
+      multiSelect: false
+```
+
+This ensures:
+- Clear, structured questions
+- User can choose from options or provide custom response
+- Conversation stays focused on technical decisions
+
 ## When to Use This Skill
 
 Use this skill when:
