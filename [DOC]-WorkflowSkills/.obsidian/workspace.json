@@ -1,0 +1,225 @@
+{
+  "main": {
+    "id": "15075ee36485a4bf",
+    "type": "split",
+    "children": [
+      {
+        "id": "a490446245242e05",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "184d31ddede1a608",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "01-Specs/CDC-Eglefor.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "CDC-Eglefor"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "0635be09c950db5f",
+    "type": "split",
+    "children": [
+      {
+        "id": "2f4ad3c81b00e075",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "fd72e007cb351e24",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Explorateur de fichiers"
+            }
+          },
+          {
+            "id": "d97195f0ece25a72",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Rechercher"
+            }
+          },
+          {
+            "id": "4cd30e5e35bec501",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Signets"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "40f5fbc2de44f1f0",
+    "type": "split",
+    "children": [
+      {
+        "id": "211b0e3564ddd984",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "dd64a1b0f1ee0cd4",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "10-Archives/FEAT-001-Audit-Prestation/FEAT-001-Audit-Findings.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Rétrolien pour FEAT-001-Audit-Findings"
+            }
+          },
+          {
+            "id": "47e0703c6f0fc545",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "10-Archives/FEAT-001-Audit-Prestation/FEAT-001-Audit-Findings.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Liens sortants de FEAT-001-Audit-Findings"
+            }
+          },
+          {
+            "id": "27323db84023b6e2",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Mots-clés"
+            }
+          },
+          {
+            "id": "7086d5db2aec0d45",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "Toutes les propriétés"
+            }
+          },
+          {
+            "id": "1471952f9a5ac6cf",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "10-Archives/FEAT-001-Audit-Prestation/FEAT-001-Audit-Findings.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Plan de FEAT-001-Audit-Findings"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Ouvrir le sélecteur rapide": false,
+      "graph:Ouvrir la vue graphique": false,
+      "canvas:Créer une nouvelle toile": false,
+      "daily-notes:Ouvrir la note quotidienne": false,
+      "templates:Insérer le modèle": false,
+      "command-palette:Ouvrir la palette de commandes": false,
+      "bases:Create new base": false,
+      "templater-obsidian:Templater": false,
+      "obsidian-kanban:Create new board": false
+    }
+  },
+  "active": "184d31ddede1a608",
+  "lastOpenFiles": [
+    "10-Archives/FEAT-001-Audit-Prestation/FEAT-001-Questions-Client.docx",
+    "10-Archives/FEAT-001-Audit-Prestation/FEAT-001-Review-Report.md",
+    "10-Archives/FEAT-001-Audit-Prestation/FEAT-001-Audit-Findings.md",
+    "10-Archives/FEAT-001-Audit-Prestation/FEAT-001-Questions-Client.md",
+    "FEAT-001-Questions-Client.pdf",
+    "10-Archives/FEAT-001-Audit-Prestation/SYNTHESE-Audit-EGLEFOR.md",
+    "10-Archives/FEAT-001-Audit-Prestation",
+    "07-Meetings/MEETING-2025-11-03-Resume.md",
+    "07-Meetings/MEETING-2025-11-03-Laizy-Presentation.md",
+    "07-Meetings/PRESENTATION-2025-11-Laizy-Commercial.md",
+    "01-Specs/CDC-Eglefor.md",
+    "10-Archives/README.md",
+    "08-Dev/README.md",
+    "07-Meetings/README.md",
+    "06-ADR/README.md",
+    "05-API/README.md",
+    "04-Features/README.md",
+    "03-Architecture/README.md",
+    "02-Database/README.md",
+    "01-Specs/README.md",
+    "00-MOC/MOC-Decisions.md",
+    "00-MOC/MOC-API.md",
+    "00-MOC/MOC-Database.md",
+    "00-MOC/MOC-Features.md",
+    "00-MOC/MOC-Architecture.md",
+    "00-MOC/MOC-Principal.md",
+    "10-Archives",
+    "08-Dev",
+    "07-Meetings",
+    "06-ADR",
+    "05-API",
+    "04-Features",
+    "03-Architecture",
+    "02-Database"
+  ]
+}

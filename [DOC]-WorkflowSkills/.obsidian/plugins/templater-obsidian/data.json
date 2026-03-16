@@ -1,0 +1,58 @@
+{
+  "command_timeout": 5,
+  "templates_folder": "_Templates",
+  "templates_pairs": [
+    [
+      "",
+      ""
+    ]
+  ],
+  "trigger_on_file_creation": true,
+  "auto_jump_to_cursor": false,
+  "enable_system_commands": false,
+  "shell_path": "",
+  "user_scripts_folder": "",
+  "enable_folder_templates": true,
+  "folder_templates": [
+    {
+      "folder": "00-MOC",
+      "template": "_Templates/TPL-MOC.md"
+    },
+    {
+      "folder": "01-Specs",
+      "template": "_Templates/TPL-Spec.md"
+    },
+    {
+      "folder": "03-Architecture",
+      "template": "_Templates/TPL-Architecture.md"
+    },
+    {
+      "folder": "06-ADR",
+      "template": "_Templates/TPL-ADR.md"
+    },
+    {
+      "folder": "",
+      "template": ""
+    },
+    {
+      "folder": "",
+      "template": ""
+    }
+  ],
+  "enable_file_templates": false,
+  "file_templates": [
+    {
+      "regex": ".*",
+      "template": ""
+    }
+  ],
+  "syntax_highlighting": true,
+  "syntax_highlighting_mobile": false,
+  "enabled_templates_hotkeys": [
+    ""
+  ],
+  "startup_templates": [
+    ""
+  ],
+  "intellisense_render": 1
+}
