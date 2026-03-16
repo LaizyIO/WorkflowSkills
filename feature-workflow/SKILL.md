@@ -54,7 +54,7 @@ Use this skill when:
 
 ## Workflow Phases
 
-The feature implementation workflow consists of 6 phases:
+The feature implementation workflow consists of 7 phases:
 
 ```
 Phase 0: Specification (feature-specification)
@@ -70,6 +70,8 @@ Phase 4: Testing (test-executor)
 Phase 5: Fixing (test-fixer)
    ↓
    └─→ If tests still fail, loop back to Phase 5
+Phase 6: Documentation (feature-implementer - doc phase)
+   ↓ updated [DOC]-* vault
 ```
 
 ## Workflow Modes
@@ -88,7 +90,8 @@ Orchestrator:
 3. Implement → code + test-plan.md
 4. Test → test-failures.md (if any)
 5. Fix → iterate until tests pass
-6. Complete!
+6. Documentation → update [DOC]-* vault
+7. Complete!
 ```
 
 **Use When:**
@@ -178,7 +181,7 @@ Workflow behavior is configurable via JSON or interactive prompts.
 ```json
 {
   "workflow": {
-    "phases": ["specification", "research", "plan", "implement", "test", "fix"],
+    "phases": ["specification", "research", "plan", "implement", "test", "fix", "documentation"],
     "skip_phases": [],
     "stop_after": null,
     "auto_iterate": true,
@@ -212,6 +215,12 @@ Workflow behavior is configurable via JSON or interactive prompts.
   "fixing": {
     "max_fix_iterations": 3,
     "auto_retest": true
+  },
+  "documentation": {
+    "enabled": true,
+    "vault_pattern": "[DOC]-*",
+    "doc_types": ["feat", "adr", "db", "arch", "api", "dev", "moc"],
+    "language": "fr"
   }
 }
 ```
@@ -343,7 +352,13 @@ Phase 5 (Fixing):
   Output: fixes + re-run tests
   ↓
   If failures persist → loop back to Phase 5
-  If all pass → Complete!
+  If all pass → Proceed to Documentation
+
+Phase 6 (Documentation):
+  Input: all code changes from Phases 3-5
+  Output: updated [DOC]-* vault (new/updated/archived documents)
+  ↓
+  Complete!
 ```
 
 **State Files:**
@@ -512,9 +527,36 @@ Iteration 3:
 - `auto_retest`: Automatically re-run tests after fixes
 
 **Next:**
-- If all pass → Complete!
+- If all pass → Proceed to Phase 6 (Documentation)
 - If failures and iterations remain → Retry Phase 5
 - If max iterations → Stop and report
+
+### Phase 6: Documentation
+
+**Invocation:**
+```
+Use feature-implementer skill (documentation phase):
+  - Detect [DOC]-* vault in project
+  - Scan for related existing documentation
+  - Compare code changes vs existing docs (Identifier → Comparer → Décider)
+  - Update outdated documents
+  - Create missing documents using TPL-*.md templates
+  - Archive obsolete documents to 10-Archives/
+  - Update MOC indexes
+  - All content in FRENCH
+```
+
+**Validation:**
+- Documentation changes were made (or explicitly skipped with reason)
+- New documents have proper YAML frontmatter
+- MOC indexes updated with wikilinks to new documents
+- All documentation content in FRENCH
+
+**Skip Conditions:**
+- No `[DOC]-*` vault exists in project
+- User explicitly skips documentation phase via config (`documentation.enabled: false`)
+
+**Next:** Complete!
 
 ## Progress Tracking
 
@@ -529,6 +571,7 @@ Progress:
   [✅] Phase 3: Implementation (100%)
   [⏳] Phase 4: Testing (in progress)
   [ ] Phase 5: Fixing
+  [ ] Phase 6: Documentation
 
 Current Status:
   Running E2E tests (5/10 complete)

@@ -27,6 +27,7 @@
 - [ ] **Phase 2**: [Phase Name] (0%)
 - [ ] **Phase 3**: [Phase Name] (0%)
 - [ ] **Phase 4**: [Phase Name] (0%)
+- [ ] **Phase Finale**: Documentation Update (0%)
 
 **Overall Progress:** 0/X phases complete
 
@@ -164,6 +165,69 @@ Comprehensive testing of the entire feature
 - [ ] Performance meets requirements
 - [ ] Manual testing complete
 - [ ] No critical bugs
+
+---
+
+## Phase Finale: Documentation Update
+
+### Goals
+Synchroniser le vault Obsidian du projet (`[DOC]-*`) avec tous les changements d'implémentation. S'assurer que la documentation reflète l'état réel du code après implémentation et validation des tests.
+
+### Prerequisites
+- Toutes les phases d'implémentation terminées
+- Tous les tests passent
+- Le code est stable et validé
+- Un vault `[DOC]-*` existe à la racine du projet (sinon skip cette phase)
+
+### Steps
+
+#### Analyse documentaire (Identifier → Comparer → Décider)
+
+- [ ] **Step D.1**: Scanner le vault `[DOC]-*` pour tous les documents liés à la feature
+  - **Location**: `[DOC]-*/` (sous-dossiers : 02-Database/, 03-Architecture/, 04-Features/, 05-API/, 06-ADR/, 08-Dev/)
+  - **Details**: Lister tous les fichiers FEAT, ADR, DB, ARCH, API, DEV, MOC qui référencent ou sont liés à la feature implémentée
+  - **Dependencies**: Toutes les phases d'implémentation et tests terminées
+
+- [ ] **Step D.2**: Comparer la documentation existante avec le code réel
+  - **Details**: Pour chaque document trouvé, vérifier si son contenu correspond au code actuel. Classifier : docs obsolètes, docs manquants, docs à jour
+  - **Dependencies**: Step D.1
+
+#### Mise à jour documentaire
+
+- [ ] **Step D.3**: Mettre à jour les documents obsolètes
+  - **Details**: Éditer les documents dont le contenu diverge du code. Mettre à jour le champ `updated` du frontmatter. Contenu en FRANÇAIS.
+  - **Dependencies**: Step D.2
+
+- [ ] **Step D.4**: Créer les documents manquants
+  - **Details**: Utiliser les templates `[DOC]-*/_Templates/TPL-*.md`. Suivre les conventions de nommage (PREFIX-XXX-Titre.md, numérotation 3 chiffres). Tout le contenu en FRANÇAIS.
+  - **Dependencies**: Step D.2
+
+- [ ] **Step D.5**: Archiver les documents obsolètes
+  - **Location**: `[DOC]-*/10-Archives/`
+  - **Details**: Déplacer vers 10-Archives/ les documents décrivant des features/code qui n'existent plus
+  - **Dependencies**: Step D.2
+
+- [ ] **Step D.6**: Mettre à jour les index MOC
+  - **Location**: `[DOC]-*/00-MOC/`
+  - **Details**: Ajouter les wikilinks vers les nouveaux documents dans MOC-Principal et les MOC de domaine concernés
+  - **Dependencies**: Steps D.3, D.4, D.5
+
+### Validation Criteria
+
+- [ ] Tous les changements de code sont reflétés dans la documentation
+- [ ] Aucune documentation obsolète ne subsiste pour les composants modifiés
+- [ ] Les nouvelles features/décisions/schémas ont des documents correspondants
+- [ ] Les index MOC incluent les liens vers tous les nouveaux documents
+- [ ] Tous les documents ont un frontmatter YAML valide (title, type, status, created, updated, tags)
+- [ ] Tout le contenu documentaire est en FRANÇAIS
+- [ ] Les wikilinks Obsidian sont correctement formatés (`[[Nom-Document]]`)
+
+### Notes
+
+- Philosophie : Code = Source de Vérité. Documentation = Reflet du Code.
+- Processus 3 phases : Identifier les docs existants → Comparer avec le code → Décider (Créer/Mettre à jour/Skip/Archiver)
+- Templates disponibles : TPL-Feature.md, TPL-ADR.md, TPL-Database.md, TPL-Architecture.md, TPL-API-Endpoint.md, TPL-Dev-Note.md, TPL-MOC.md
+- Si pas de vault `[DOC]-*` dans le projet : skip cette phase entièrement
 
 ---
 

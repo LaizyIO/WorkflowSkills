@@ -32,6 +32,7 @@ A good implementation plan is:
 - **Track able**: Uses checkboxes to show progress
 - **Testable**: Each step includes validation criteria
 - **Phased**: Breaks large features into logical stages
+- **Documentation-Aware**: Always includes a final documentation phase to synchronize the project's Obsidian vault (`[DOC]-*`) with implementation changes
 
 ## Creating an Implementation Plan
 
@@ -61,6 +62,7 @@ Break the feature into logical phases. Each phase should:
 4. Frontend Notification Settings UI
 5. Testing and Validation
 6. Deployment
+7. Documentation Update
 
 ### Step 3: Break Phases into Steps
 
@@ -129,7 +131,45 @@ For each step or phase, add clear success criteria:
 - [ ] Database migrations apply successfully
 ```
 
-### Step 7: Validate Plan
+### Step 7: Add Documentation Phase
+
+Every plan **MUST** include a final documentation phase after testing/validation. This phase ensures the project's Obsidian vault (`[DOC]-*`) stays synchronized with the implemented code.
+
+**Prerequisites:** The project must have a `[DOC]-*` Obsidian vault directory at its root. If none exists, note it in the plan and skip this phase.
+
+**The Documentation Phase follows the 3-step process: Identifier → Comparer → Décider**
+
+**Standard Documentation Phase Steps:**
+
+1. **Identifier les docs existants**: Scan the `[DOC]-*` vault for ALL documents related to the implemented feature (FEAT, ADR, DB, ARCH, API, DEV, MOC, SPEC files)
+2. **Comparer code vs documentation**: For each related document, compare what the doc says vs what the code actually does
+3. **Mettre à jour les docs obsolètes**: Edit documents where the code has diverged from documentation
+4. **Créer les docs manquants**: Generate new FEAT/ADR/DB/ARCH/API/DEV documents for code that has no documentation
+5. **Archiver les docs obsolètes**: Move to `10-Archives/` any documents that describe features/code that no longer exists
+6. **Mettre à jour les index MOC**: Add links to new documents in relevant MOC files (MOC-Principal and domain-specific MOCs)
+7. **Valider la complétude**: Verify every significant code change is reflected in documentation
+
+**Documentation Types to Consider:**
+
+| Type | Prefix | Folder | Triggered By |
+|------|--------|--------|--------------|
+| Feature | `FEAT-XXX` | `04-Features/` | New or modified features |
+| Decision Record | `ADR-XXX` | `06-ADR/` | Architecture decisions made during implementation |
+| Database | `DB-XXX` | `02-Database/` | Database schema changes |
+| Architecture | `ARCH-XXX` | `03-Architecture/` | Architecture/structure changes |
+| API | `API-XXX` | `05-API/` | New or modified API endpoints |
+| Dev Note | `DEV-XXX` | `08-Dev/` | Setup changes, notable problem resolutions, workarounds |
+| Map of Content | `MOC-XXX` | `00-MOC/` | Index updates for new documents |
+
+**Key Rules:**
+- ALL documentation content must be in **FRENCH**
+- Follow templates from `[DOC]-*/_Templates/TPL-*.md`
+- Use proper naming conventions (3-digit numbering: FEAT-001, ADR-002)
+- Include proper YAML frontmatter (title, type, status, created, updated, tags)
+- Use Obsidian wikilinks `[[Document-Name]]` for cross-references
+- **Code = Source de Vérité. Documentation = Reflet du Code.**
+
+### Step 8: Validate Plan
 
 Use `scripts/validate_plan.py` to check:
 - All sections are present
@@ -290,6 +330,7 @@ Add email notifications sent via Microsoft Graph when forms are submitted.
 - [ ] Phase 2: Queue Integration (50%)
 - [ ] Phase 3: Frontend Settings (0%)
 - [ ] Phase 4: Testing (0%)
+- [ ] Phase 5: Documentation Update (0%)
 
 ---
 
@@ -381,6 +422,30 @@ Comprehensive testing of email notification flow.
 - [ ] Manual test emails received
 - [ ] No performance degradation with high email volume
 - [ ] Hangfire dashboard shows successful processing
+
+---
+
+## Phase 5: Documentation Update
+
+### Goals
+Synchroniser le vault Obsidian `[DOC]-*` avec tous les changements d'implémentation.
+
+### Steps
+
+- [ ] Scanner le vault `[DOC]-*` pour les docs liés (FEAT, ADR, DB, API, DEV)
+- [ ] Comparer documentation existante vs code réel
+- [ ] Mettre à jour FEAT-XXX pour la feature email notifications
+- [ ] Créer ADR-XXX si des décisions d'architecture ont été prises (choix Microsoft Graph, Hangfire)
+- [ ] Créer/mettre à jour API-XXX pour les nouveaux endpoints
+- [ ] Mettre à jour les MOC concernés
+
+**Dependencies**: All previous phases must be complete
+
+### Validation Criteria
+- [ ] Documentation reflète le code réel
+- [ ] Tous les nouveaux documents ont un frontmatter valide
+- [ ] Contenu en FRANÇAIS
+- [ ] Wikilinks Obsidian corrects
 
 ---
 

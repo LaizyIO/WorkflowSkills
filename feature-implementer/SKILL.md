@@ -150,6 +150,99 @@ make test
 
 See `test-plan-generator` skill for detailed test plan generation.
 
+### Phase 6: Documentation Update
+
+When the plan includes a Documentation phase (it should always be the last phase), execute it using the following process.
+
+**Skip condition:** If no `[DOC]-*` directory exists at the project root, skip this phase entirely and note it in the plan.
+
+#### 1. Detect the Obsidian Vault
+
+- Look for a `[DOC]-*` directory at the project root
+- Identify the vault structure: list subdirectories (00-MOC/, 02-Database/, 03-Architecture/, 04-Features/, 05-API/, 06-ADR/, 08-Dev/, 10-Archives/)
+- Locate templates: `[DOC]-*/_Templates/TPL-*.md`
+
+#### 2. Scan for Related Documentation
+
+Glob each relevant subdirectory for documents related to the implemented feature:
+
+```
+[DOC]-*/04-Features/FEAT-*.md   → Feature specifications
+[DOC]-*/06-ADR/ADR-*.md         → Architecture Decision Records
+[DOC]-*/02-Database/DB-*.md     → Database schemas
+[DOC]-*/03-Architecture/ARCH-*.md → Architecture documentation
+[DOC]-*/05-API/API-*.md         → API endpoint documentation
+[DOC]-*/08-Dev/DEV-*.md         → Development notes
+[DOC]-*/00-MOC/MOC-*.md         → Index files
+```
+
+Read each potentially related document to understand what is currently documented.
+
+#### 3. Compare Code vs Documentation (Identifier → Comparer → Décider)
+
+For each document found:
+- **Read the document** to extract what it claims
+- **Read the actual code** it references (files, classes, endpoints, schemas)
+- **Compare** and classify:
+  - Code = Doc → **SKIP** (no action needed)
+  - Code ≠ Doc → **UPDATE** the document to match code
+  - Code exists, no Doc → **CREATE** new document
+  - Doc exists, code removed → **ARCHIVE** (move to 10-Archives/)
+
+**Critical:** NEVER trust only plan descriptions. Always verify actual file contents with the Read tool. The code is the source of truth.
+
+#### 4. Execute Documentation Changes
+
+**For UPDATES:**
+- Edit the existing document to match current code reality
+- Update the `updated` field in YAML frontmatter to today's date
+- Keep existing document structure, only modify content that diverged
+- Content in FRENCH
+
+**For CREATES:**
+1. Read the appropriate template: `[DOC]-*/_Templates/TPL-{Type}.md`
+2. Detect next available number: glob existing files in target folder, find max number, increment
+3. Create document following template structure with naming convention `PREFIX-XXX-Titre.md`
+4. Fill YAML frontmatter with proper metadata:
+   ```yaml
+   ---
+   title: Titre du document
+   type: feature|adr|database|arch|api|dev
+   status: draft
+   created: YYYY-MM-DD
+   updated: YYYY-MM-DD
+   tags:
+     - relevant-tags
+   ---
+   ```
+5. ALL content must be in **FRENCH**
+6. Add wikilinks `[[Document-Name]]` to related documents
+
+**For ARCHIVES:**
+- Move file to `[DOC]-*/10-Archives/`
+- Update any MOC that referenced the archived document (remove or mark as archived)
+
+#### 5. Update MOC Indexes
+
+- Read `[DOC]-*/00-MOC/MOC-Principal.md`
+- Add wikilinks for all newly created documents in the appropriate sections
+- Update domain-specific MOCs if they exist (e.g., MOC-Architecture, MOC-API)
+- Remove references to archived documents
+
+#### 6. Validate and Mark Complete
+
+- Verify all created/updated documents have valid YAML frontmatter
+- Verify wikilinks resolve correctly (referenced documents exist)
+- Mark documentation steps complete in the plan: `- [ ]` → `- [x]`
+- Update phase progress percentage
+
+**Key Conventions:**
+- **Language**: ALL documentation content in FRENCH (variable names and code excerpts stay in original language)
+- **Naming**: `PREFIX-XXX-Titre.md` (3-digit zero-padded numbers)
+- **Frontmatter**: Required fields: title, type, status, created, updated, tags
+- **Links**: `[[Document-Name]]` format (no .md extension, no path prefix)
+- **Philosophy**: Code = Source de Vérité. Documentation = Reflet du Code.
+
 ## Handling Different Project Types
 
 ### React/TypeScript Project
@@ -384,8 +477,8 @@ If step cannot be completed:
 
 ```
 feature-research → implementation-planner → feature-implementer → test-executor → test-fixer
-                                                    ↓
-                                            test-plan-generator
+                                                    ↓                                  ↓
+                                            test-plan-generator              documentation-update
 ```
 
 ## Common Implementation Patterns
@@ -439,6 +532,9 @@ feature-research → implementation-planner → feature-implementer → test-exe
 8. **Ask When Uncertain**: If build/test commands unknown, ask user
 9. **Generate Test Plans**: Don't forget to create test-plan.md
 10. **Communicate Progress**: Keep plan updated for visibility
+11. **Update Documentation Last**: Documentation phase runs after code is stable and all tests pass
+12. **Follow Templates**: Always use `[DOC]-*/_Templates/TPL-*.md` when creating new documentation
+13. **Code is Truth**: Documentation must reflect actual code, not plans or intentions
 
 ## Bundled Resources
 
