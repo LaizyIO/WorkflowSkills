@@ -24,7 +24,8 @@
         "./test-executor",
         "./test-fixer",
         "./git-workflow-manager",
-        "./workflow-challenger"
+        "./workflow-challenger",
+        "./linear-issue-creator"
       ]
     }
   ]
