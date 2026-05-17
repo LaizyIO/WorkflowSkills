@@ -309,13 +309,13 @@ Le skill gère automatiquement les worktrees Git pour développement parallèle.
 <claude-mem-context>
 # Memory Context
 
-# [WorkflowSkills] recent context, 2026-05-17 9:26am GMT+2
+# [WorkflowSkills] recent context, 2026-05-17 9:27am GMT+2
 
 Legend: 🎯session 🔴bugfix 🟣feature 🔄refactor ✅change 🔵discovery ⚖️decision 🚨security_alert 🔐security_note
 Format: ID TIME TYPE TITLE
 Fetch details: get_observations([IDs]) | Search: mem-search skill
 
-Stats: 7 obs (3 832t read) | 302 672t work | 99% savings
+Stats: 8 obs (4 149t read) | 304 468t work | 99% savings
 
 ### May 17, 2026
 495 9:12a ⚖️ Plan to Port Feature-Workflow-Suite Skills and CLAI CLI to Support OpenAI Codex
@@ -324,7 +324,8 @@ Stats: 7 obs (3 832t read) | 302 672t work | 99% savings
 499 " ⚖️ Full Implementation Plan Approved: CLAI Dual-Target Claude/Codex Migration
 500 " ⚖️ Architecture Decision: Dual-Target Mode (Claude/Codex) for clai + Feature Workflow Suite
 496 " 🔵 WorkflowSkills Repository Structure: Both CLAUDE.md and AGENTS.md Already Exist
+502 9:18a 🔵 Partial Commit State: SKILL.md Changes Committed, Obsidian Docs Partially Untracked
 501 9:25a 🔵 Dual-Target Migration Already Implemented in clai Codebase
 
-Access 303k tokens of past work via get_observations([IDs]) or mem-search skill.
+Access 304k tokens of past work via get_observations([IDs]) or mem-search skill.
 </claude-mem-context>
