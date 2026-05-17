@@ -512,3 +512,11 @@ def generate_test_plan(changes):
 
 - `scripts/analyze_changes.py` - Analyze git diff to determine test needs
 - `references/test-strategies.md` - Test strategies by change type
+
+
+## Compatibility Mapping (Claude -> Codex)
+
+- `AskUserQuestion` -> `request_user_input`
+- `Task tool` with `subagent_type` -> `spawn_agent` with `agent_type`
+- `Glob`/`Grep`/`Read` instructions -> use shell tooling (`rg`, `Get-Content`, `Get-ChildItem`)
+- If a Claude-specific primitive is unavailable, use the nearest Codex-native tool with equivalent intent

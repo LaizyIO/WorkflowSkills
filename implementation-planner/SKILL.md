@@ -512,3 +512,11 @@ Synchroniser le vault Obsidian `[DOC]-*` avec tous les changements d'implémenta
 - `scripts/validate_plan.py` - Validates plan structure and completeness
 - `references/plan-template.md` - Complete implementation plan template
 - `references/dependency-matrix.md` - Guide for identifying and documenting dependencies
+
+
+## Compatibility Mapping (Claude -> Codex)
+
+- `AskUserQuestion` -> `request_user_input`
+- `Task tool` with `subagent_type` -> `spawn_agent` with `agent_type`
+- `Glob`/`Grep`/`Read` instructions -> use shell tooling (`rg`, `Get-Content`, `Get-ChildItem`)
+- If a Claude-specific primitive is unavailable, use the nearest Codex-native tool with equivalent intent

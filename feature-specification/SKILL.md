@@ -15,7 +15,7 @@ Transform vague or incomplete requests into comprehensive, validated specificati
 
 ## IMPORTANT: User Interaction
 
-**ALWAYS use the `AskUserQuestion` tool to ask questions to the user.**
+**ALWAYS use the `request_user_input` tool to ask questions to the user.**
 
 This tool allows structured questioning with multiple choice options:
 - Ask 1-4 questions at a time
@@ -25,7 +25,7 @@ This tool allows structured questioning with multiple choice options:
 
 **Example usage:**
 ```
-AskUserQuestion:
+request_user_input:
   questions:
     - question: "Who are the primary users of this feature?"
       header: "Users"
@@ -222,3 +222,11 @@ The CDC becomes input for `feature-research`, providing clear requirements for t
 - `references/cdc-template.md` - Complete CDC template in French
 - `references/questioning-guide.md` - Detailed questioning strategies by category
 - `references/proposal-techniques.md` - Techniques for being proactive
+
+
+## Compatibility Mapping (Claude -> Codex)
+
+- `AskUserQuestion` -> `request_user_input`
+- `Task tool` with `subagent_type` -> `spawn_agent` with `agent_type`
+- `Glob`/`Grep`/`Read` instructions -> use shell tooling (`rg`, `Get-Content`, `Get-ChildItem`)
+- If a Claude-specific primitive is unavailable, use the nearest Codex-native tool with equivalent intent

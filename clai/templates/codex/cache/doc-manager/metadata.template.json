@@ -1,0 +1,16 @@
+{
+  "session_id": "",
+  "project_dir": "",
+  "doc_project": "",
+  "last_generation": {
+    "timestamp": "",
+    "generation_number": 0,
+    "last_processed_message_index": 0,
+    "last_message_uuid": "",
+    "total_messages": 0,
+    "files_generated": []
+  },
+  "history": [],
+  "version": "1.0",
+  "last_updated": ""
+}

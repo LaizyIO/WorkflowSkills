@@ -541,3 +541,11 @@ feature-research → implementation-planner → feature-implementer → test-exe
 - `references/implementation-checklist.md` - Quality checklist for implementations
 - `references/update-plan-guide.md` - Guide for updating plans
 - `references/common-build-patterns.md` - Build/test commands by framework
+
+
+## Compatibility Mapping (Claude -> Codex)
+
+- `AskUserQuestion` -> `request_user_input`
+- `Task tool` with `subagent_type` -> `spawn_agent` with `agent_type`
+- `Glob`/`Grep`/`Read` instructions -> use shell tooling (`rg`, `Get-Content`, `Get-ChildItem`)
+- If a Claude-specific primitive is unavailable, use the nearest Codex-native tool with equivalent intent

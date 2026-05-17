@@ -472,3 +472,11 @@ create-worktree feature another-feature
 - `scripts/list_worktrees.sh` - List all worktrees with status
 - `scripts/cleanup_worktrees.sh` - Clean up merged and stale worktrees
 - `references/gitflow-conventions.md` - Complete GitFlow reference
+
+
+## Compatibility Mapping (Claude -> Codex)
+
+- `AskUserQuestion` -> `request_user_input`
+- `Task tool` with `subagent_type` -> `spawn_agent` with `agent_type`
+- `Glob`/`Grep`/`Read` instructions -> use shell tooling (`rg`, `Get-Content`, `Get-ChildItem`)
+- If a Claude-specific primitive is unavailable, use the nearest Codex-native tool with equivalent intent

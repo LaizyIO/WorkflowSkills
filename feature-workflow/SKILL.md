@@ -13,12 +13,12 @@ Orchestrate the complete feature implementation workflow or run specific phases,
 
 ## IMPORTANT: User Interaction
 
-**ALWAYS use the `AskUserQuestion` tool for workflow configuration questions.**
+**ALWAYS use the `request_user_input` tool for workflow configuration questions.**
 
 When starting a workflow or needing user decisions, use structured questions:
 
 ```
-AskUserQuestion:
+request_user_input:
   questions:
     - question: "Do you need to clarify requirements first?"
       header: "Specification"
@@ -761,3 +761,11 @@ User: "Something feels off about this plan, can you review it?"
 - `scripts/orchestrate.py` - Main orchestration logic
 - `references/workflow-config-schema.json` - Complete configuration schema
 - `references/orchestration-examples.md` - Example workflows and configs
+
+
+## Compatibility Mapping (Claude -> Codex)
+
+- `AskUserQuestion` -> `request_user_input`
+- `Task tool` with `subagent_type` -> `spawn_agent` with `agent_type`
+- `Glob`/`Grep`/`Read` instructions -> use shell tooling (`rg`, `Get-Content`, `Get-ChildItem`)
+- If a Claude-specific primitive is unavailable, use the nearest Codex-native tool with equivalent intent

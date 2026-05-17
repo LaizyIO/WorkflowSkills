@@ -1,0 +1,43 @@
+{
+  "name": "@glamazere/clai",
+  "version": "1.1.2",
+  "description": "CLI pour installer et configurer Workflow Skills Suite pour Claude Code et Codex",
+  "main": "src/cli.js",
+  "bin": {
+    "clai": "./bin/clai.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "claude",
+    "claude-code",
+    "workflow",
+    "skills",
+    "documentation",
+    "obsidian",
+    "clai",
+    "claude-ai"
+  ],
+  "author": "Guillaume Lamazere <glamazere@laizy.io>",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^11.1.0",
+    "chalk": "^4.1.2",
+    "ora": "^5.4.1",
+    "inquirer": "^8.2.6",
+    "fs-extra": "^11.2.0",
+    "node-fetch": "^2.7.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LaizyIO/WorkflowSkills.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LaizyIO/WorkflowSkills/issues"
+  },
+  "homepage": "https://github.com/LaizyIO/WorkflowSkills#readme"
+}

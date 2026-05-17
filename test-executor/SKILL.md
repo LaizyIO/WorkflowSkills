@@ -551,3 +551,11 @@ Optional strategy for critical tests:
 - `scripts/start_services.sh` - Template for starting project services
 - `references/test-report-template.md` - Template for failure reports
 - `references/test-execution-patterns.md` - Execution patterns by test type
+
+
+## Compatibility Mapping (Claude -> Codex)
+
+- `AskUserQuestion` -> `request_user_input`
+- `Task tool` with `subagent_type` -> `spawn_agent` with `agent_type`
+- `Glob`/`Grep`/`Read` instructions -> use shell tooling (`rg`, `Get-Content`, `Get-ChildItem`)
+- If a Claude-specific primitive is unavailable, use the nearest Codex-native tool with equivalent intent

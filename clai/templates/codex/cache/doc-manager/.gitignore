@@ -1,0 +1,4 @@
+# Ignore tous les fichiers du cache sauf les templates
+*
+!.gitignore
+!metadata.template.json

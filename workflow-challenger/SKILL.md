@@ -31,15 +31,15 @@ Use this skill:
 
 ## IMPORTANT: User Interaction
 
-**Use the `AskUserQuestion` tool when clarification is needed on identified gaps.**
+**Use the `request_user_input` tool when clarification is needed on identified gaps.**
 
-After analysis, use AskUserQuestion to:
+After analysis, use request_user_input to:
 - Confirm critical issues need resolution
 - Get user input on ambiguous findings
 - Prioritize which gaps to address first
 
 ```
-AskUserQuestion:
+request_user_input:
   questions:
     - question: "I found that the CDC doesn't address error handling. How should we proceed?"
       header: "Gap Found"
@@ -231,7 +231,7 @@ Compile findings into a structured report:
 
 **Date:** [Date]
 **Stage:** [Specification / Research / Planning / etc.]
-**Challenger:** Claude Code
+**Challenger:** Codex
 
 ## Summary
 
@@ -419,3 +419,11 @@ Phase 2: Planning → [Challenge Plan] → Phase 3: Implementation
 
 - `references/challenge-checklist.md` - Comprehensive checklist by stage
 - `references/gap-analysis-guide.md` - Detailed gap analysis methodology
+
+
+## Compatibility Mapping (Claude -> Codex)
+
+- `AskUserQuestion` -> `request_user_input`
+- `Task tool` with `subagent_type` -> `spawn_agent` with `agent_type`
+- `Glob`/`Grep`/`Read` instructions -> use shell tooling (`rg`, `Get-Content`, `Get-ChildItem`)
+- If a Claude-specific primitive is unavailable, use the nearest Codex-native tool with equivalent intent

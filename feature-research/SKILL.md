@@ -21,10 +21,10 @@ When CDC.md exists, use it as the source of truth for requirements and focus res
 
 ## IMPORTANT: User Interaction
 
-**ALWAYS use the `AskUserQuestion` tool when asking clarifying questions.**
+**ALWAYS use the `request_user_input` tool when asking clarifying questions.**
 
 ```
-AskUserQuestion:
+request_user_input:
   questions:
     - question: "Should we create a POC to validate this approach?"
       header: "POC"
@@ -267,7 +267,7 @@ This document becomes the input for the `implementation-planner` skill.
 ```
 User: "I want to add email notifications when a form is submitted"
 
-Claude (using feature-research skill):
+Codex:
 1. "Let me research this feature. A few questions first:
    - Should emails be sent immediately or queued?
    - Are there specific email templates to use?
@@ -295,3 +295,11 @@ Claude (using feature-research skill):
 - `references/research-template.md` - Template for findings document
 - `references/deep-wiki-usage.md` - Guide for using MCP Deep Wiki effectively
 - `references/poc-guidelines.md` - Detailed POC creation guidelines
+
+
+## Compatibility Mapping (Claude -> Codex)
+
+- `AskUserQuestion` -> `request_user_input`
+- `Task tool` with `subagent_type` -> `spawn_agent` with `agent_type`
+- `Glob`/`Grep`/`Read` instructions -> use shell tooling (`rg`, `Get-Content`, `Get-ChildItem`)
+- If a Claude-specific primitive is unavailable, use the nearest Codex-native tool with equivalent intent
