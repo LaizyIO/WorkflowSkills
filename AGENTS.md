@@ -300,6 +300,14 @@ Le skill gère automatiquement les worktrees Git pour développement parallèle.
 - Archives workflow: `[DOC]-WorkflowSkills/10-Archives/`
 - Cache doc-manager: `.codex/cache/doc-manager/`
 
+## Marketplace Codex
+
+Pour importer cette suite dans Codex comme marketplace:
+
+- Source: `git@github.com:LaizyIO/WorkflowSkills.git`
+- Reference Git: `main`
+- Chemins partiels: `plugins/codex`
+
 ---
 
 **Dernière mise à jour**: 2026-03-16
@@ -309,13 +317,13 @@ Le skill gère automatiquement les worktrees Git pour développement parallèle.
 <claude-mem-context>
 # Memory Context
 
-# [WorkflowSkills] recent context, 2026-05-17 9:27am GMT+2
+# [WorkflowSkills] recent context, 2026-05-17 9:33am GMT+2
 
 Legend: 🎯session 🔴bugfix 🟣feature 🔄refactor ✅change 🔵discovery ⚖️decision 🚨security_alert 🔐security_note
 Format: ID TIME TYPE TITLE
 Fetch details: get_observations([IDs]) | Search: mem-search skill
 
-Stats: 8 obs (4 149t read) | 304 468t work | 99% savings
+Stats: 10 obs (5 133t read) | 348 621t work | 99% savings
 
 ### May 17, 2026
 495 9:12a ⚖️ Plan to Port Feature-Workflow-Suite Skills and CLAI CLI to Support OpenAI Codex
@@ -325,7 +333,10 @@ Stats: 8 obs (4 149t read) | 304 468t work | 99% savings
 500 " ⚖️ Architecture Decision: Dual-Target Mode (Claude/Codex) for clai + Feature Workflow Suite
 496 " 🔵 WorkflowSkills Repository Structure: Both CLAUDE.md and AGENTS.md Already Exist
 502 9:18a 🔵 Partial Commit State: SKILL.md Changes Committed, Obsidian Docs Partially Untracked
+S273 Implement dual-target (Claude/Codex) migration for clai CLI and Feature Workflow Suite (May 17, 9:20 AM)
 501 9:25a 🔵 Dual-Target Migration Already Implemented in clai Codebase
+503 9:27a 🟣 Dual Claude/Codex Target Support Committed to Main Branch
+504 9:28a 🟣 WorkflowSkills Repository Fully Clean — All Dual-Target Work Committed
 
-Access 304k tokens of past work via get_observations([IDs]) or mem-search skill.
+Access 349k tokens of past work via get_observations([IDs]) or mem-search skill.
 </claude-mem-context>

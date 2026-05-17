@@ -1,0 +1,40 @@
+{
+  "name": "workflow-skills",
+  "version": "1.2.0",
+  "description": "Feature workflow suite for Codex: specification, research, planning, implementation, testing, fixing, Git workflows, and documentation.",
+  "author": {
+    "name": "Guillaume",
+    "email": "guillaume@bovis.com",
+    "url": "https://github.com/LaizyIO"
+  },
+  "homepage": "https://github.com/LaizyIO/WorkflowSkills",
+  "repository": "https://github.com/LaizyIO/WorkflowSkills",
+  "license": "MIT",
+  "keywords": [
+    "codex",
+    "skills",
+    "workflow",
+    "feature",
+    "testing",
+    "documentation"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Workflow Skills",
+    "shortDescription": "Structured feature delivery skills for Codex.",
+    "longDescription": "A complete Codex-compatible workflow suite covering specification, research, planning, implementation, test planning, test execution, test fixing, Git worktrees, critical review, Linear issue creation, and Obsidian documentation maintenance.",
+    "developerName": "Guillaume",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/LaizyIO/WorkflowSkills",
+    "defaultPrompt": [
+      "Use feature-workflow for this feature.",
+      "Research this change before implementation.",
+      "Generate a test plan for this work."
+    ],
+    "brandColor": "#2563EB"
+  }
+}

@@ -268,3 +268,13 @@ MIT
 - `--target claude`: initialise `.claude/` et g?n?re/maj `CLAUDE.md`
 - `--target codex`: initialise `.codex/` et g?n?re/maj `AGENTS.md`
 - Ruflo reste disponible uniquement en target Claude
+
+## Import marketplace Codex
+
+Dans Codex, ajouter une place de marche avec:
+
+- Source: `git@github.com:LaizyIO/WorkflowSkills.git`
+- Reference Git: `main`
+- Chemins partiels: `plugins/codex`
+
+Le chemin `plugins/codex` contient le `marketplace.json` Codex, qui pointe vers le plugin `workflow-skills`.
