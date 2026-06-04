@@ -17,3 +17,11 @@ The plugin manifest is:
 ```text
 plugins/codex/workflow-skills/.codex-plugin/plugin.json
 ```
+
+Included design skill:
+
+```text
+ux-refactor
+```
+
+Use `$ux-refactor` when you want Codex to audit or improve a UI while preserving business logic.

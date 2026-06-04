@@ -1,7 +1,7 @@
 {
   "name": "workflow-skills",
-  "version": "1.2.0",
-  "description": "Feature workflow suite for Codex: specification, research, planning, implementation, testing, fixing, Git workflows, and documentation.",
+  "version": "1.3.0",
+  "description": "Feature workflow suite for Codex: specification, research, planning, implementation, UX refactoring, testing, fixing, Git workflows, and documentation.",
   "author": {
     "name": "Guillaume",
     "email": "guillaume@bovis.com",
@@ -16,13 +16,15 @@
     "workflow",
     "feature",
     "testing",
-    "documentation"
+    "documentation",
+    "ux",
+    "design"
   ],
   "skills": "./skills/",
   "interface": {
     "displayName": "Workflow Skills",
     "shortDescription": "Structured feature delivery skills for Codex.",
-    "longDescription": "A complete Codex-compatible workflow suite covering specification, research, planning, implementation, test planning, test execution, test fixing, Git worktrees, critical review, Linear issue creation, and Obsidian documentation maintenance.",
+    "longDescription": "A complete Codex-compatible workflow suite covering specification, research, planning, implementation, UX/UI refactoring, test planning, test execution, test fixing, Git worktrees, critical review, Linear issue creation, and Obsidian documentation maintenance.",
     "developerName": "Guillaume",
     "category": "Productivity",
     "capabilities": [
@@ -33,7 +35,7 @@
     "defaultPrompt": [
       "Use feature-workflow for this feature.",
       "Research this change before implementation.",
-      "Generate a test plan for this work."
+      "Use ux-refactor to improve this UI."
     ],
     "brandColor": "#2563EB"
   }
