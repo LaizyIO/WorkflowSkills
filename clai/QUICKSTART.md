@@ -58,8 +58,7 @@ clai init
 # Lancer Claude dans le projet
 claude
 
-# Utiliser la commande de documentation
-/doc-manager
+# Suivre le workflow feature et maintenir [DOC]-* pendant les phases de travail
 ```
 
 ## Installation Globale (Optionnelle)
@@ -94,15 +93,10 @@ votre-projet/
 ├── CLAUDE.md                 # Guide auto-généré pour Claude Code
 ├── .claude/
 │   ├── commands/
-│   │   └── doc-manager.md
 │   ├── agents/
-│   │   └── doc-manager-agent.md
 │   ├── output-styles/
 │   │   └── non-dev-explanatory.md
 │   └── cache/
-│       └── doc-manager/
-│           ├── .gitignore
-│           └── metadata.template.json
 └── [DOC]-VotreProjet/
     ├── 00-MOC/
     ├── 06-ADR/
@@ -116,8 +110,8 @@ votre-projet/
 
 1. Lancez Claude Code: `claude`
 2. Créez une conversation
-3. Utilisez `/doc-manager` pour générer la documentation
-4. Consultez `.claude/DOC-GENERATION-REPORT-SESSION-1.md`
+3. Suivez le workflow feature
+4. Mettez à jour `[DOC]-*` pendant les phases de specification, research, plan, implementation, tests et documentation
 
 ## Aide
 

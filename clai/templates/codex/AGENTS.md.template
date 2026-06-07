@@ -60,6 +60,54 @@ Templates are available in `_Templates/` for each document type.
 
 ---
 
+## UX DesignOps
+
+For any user-visible interface change, Codex must use the UX DesignOps workflow.
+
+### Sources
+
+- `DESIGN.md` at project root is the portable design contract.
+- Persistent UX memory lives in `[DOC]-{{PROJECT_NAME}}/11-UX-DesignOps/`.
+- `MOC-UX.md` lives in `[DOC]-{{PROJECT_NAME}}/00-MOC/`.
+- UX templates live in `[DOC]-{{PROJECT_NAME}}/_Templates/TPL-UX-*.md`.
+- There is no fallback to `docs/obsidian`.
+
+### UX Skills
+
+| Skill | Usage |
+|-------|-------|
+| `ux-bootstrap` | Initialize UX DesignOps memory |
+| `ux-audit` | Audit an existing UI before planning or coding |
+| `ux-flow` | Define user flow and state matrix |
+| `ux-component-spec` | Specify reusable UI components |
+| `ux-stitch-brief` | Prepare Stitch-ready design brief |
+| `ux-stitch-generate` | Prepare or run Stitch exploration |
+| `ux-stitch-iterate` | Iterate an existing Stitch direction |
+| `ux-code-to-stitch` | Translate current code into Stitch inputs |
+| `ux-implement-from-stitch` | Implement selected Stitch direction |
+| `ux-polish` | Improve UI quality without changing behavior |
+| `ux-visual-verification` | Verify UI with rendered desktop/mobile checks |
+| `ux-design-sync` | Sync code, DESIGN.md, UX docs and Stitch map |
+| `ux-storybook` | Use Storybook as component state catalog |
+
+### Required UI Verification
+
+UI changes must be visually verified with Playwright, the Codex Browser plugin, Storybook rendered through browser automation, or an equivalent rendering/capture tool.
+
+If no rendering tool is available, mark verification as blocked and add setup work. Do not validate UI changes through code-only review.
+
+### Stitch MCP
+
+When Stitch MCP is configured, use it for project, screen, and design system context. Store Stitch IDs and mappings in:
+
+```text
+[DOC]-{{PROJECT_NAME}}/11-UX-DesignOps/07-Stitch/Project_Map.md
+```
+
+Never store API keys in repository files or documentation.
+
+---
+
 ## Feature Workflow Skills
 
 Ce projet utilise la **Feature Workflow Suite** pour implémenter les features de manière structurée. Ces skills orchestrent le cycle complet : specification → research → plan → implement → test → fix.
@@ -264,30 +312,6 @@ clai ruflo init      # intégration safe-merge dans ce projet
 
 ---
 
-## Commandes Disponibles
-
-### `/doc-manager`
-Génère automatiquement la documentation Obsidian depuis la conversation actuelle.
-
-**Fonctionnalités:**
-- Mode incrémental (traite seulement les nouveaux messages)
-- Documentation 100% en français
-- Détection automatique des patterns (ADR, FEAT, DEV, etc.)
-- Génération de rapports de session
-
-**Utilisation:**
-```
-# Après une conversation de travail
-/doc-manager
-```
-
-**Fichiers générés:**
-- `.codex/DOC-GENERATION-REPORT-SESSION-X.md` - Rapport de génération
-- `.codex/cache/doc-manager/metadata.json` - Metadata pour mode incrémental
-- `[DOC]-{{PROJECT_NAME}}/XX-Category/DOC-XXX.md` - Documents générés
-
----
-
 ## Output Styles
 
 Des styles de sortie personnalisés sont disponibles dans `.codex/output-styles/`:
@@ -315,7 +339,6 @@ Le skill gère automatiquement les worktrees Git pour développement parallèle.
 - Documentation Obsidian: `[DOC]-{{PROJECT_NAME}}/`
 - Templates: `[DOC]-{{PROJECT_NAME}}/_Templates/`
 - Archives workflow: `[DOC]-{{PROJECT_NAME}}/10-Archives/`
-- Cache doc-manager: `.codex/cache/doc-manager/`
 
 ---
 

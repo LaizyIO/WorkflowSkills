@@ -18,10 +18,56 @@ The plugin manifest is:
 plugins/codex/workflow-skills/.codex-plugin/plugin.json
 ```
 
-Included design skill:
+## Included Workflows
+
+- Feature specification, research, implementation planning, implementation, testing, fixing, Git worktrees, and Linear issue creation.
+- UX DesignOps workflow for product UI work.
+- Stitch MCP-aware design exploration and synchronization.
+- Visual verification workflow for UI changes.
+
+## UX DesignOps Skills
+
+The previous `ux-refactor` skill is replaced by specialized skills:
 
 ```text
-ux-refactor
+ux-bootstrap
+ux-audit
+ux-flow
+ux-component-spec
+ux-stitch-brief
+ux-stitch-generate
+ux-stitch-iterate
+ux-code-to-stitch
+ux-implement-from-stitch
+ux-polish
+ux-visual-verification
+ux-design-sync
+ux-storybook
 ```
 
-Use `$ux-refactor` when you want Codex to audit or improve a UI while preserving business logic.
+Persistent UX documentation must use the project vault:
+
+```text
+[DOC]-<Project>/11-UX-DesignOps/
+```
+
+MOC and templates remain in the standard vault folders:
+
+```text
+[DOC]-<Project>/00-MOC/MOC-UX.md
+[DOC]-<Project>/_Templates/TPL-UX-*.md
+```
+
+There is no runtime fallback to `docs/obsidian`.
+
+## Visual Verification
+
+UI changes must be verified with Playwright, the Codex Browser plugin, Storybook rendered through browser automation, or an equivalent rendering/capture tool.
+
+If no rendering tool is available, the UX verification is blocked until the project has one.
+
+## Stitch MCP
+
+When Stitch MCP is configured, the UX Stitch skills should use available MCP tools for projects, screens, design systems, `DESIGN.md` upload, and design system application.
+
+Some advanced operations may not be exposed by the current MCP namespace, including direct screen generation, HTML upload/extraction, React/shadcn conversion, and `stitch-loop`. Delegate those operations to the official `google-labs-code/stitch-skills` ecosystem when needed.

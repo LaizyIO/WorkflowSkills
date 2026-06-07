@@ -135,8 +135,7 @@ clai init my-project
 # Lancer Claude Code
 claude
 
-# Utiliser les commandes
-/doc-manager
+# Suivre le workflow feature et maintenir [DOC]-* pendant les phases de travail
 ```
 
 ### Initialiser un projet existant
@@ -147,7 +146,6 @@ clai init
 
 # Les commandes sont maintenant disponibles
 claude
-/doc-manager
 ```
 
 ## Structure créée
@@ -159,15 +157,10 @@ my-project/
 ├── CLAUDE.md                 # Guide pour Claude Code (auto-généré)
 ├── .claude/
 │   ├── commands/
-│   │   └── doc-manager.md
 │   ├── agents/
-│   │   └── doc-manager-agent.md
 │   ├── output-styles/
 │   │   └── non-dev-explanatory.md
 │   └── cache/
-│       └── doc-manager/
-│           ├── .gitignore
-│           └── metadata.template.json
 └── [DOC]-MyProject/          # Si création demandée
     ├── 00-MOC/
     ├── 02-Database/
@@ -186,7 +179,7 @@ my-project/
 - **Feature Workflow Skills** - Guide d'utilisation des skills
 - **Hiérarchie des Sources de Vérité** - Ordre de priorité (CDC > DB > Meetings > ADR > FEAT)
 - **Règles Critiques** - Comment suivre la documentation Obsidian
-- **Commandes Disponibles** - Liste des commandes Claude Code
+- **Git Workflow** - Conventions de branches et worktrees
 
 **Comportement:**
 - **Première initialisation** → Crée `CLAUDE.md`
@@ -194,20 +187,6 @@ my-project/
 - **Contenu déjà présent** → Ignore (évite les duplications)
 
 Ce fichier sert de guide pour Claude Code dans votre projet.
-
-### Agents Dédiés
-
-`clai init` installe également des agents dédiés dans `.claude/agents/`:
-
-- **doc-manager-agent.md** - Agent spécialisé pour la génération de documentation Obsidian
-
-Les agents sont des subagents Claude Code autonomes avec leur propre prompt système et configuration. Ils sont automatiquement invoqués par les commandes (comme `/doc-manager`) pour effectuer des tâches complexes en arrière-plan.
-
-## Commandes Claude disponibles
-
-Après installation, vous aurez accès à:
-
-- `/doc-manager` - Génère la documentation Obsidian depuis la conversation
 
 ## Configuration
 

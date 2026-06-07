@@ -549,3 +549,18 @@ feature-research → implementation-planner → feature-implementer → test-exe
 - `Task tool` with `subagent_type` -> `spawn_agent` with `agent_type`
 - `Glob`/`Grep`/`Read` instructions -> use shell tooling (`rg`, `Get-Content`, `Get-ChildItem`)
 - If a Claude-specific primitive is unavailable, use the nearest Codex-native tool with equivalent intent
+
+## UX DesignOps Integration
+
+For UI implementation:
+
+- read `DESIGN.md`, related `[DOC]-*/11-UX-DesignOps/` docs, and the implementation plan before editing;
+- use `ux-polish` for focused UI refinement;
+- use `ux-implement-from-stitch` when implementing a selected Stitch direction;
+- preserve business logic, routes, APIs, validation, state management, and existing component architecture;
+- reuse existing components and tokens;
+- do not paste raw Stitch HTML when the project has reusable UI architecture;
+- update UX docs and visual debt after changes;
+- run `ux-visual-verification` before marking UI work complete.
+
+If visual verification cannot run because no rendering tool is available, mark the plan step blocked and document the missing setup.

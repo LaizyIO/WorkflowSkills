@@ -67,6 +67,7 @@ program
   .option('-d, --doc <name>', 'Nom du dossier [DOC]-')
   .option('-f, --force', 'Force l\'ecrasement sans confirmation')
   .option('-t, --target <target>', 'Cible d\'installation: claude ou codex')
+  .option('--no-ux', 'Ne pas installer UX DesignOps pour la cible Codex')
   .option('--with-ruflo', 'Integre Ruflo (multi-agents) sans prompter')
   .option('--no-ruflo', 'Desactive le prompt Ruflo')
   .action(async (name, options) => {
@@ -128,6 +129,7 @@ program
   .command('sync')
   .description('Met a jour les commandes et skills')
   .option('-t, --target <target>', 'Cible de sync: claude ou codex')
+  .option('--no-ux', 'Ne pas synchroniser UX DesignOps pour la cible Codex')
   .action(async (options) => {
     console.log(chalk.blue('Synchronisation...\n'));
     await syncProject(options);

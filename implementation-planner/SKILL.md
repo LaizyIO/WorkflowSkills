@@ -520,3 +520,16 @@ Synchroniser le vault Obsidian `[DOC]-*` avec tous les changements d'implémenta
 - `Task tool` with `subagent_type` -> `spawn_agent` with `agent_type`
 - `Glob`/`Grep`/`Read` instructions -> use shell tooling (`rg`, `Get-Content`, `Get-ChildItem`)
 - If a Claude-specific primitive is unavailable, use the nearest Codex-native tool with equivalent intent
+
+## UX DesignOps Integration
+
+For UI features, integrate UX work into the same `FEAT-XXX-Plan.md`; do not create a parallel UX plan. Add conditional phases or steps for:
+
+- `ux-flow` and `ux-component-spec` when flows or shared components are unclear;
+- `ux-audit` when modifying an existing surface;
+- Stitch MCP sync/generation when visual exploration or design system application is needed;
+- UI implementation via `ux-polish` or `ux-implement-from-stitch`;
+- `ux-visual-verification` with Playwright, Browser plugin, Storybook rendering, or equivalent;
+- `ux-design-sync` to update `DESIGN.md`, `MOC-UX.md`, and `[DOC]-*/11-UX-DesignOps/`.
+
+If no visual rendering tool is available, mark UI verification as blocked and add setup work. Do not plan a no-Playwright fallback.

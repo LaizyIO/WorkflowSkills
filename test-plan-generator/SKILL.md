@@ -520,3 +520,17 @@ def generate_test_plan(changes):
 - `Task tool` with `subagent_type` -> `spawn_agent` with `agent_type`
 - `Glob`/`Grep`/`Read` instructions -> use shell tooling (`rg`, `Get-Content`, `Get-ChildItem`)
 - If a Claude-specific primitive is unavailable, use the nearest Codex-native tool with equivalent intent
+
+## UX DesignOps Integration
+
+For UI changes, add UX test coverage without duplicating lower-level tests:
+
+- state matrix: loading, empty, error, success, disabled, selected, permission, offline when relevant;
+- desktop and mobile responsive checks;
+- keyboard navigation and focus-visible checks;
+- accessibility basics: labels, contrast, ARIA for icon-only controls, non-color-only errors;
+- visual comparison against Stitch screenshot or prompt when relevant;
+- Storybook state coverage when Storybook exists;
+- anti-slop checks against `DESIGN.md` and `[DOC]-*/11-UX-DesignOps/`.
+
+Always include `ux-visual-verification` in the test plan for user-visible UI changes.

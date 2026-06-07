@@ -247,30 +247,6 @@ Si des modifications ont été nécessaires pendant l'implémentation :
 
 ---
 
-## Commandes Disponibles
-
-### `/doc-manager`
-Génère automatiquement la documentation Obsidian depuis la conversation actuelle.
-
-**Fonctionnalités:**
-- Mode incrémental (traite seulement les nouveaux messages)
-- Documentation 100% en français
-- Détection automatique des patterns (ADR, FEAT, DEV, etc.)
-- Génération de rapports de session
-
-**Utilisation:**
-```
-# Après une conversation de travail
-/doc-manager
-```
-
-**Fichiers générés:**
-- `.codex/DOC-GENERATION-REPORT-SESSION-X.md` - Rapport de génération
-- `.codex/cache/doc-manager/metadata.json` - Metadata pour mode incrémental
-- `[DOC]-WorkflowSkills/XX-Category/DOC-XXX.md` - Documents générés
-
----
-
 ## Output Styles
 
 Des styles de sortie personnalisés sont disponibles dans `.codex/output-styles/`:
@@ -298,7 +274,6 @@ Le skill gère automatiquement les worktrees Git pour développement parallèle.
 - Documentation Obsidian: `[DOC]-WorkflowSkills/`
 - Templates: `[DOC]-WorkflowSkills/_Templates/`
 - Archives workflow: `[DOC]-WorkflowSkills/10-Archives/`
-- Cache doc-manager: `.codex/cache/doc-manager/`
 
 ## Marketplace Codex
 
@@ -317,13 +292,13 @@ Pour importer cette suite dans Codex comme marketplace:
 <claude-mem-context>
 # Memory Context
 
-# [WorkflowSkills] recent context, 2026-05-17 9:33am GMT+2
+# [WorkflowSkills] recent context, 2026-06-07 2:58pm GMT+2
 
 Legend: 🎯session 🔴bugfix 🟣feature 🔄refactor ✅change 🔵discovery ⚖️decision 🚨security_alert 🔐security_note
 Format: ID TIME TYPE TITLE
 Fetch details: get_observations([IDs]) | Search: mem-search skill
 
-Stats: 10 obs (5 133t read) | 348 621t work | 99% savings
+Stats: 11 obs (5 711t read) | 356 891t work | 98% savings
 
 ### May 17, 2026
 495 9:12a ⚖️ Plan to Port Feature-Workflow-Suite Skills and CLAI CLI to Support OpenAI Codex
@@ -337,6 +312,7 @@ S273 Implement dual-target (Claude/Codex) migration for clai CLI and Feature Wor
 501 9:25a 🔵 Dual-Target Migration Already Implemented in clai Codebase
 503 9:27a 🟣 Dual Claude/Codex Target Support Committed to Main Branch
 504 9:28a 🟣 WorkflowSkills Repository Fully Clean — All Dual-Target Work Committed
+505 9:33a 🔵 Claude vs Codex Plugin/Marketplace Format Incompatibility
 
-Access 349k tokens of past work via get_observations([IDs]) or mem-search skill.
+Access 357k tokens of past work via get_observations([IDs]) or mem-search skill.
 </claude-mem-context>

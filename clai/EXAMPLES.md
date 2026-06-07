@@ -33,7 +33,7 @@ Configuration documentation Obsidian...
 
 🎯 Prochaines étapes:
    1. Lancez Claude Code dans ce dossier
-   2. Utilisez /doc-manager pour générer la doc
+   2. Suivez le workflow feature et maintenez [DOC]-* pendant les phases de travail
 
 ✅ Projet initialisé avec succès!
 ```
@@ -43,13 +43,9 @@ Configuration documentation Obsidian...
 my-new-project/
 ├── .claude/
 │   ├── commands/
-│   │   └── doc-manager.md
 │   ├── output-styles/
 │   │   └── non-dev-explanatory.md
 │   └── cache/
-│       └── doc-manager/
-│           ├── .gitignore
-│           └── metadata.template.json
 └── [DOC]-my-app/
     ├── 00-MOC/
     ├── 06-ADR/
@@ -91,7 +87,7 @@ Configuration du cache...
 
 🎯 Prochaines étapes:
    1. Lancez Claude Code dans ce dossier
-   2. Utilisez /doc-manager pour générer la doc
+   2. Suivez le workflow feature et maintenez [DOC]-* pendant les phases de travail
 ```
 
 ---
@@ -134,8 +130,7 @@ Configuration du cache...
 ❯ 🔍 Afficher les fichiers existants
 
 Fichiers existants:
-  - doc-manager/.gitignore
-  - doc-manager/metadata.template.json
+  - metadata.template.json
 
 ? Action:
 ❯ ✅ Écraser
@@ -153,7 +148,7 @@ Fichiers existants:
 
 🎯 Prochaines étapes:
    1. Lancez Claude Code dans ce dossier
-   2. Utilisez /doc-manager pour générer la doc
+   2. Suivez le workflow feature et maintenez [DOC]-* pendant les phases de travail
 ```
 
 ---
@@ -183,7 +178,7 @@ Configuration du cache...
 
 🎯 Prochaines étapes:
    1. Lancez Claude Code dans ce dossier
-   2. Utilisez /doc-manager pour générer la doc
+   2. Suivez le workflow feature et maintenez [DOC]-* pendant les phases de travail
 ```
 
 **Cas d'usage:** Automatisation, CI/CD, scripts
@@ -199,7 +194,6 @@ $ clai global
 
 🌍 Installation des commandes globales...
 
-Installation de /doc-manager...
 Installation de /commit...
 Installation de /release...
 
@@ -209,7 +203,7 @@ Installation de /release...
 
 $ cd any-project
 $ claude
-# /doc-manager est disponible sans clai init!
+# Les commandes globales installees sont disponibles sans clai init
 ```
 
 ---
@@ -305,33 +299,13 @@ $ claude
 # 7. Travailler et documenter
 # ... conversation avec Claude ...
 
-# 8. Générer la documentation
-/doc-manager
+# 8. Mettre a jour la documentation pendant les phases du workflow
+# Exemple: creer ou mettre a jour FEAT/ADR/DEV selon le code reel
 
-✅ Agent de documentation lancé en background (Mode incrémental)
-
-📊 Session analysée:
-   - Messages totaux: 150
-   - Nouveaux messages: 150 (première génération)
-   - Génération: #1
-   - Projet: [DOC]-AwesomeApp
-
-⏳ L'agent analyse les nouveaux messages et génère la documentation...
-
-# 9. Vérifier la documentation générée
+# 9. Verifier la documentation maintenue
 $ ls [DOC]-AwesomeApp/08-Dev/
 DEV-001-Setup-Initial.md
 DEV-002-Architecture-Choice.md
-
-$ cat .claude/cache/doc-manager/metadata.json
-{
-  "session_id": "...",
-  "last_generation": {
-    "generation_number": 1,
-    "last_processed_message_index": 150,
-    "files_generated": [...]
-  }
-}
 ```
 
 ---
@@ -452,20 +426,6 @@ Ajoutez à votre `.bashrc` ou `.zshrc`:
 alias ci='clai init'
 alias cg='clai global'
 alias cs='clai sync'
-```
-
-### Git Integration
-
-Ajoutez à `.gitignore`:
-
-```gitignore
-# Cache doc-manager (données générées)
-.claude/cache/doc-manager/metadata.json
-.claude/cache/doc-manager/*.md
-
-# Mais gardez les templates
-!.claude/cache/doc-manager/.gitignore
-!.claude/cache/doc-manager/metadata.template.json
 ```
 
 ### CI/CD

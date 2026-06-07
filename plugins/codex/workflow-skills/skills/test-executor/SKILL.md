@@ -559,3 +559,15 @@ Optional strategy for critical tests:
 - `Task tool` with `subagent_type` -> `spawn_agent` with `agent_type`
 - `Glob`/`Grep`/`Read` instructions -> use shell tooling (`rg`, `Get-Content`, `Get-ChildItem`)
 - If a Claude-specific primitive is unavailable, use the nearest Codex-native tool with equivalent intent
+
+## UX DesignOps Integration
+
+When executing tests for UI changes, run the visual verification step from the test plan:
+
+- use Playwright, Codex Browser plugin, Storybook rendered through browser automation, or equivalent;
+- verify desktop and mobile viewports;
+- verify focus, keyboard, overflow, layout stability, and required UI states;
+- capture or reference screenshots when available;
+- write results to the test results document and related UX audit doc.
+
+If no rendering tool is available, do not mark the UI tests as passed. Report a blocked verification with the missing tool/configuration.

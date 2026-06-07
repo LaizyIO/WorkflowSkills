@@ -113,6 +113,127 @@ async function smartCopy(src, dest, label, spinner, force = false) {
   return { action: 'created' };
 }
 
+async function copyTemplateTree(src, dest, replacements = {}, force = false) {
+  if (!(await fs.pathExists(src))) {
+    return { action: 'skipped', reason: 'source not found', created: 0, updated: 0, skipped: 0 };
+  }
+
+  let created = 0;
+  let updated = 0;
+  let skipped = 0;
+
+  async function copyEntry(entrySrc, entryDest) {
+    const stat = await fs.stat(entrySrc);
+    if (stat.isDirectory()) {
+      await fs.ensureDir(entryDest);
+      const entries = await fs.readdir(entrySrc);
+      for (const entry of entries) {
+        await copyEntry(path.join(entrySrc, entry), path.join(entryDest, entry));
+      }
+      return;
+    }
+
+    const existed = await fs.pathExists(entryDest);
+    if (existed && !force) {
+      skipped++;
+      return;
+    }
+
+    await fs.ensureDir(path.dirname(entryDest));
+    let content = await fs.readFile(entrySrc, 'utf-8');
+    for (const [key, value] of Object.entries(replacements)) {
+      content = content.replace(new RegExp('\\{\\{' + key + '\\}\\}', 'g'), value);
+    }
+    await fs.writeFile(entryDest, content, 'utf-8');
+
+    if (existed) updated++;
+    else created++;
+  }
+
+  await copyEntry(src, dest);
+  return {
+    action: created > 0 || updated > 0 ? 'created' : 'skipped',
+    created,
+    updated,
+    skipped
+  };
+}
+
+async function findDocRoot(cwd, preferredName = null) {
+  if (preferredName) {
+    const preferred = path.join(cwd, '[DOC]-' + preferredName);
+    if (await fs.pathExists(preferred)) return preferred;
+  }
+
+  const entries = await fs.readdir(cwd, { withFileTypes: true });
+  const found = entries.find((entry) => entry.isDirectory() && entry.name.startsWith('[DOC]-'));
+  return found ? path.join(cwd, found.name) : null;
+}
+
+async function ensureMocUxLink(docRoot, today) {
+  const mocDir = path.join(docRoot, '00-MOC');
+  const mocPath = path.join(mocDir, 'MOC-Principal.md');
+  await fs.ensureDir(mocDir);
+
+  if (!(await fs.pathExists(mocPath))) {
+    await fs.writeFile(mocPath, `---
+title: MOC-Principal
+type: moc
+status: draft
+created: ${today}
+updated: ${today}
+tags:
+  - moc
+---
+
+# MOC Principal
+
+## UX
+
+- [[MOC-UX]]
+`, 'utf-8');
+    return { action: 'created' };
+  }
+
+  let content = await fs.readFile(mocPath, 'utf-8');
+  if (content.includes('[[MOC-UX]]')) {
+    return { action: 'exists' };
+  }
+
+  content = content.replace(/updated:\s*\d{4}-\d{2}-\d{2}/, 'updated: ' + today);
+  content += '\n\n## UX\n- [[MOC-UX]]\n';
+  await fs.writeFile(mocPath, content, 'utf-8');
+  return { action: 'updated' };
+}
+
+async function installUxDesignOps(cwd, docName, projectName, templatesDir, force = false) {
+  const uxTemplateRoot = path.join(templatesDir, 'codex', 'ux-designops');
+  const today = new Date().toISOString().split('T')[0];
+  const replacements = {
+    DATE: today,
+    PROJECT_NAME: docName || projectName || 'Project'
+  };
+
+  const result = {
+    root: await copyTemplateTree(path.join(uxTemplateRoot, 'root'), cwd, replacements, force),
+    doc: null,
+    moc: null,
+    skipped: false,
+    reason: null
+  };
+
+  const docRoot = await findDocRoot(cwd, docName);
+  if (!docRoot) {
+    result.skipped = true;
+    result.reason = 'no [DOC]-* directory found';
+    return result;
+  }
+
+  result.doc = await copyTemplateTree(path.join(uxTemplateRoot, 'doc'), docRoot, replacements, force);
+  result.moc = await ensureMocUxLink(docRoot, today);
+  return result;
+}
+
 async function resolveTarget(options = {}) {
   const fromFlag = normalizeTarget(options.target);
   if (fromFlag) return fromFlag;
@@ -171,7 +292,8 @@ async function initProject(projectName, options = {}) {
       agents: null,
       outputStyles: null,
       cache: null,
-      doc: null
+      doc: null,
+      ux: null
     };
 
     const forceOverwrite = options.force || false;
@@ -259,6 +381,16 @@ async function initProject(projectName, options = {}) {
       spinner.succeed('Projet initialisé (sans documentation)');
     }
 
+    if (target === 'codex' && options.ux !== false) {
+      spinner.text = 'Installation UX DesignOps...';
+      results.ux = await installUxDesignOps(cwd, docName, name, templatesDir, forceOverwrite);
+      if (results.ux.skipped) {
+        spinner.warn('UX DesignOps partiellement installé: ' + results.ux.reason);
+      } else {
+        spinner.succeed('UX DesignOps configuré');
+      }
+    }
+
     spinner.text = 'Génération du guide ' + targetConfig.guideFileName + '...';
     const guideResult = await generateGuide(cwd, name, docName, targetConfig);
     results.guide = guideResult;
@@ -302,6 +434,14 @@ async function initProject(projectName, options = {}) {
       console.log(chalk.gray('   ' + icon + ' ' + targetConfig.guideFileName + ' → ' + action));
     }
 
+    if (results.ux) {
+      if (results.ux.skipped) {
+        console.log(chalk.gray('   UX DesignOps docs → Ignorées (' + results.ux.reason + ')'));
+      } else {
+        console.log(chalk.gray('   ✨ UX DesignOps → Configuré ([DOC]-*/11-UX-DesignOps + DESIGN.md)'));
+      }
+    }
+
     if (target === 'claude' && options.ruflo !== false) {
       let doRuflo = options.withRuflo === true;
       if (!doRuflo) {
@@ -327,7 +467,7 @@ async function initProject(projectName, options = {}) {
 
     console.log(chalk.blue('\n🎯 Prochaines étapes:'));
     console.log(chalk.gray('   1. Lancez ' + (target === 'codex' ? 'Codex' : 'Claude Code') + ' dans ce dossier'));
-    console.log(chalk.gray('   2. Utilisez /doc-manager pour générer la doc'));
+    console.log(chalk.gray('   2. Suivez le workflow feature et mettez à jour [DOC]-* pendant les phases de travail'));
 
     return true;
   } catch (error) {
@@ -431,6 +571,10 @@ async function syncProject(options = {}) {
     const agentsTemplatesDir = path.join(targetTemplatesRoot, 'agents');
     if (await fs.pathExists(agentsTemplatesDir)) {
       await fs.copy(agentsTemplatesDir, agentsDir, { overwrite: true });
+    }
+
+    if (target === 'codex' && options.ux !== false) {
+      await installUxDesignOps(cwd, null, path.basename(cwd), templatesDir, false);
     }
 
     spinner.succeed('Synchronisation terminée (' + target + ')');

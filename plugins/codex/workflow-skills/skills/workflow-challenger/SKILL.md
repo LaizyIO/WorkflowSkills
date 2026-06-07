@@ -427,3 +427,16 @@ Phase 2: Planning → [Challenge Plan] → Phase 3: Implementation
 - `Task tool` with `subagent_type` -> `spawn_agent` with `agent_type`
 - `Glob`/`Grep`/`Read` instructions -> use shell tooling (`rg`, `Get-Content`, `Get-ChildItem`)
 - If a Claude-specific primitive is unavailable, use the nearest Codex-native tool with equivalent intent
+
+## UX DesignOps Integration
+
+When challenging UI work, verify:
+
+- CDC and FEAT docs state user goal, primary task, states, accessibility, and responsive constraints;
+- findings include UX/UI research when the feature is user-visible;
+- plans include visual verification and UX doc sync;
+- implementation preserves business logic and design system constraints;
+- tests include state matrix, desktop/mobile, keyboard/focus, and accessibility basics;
+- `[DOC]-*/11-UX-DesignOps/`, `MOC-UX.md`, and `DESIGN.md` are updated when required.
+
+Flag any no-rendering UI validation as a blocker.

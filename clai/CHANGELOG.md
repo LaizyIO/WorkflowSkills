@@ -5,6 +5,12 @@ Toutes les modifications notables de ce projet seront documentées dans ce fichi
 Le format est basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/),
 et ce projet adhère au [Versioning Sémantique](https://semver.org/lang/fr/).
 
+## [Unreleased]
+
+### Supprimé
+- Commande `/doc-manager`, agent dédié et cache associé retirés des templates installés.
+- Skill `source-command-doc-manager` retiré de la Workflow Skills Suite.
+
 ## [1.0.4] - 2026-01-14
 
 ### Modifié

@@ -134,6 +134,56 @@
 
 ---
 
+## Phase UX: DesignOps, Stitch & Visual Verification (conditional)
+
+### Goals
+Integrer le travail UX/UI dans le plan principal quand la feature modifie une surface visible par l'utilisateur.
+
+### Prerequisites
+- Un vault `[DOC]-*` existe a la racine du projet.
+- `DESIGN.md` et `[DOC]-*/11-UX-DesignOps/` ont ete lus ou initialises via `ux-bootstrap`.
+
+### Steps
+
+- [ ] **Step UX.1**: Lire le contexte UX projet
+  - **Location**: `DESIGN.md`, `[DOC]-*/11-UX-DesignOps/`, `00-MOC/MOC-UX.md`
+  - **Details**: Identifier surfaces, composants, flows, dette visuelle, decisions et contraintes design.
+  - **Dependencies**: Research complete
+
+- [ ] **Step UX.2**: Produire flow ou component spec si necessaire
+  - **Location**: `[DOC]-*/11-UX-DesignOps/06-Flows/`, `[DOC]-*/11-UX-DesignOps/05-Components/`
+  - **Details**: Utiliser `ux-flow` ou `ux-component-spec` pour states, responsive, accessibilite et criteres UX.
+  - **Dependencies**: Step UX.1
+
+- [ ] **Step UX.3**: Synchroniser ou explorer avec Stitch si necessaire
+  - **Location**: `[DOC]-*/11-UX-DesignOps/07-Stitch/`
+  - **Details**: Utiliser Stitch MCP quand disponible; documenter project IDs, screen IDs, design systems et limites MCP.
+  - **Dependencies**: Step UX.1
+
+- [ ] **Step UX.4**: Implementer ou polir l'UI
+  - **Location**: Frontend files
+  - **Details**: Utiliser `ux-polish` ou `ux-implement-from-stitch`, preserver logique metier, composants et tokens.
+  - **Dependencies**: Steps UX.2/UX.3 as needed
+
+- [ ] **Step UX.5**: Verifier visuellement
+  - **Location**: Playwright, Browser plugin, Storybook rendered, or equivalent
+  - **Details**: Utiliser `ux-visual-verification`; desktop, mobile, focus, overflow, states et accessibilite basics.
+  - **Dependencies**: Step UX.4
+
+- [ ] **Step UX.6**: Synchroniser la documentation UX
+  - **Location**: `DESIGN.md`, `[DOC]-*/11-UX-DesignOps/`, `00-MOC/MOC-UX.md`
+  - **Details**: Utiliser `ux-design-sync`; code = source de verite, docs = reflet du code.
+  - **Dependencies**: Step UX.5
+
+### Validation Criteria
+
+- [ ] Aucun document UX persistant n'est ecrit dans `docs/obsidian`.
+- [ ] Les docs UX ont un frontmatter valide et sont en francais.
+- [ ] La verification visuelle utilise un outil de rendu.
+- [ ] Si aucun outil de rendu n'est disponible, le plan marque la verification comme bloquee.
+
+---
+
 ## Phase N: Testing & Validation
 
 ### Goals

@@ -230,3 +230,17 @@ The CDC becomes input for `feature-research`, providing clear requirements for t
 - `Task tool` with `subagent_type` -> `spawn_agent` with `agent_type`
 - `Glob`/`Grep`/`Read` instructions -> use shell tooling (`rg`, `Get-Content`, `Get-ChildItem`)
 - If a Claude-specific primitive is unavailable, use the nearest Codex-native tool with equivalent intent
+
+## UX DesignOps Integration
+
+When a feature affects a user-visible interface, capture UX requirements during specification:
+
+- user goal and primary task;
+- target routes, screens, components, and flows;
+- required loading, empty, error, success, disabled, permission, and offline states;
+- accessibility and keyboard/focus constraints;
+- desktop and mobile responsive constraints;
+- design system, token, and component reuse constraints;
+- expected UX documents under `[DOC]-*/11-UX-DesignOps/`.
+
+Use `ux-flow` for feature journeys and `ux-component-spec` for shared UI components. Persistent UX docs require a `[DOC]-*` vault; never use `docs/obsidian` as fallback.

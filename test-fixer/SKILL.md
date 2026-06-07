@@ -577,3 +577,15 @@ Track progress across iterations:
 - `Task tool` with `subagent_type` -> `spawn_agent` with `agent_type`
 - `Glob`/`Grep`/`Read` instructions -> use shell tooling (`rg`, `Get-Content`, `Get-ChildItem`)
 - If a Claude-specific primitive is unavailable, use the nearest Codex-native tool with equivalent intent
+
+## UX DesignOps Integration
+
+When fixing UI test or visual verification failures:
+
+- inspect the rendered failure, screenshot, trace, or Browser state before changing code;
+- preserve business logic and contracts;
+- fix root visual causes such as overflow, focus loss, missing states, contrast, inaccessible labels, or token misuse;
+- update `UX_DOCS_ROOT/09-Debt/Visual_Debt.md` when a debt item is resolved or deferred;
+- rerun `ux-visual-verification` after the fix.
+
+Do not change tests to accept a visual regression unless the product/design decision is documented.

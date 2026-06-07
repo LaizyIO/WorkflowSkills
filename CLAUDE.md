@@ -247,30 +247,6 @@ Si des modifications ont été nécessaires pendant l'implémentation :
 
 ---
 
-## Commandes Disponibles
-
-### `/doc-manager`
-Génère automatiquement la documentation Obsidian depuis la conversation actuelle.
-
-**Fonctionnalités:**
-- Mode incrémental (traite seulement les nouveaux messages)
-- Documentation 100% en français
-- Détection automatique des patterns (ADR, FEAT, DEV, etc.)
-- Génération de rapports de session
-
-**Utilisation:**
-```
-# Après une conversation de travail
-/doc-manager
-```
-
-**Fichiers générés:**
-- `.claude/DOC-GENERATION-REPORT-SESSION-X.md` - Rapport de génération
-- `.claude/cache/doc-manager/metadata.json` - Metadata pour mode incrémental
-- `[DOC]-WorkflowSkills/XX-Category/DOC-XXX.md` - Documents générés
-
----
-
 ## Output Styles
 
 Des styles de sortie personnalisés sont disponibles dans `.claude/output-styles/`:
@@ -298,7 +274,6 @@ Le skill gère automatiquement les worktrees Git pour développement parallèle.
 - Documentation Obsidian: `[DOC]-WorkflowSkills/`
 - Templates: `[DOC]-WorkflowSkills/_Templates/`
 - Archives workflow: `[DOC]-WorkflowSkills/10-Archives/`
-- Cache doc-manager: `.claude/cache/doc-manager/`
 
 ---
 
