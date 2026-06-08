@@ -1,6 +1,6 @@
-# {{PROJECT_NAME}} - Guide pour Codex
+# {{PROJECT_NAME}} - Guide pour Claude Code
 
-Ce document décrit les conventions et workflows pour travailler sur ce projet avec Codex.
+Ce document décrit les conventions et workflows pour travailler sur ce projet avec Claude Code.
 
 ## Documentation Requirements
 
@@ -75,54 +75,6 @@ powershell -ExecutionPolicy Bypass -File scripts/check-mojibake.ps1
 ```
 
 Do not finalize changes that introduce mojibake candidates.
-
----
-
-## UX DesignOps
-
-For any user-visible interface change, Codex must use the UX DesignOps workflow.
-
-### Sources
-
-- `DESIGN.md` at project root is the portable design contract.
-- Persistent UX memory lives in `[DOC]-{{PROJECT_NAME}}/11-UX-DesignOps/`.
-- `MOC-UX.md` lives in `[DOC]-{{PROJECT_NAME}}/00-MOC/`.
-- UX templates live in `[DOC]-{{PROJECT_NAME}}/_Templates/TPL-UX-*.md`.
-- There is no fallback to `docs/obsidian`.
-
-### UX Skills
-
-| Skill | Usage |
-|-------|-------|
-| `ux-bootstrap` | Initialize UX DesignOps memory |
-| `ux-audit` | Audit an existing UI before planning or coding |
-| `ux-flow` | Define user flow and state matrix |
-| `ux-component-spec` | Specify reusable UI components |
-| `ux-stitch-brief` | Prepare Stitch-ready design brief |
-| `ux-stitch-generate` | Prepare or run Stitch exploration |
-| `ux-stitch-iterate` | Iterate an existing Stitch direction |
-| `ux-code-to-stitch` | Translate current code into Stitch inputs |
-| `ux-implement-from-stitch` | Implement selected Stitch direction |
-| `ux-polish` | Improve UI quality without changing behavior |
-| `ux-visual-verification` | Verify UI with rendered desktop/mobile checks |
-| `ux-design-sync` | Sync code, DESIGN.md, UX docs and Stitch map |
-| `ux-storybook` | Use Storybook as component state catalog |
-
-### Required UI Verification
-
-UI changes must be visually verified with the Codex Browser plugin by default in Codex, or with Storybook rendered through browser automation, Playwright, or an equivalent rendering/capture tool when needed.
-
-If no rendering tool is available, mark verification as blocked and add setup work. Do not validate UI changes through code-only review.
-
-### Stitch MCP
-
-When Stitch MCP is configured, use it for project, screen, and design system context. Store Stitch IDs and mappings in:
-
-```text
-[DOC]-{{PROJECT_NAME}}/11-UX-DesignOps/07-Stitch/Project_Map.md
-```
-
-Never store API keys in repository files or documentation.
 
 ---
 
@@ -332,11 +284,11 @@ clai ruflo init      # intégration safe-merge dans ce projet
 
 ## Output Styles
 
-Des styles de sortie personnalisés sont disponibles dans `.codex/output-styles/`:
+Des styles de sortie personnalisés sont disponibles dans `.claude/output-styles/`:
 
 - **non-dev-explanatory.md** - Explications techniques pour non-développeurs
 
-Pour utiliser un style, référencez-le dans vos conversations avec Codex.
+Pour utiliser un style, référencez-le dans vos conversations avec Claude Code.
 
 ---
 

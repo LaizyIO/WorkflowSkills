@@ -2,7 +2,7 @@ const { program } = require('commander');
 const chalk = require('chalk');
 const { checkClaude, installClaude } = require('./checker');
 const { setupMarketplace } = require('./marketplace');
-const { initProject, installGlobal, syncProject } = require('./project');
+const { initProject, installGlobal, syncProject, runMojibakeCheck } = require('./project');
 const {
   checkRufloInstalled,
   installRufloGlobal,
@@ -134,6 +134,14 @@ program
     console.log(chalk.blue('Synchronisation...\n'));
     await syncProject(options);
     console.log(chalk.green('\nSynchronisation terminee!'));
+  });
+
+program
+  .command('check-mojibake [paths...]')
+  .description('Detecte les sequences mojibake dans les fichiers texte du projet')
+  .action(async (paths) => {
+    const code = await runMojibakeCheck(paths);
+    process.exitCode = code;
   });
 
 program

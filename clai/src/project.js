@@ -1,6 +1,7 @@
 const fs = require('fs-extra');
 const path = require('path');
 const os = require('os');
+const { spawn } = require('child_process');
 const chalk = require('chalk');
 const ora = require('ora');
 const inquirer = require('inquirer');
@@ -159,6 +160,10 @@ async function copyTemplateTree(src, dest, replacements = {}, force = false) {
   };
 }
 
+async function installProjectTools(cwd, templatesDir, force = false) {
+  return copyTemplateTree(path.join(templatesDir, 'project'), cwd, {}, force);
+}
+
 async function findDocRoot(cwd, preferredName = null) {
   if (preferredName) {
     const preferred = path.join(cwd, '[DOC]-' + preferredName);
@@ -292,6 +297,7 @@ async function initProject(projectName, options = {}) {
       agents: null,
       outputStyles: null,
       cache: null,
+      projectTools: null,
       doc: null,
       ux: null
     };
@@ -334,6 +340,9 @@ async function initProject(projectName, options = {}) {
       spinner,
       forceOverwrite
     );
+
+    spinner.text = 'Installation des scripts projet...';
+    results.projectTools = await installProjectTools(cwd, templatesDir, forceOverwrite);
 
     let docName = options.doc;
     if (!docName) {
@@ -396,6 +405,8 @@ async function initProject(projectName, options = {}) {
     results.guide = guideResult;
     if (guideResult.action === 'created') {
       spinner.succeed('Guide ' + targetConfig.guideFileName + ' généré');
+    } else if (guideResult.action === 'replaced') {
+      spinner.succeed(targetConfig.guideFileName + ' remplacé (ancien contenu incomplet)');
     } else if (guideResult.action === 'appended') {
       spinner.succeed(targetConfig.guideFileName + ' mis à jour (contenu ajouté)');
     } else if (guideResult.action === 'exists') {
@@ -417,6 +428,7 @@ async function initProject(projectName, options = {}) {
     printResult(targetConfig.runtimeDirName + '/agents/', results.agents, 'Créés', 'Mis à jour', 'Ignorés');
     printResult(targetConfig.runtimeDirName + '/output-styles/', results.outputStyles, 'Créés', 'Mis à jour', 'Ignorés');
     printResult(targetConfig.runtimeDirName + '/cache/', results.cache, 'Créé', 'Mis à jour', 'Ignoré');
+    printResult('scripts/', results.projectTools, 'Créés', 'Mis à jour', 'Ignorés');
 
     if (docName && results.doc) {
       const icon = results.doc.action === 'created' ? '✨' : results.doc.action === 'overwritten' ? '🔄' : '⏭️';
@@ -426,9 +438,11 @@ async function initProject(projectName, options = {}) {
 
     if (results.guide) {
       const icon = results.guide.action === 'created' ? '✨' :
+        results.guide.action === 'replaced' ? '🔄' :
         results.guide.action === 'appended' ? '➕' :
         results.guide.action === 'exists' ? 'ℹ️' : '⏭️';
       const action = results.guide.action === 'created' ? 'Créé' :
+        results.guide.action === 'replaced' ? 'Remplacé' :
         results.guide.action === 'appended' ? 'Mis à jour (ajouté)' :
         results.guide.action === 'exists' ? 'Déjà présent' : 'Ignoré';
       console.log(chalk.gray('   ' + icon + ' ' + targetConfig.guideFileName + ' → ' + action));
@@ -573,8 +587,15 @@ async function syncProject(options = {}) {
       await fs.copy(agentsTemplatesDir, agentsDir, { overwrite: true });
     }
 
+    await installProjectTools(cwd, templatesDir, true);
+
     if (target === 'codex' && options.ux !== false) {
       await installUxDesignOps(cwd, null, path.basename(cwd), templatesDir, false);
+    }
+
+    const guideResult = await generateGuide(cwd, path.basename(cwd), null, targetConfig);
+    if (guideResult.action === 'error') {
+      spinner.warn(targetConfig.guideFileName + ' non synchronisé: ' + guideResult.reason);
     }
 
     spinner.succeed('Synchronisation terminée (' + target + ')');
@@ -584,6 +605,33 @@ async function syncProject(options = {}) {
     console.error(chalk.red('Erreur:'), error.message);
     return false;
   }
+}
+
+async function runMojibakeCheck(paths = []) {
+  const cwd = process.cwd();
+  const localScript = path.join(cwd, 'scripts', 'check-mojibake.ps1');
+  const bundledScript = path.resolve(__dirname, '../templates/project/scripts/check-mojibake.ps1');
+  const scriptPath = await fs.pathExists(localScript) ? localScript : bundledScript;
+
+  if (!(await fs.pathExists(scriptPath))) {
+    console.error(chalk.red('Script check-mojibake introuvable'));
+    return 1;
+  }
+
+  const executable = process.platform === 'win32' ? 'powershell' : 'pwsh';
+  const args = ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', scriptPath];
+  if (paths.length > 0) {
+    args.push('-Paths', ...paths);
+  }
+
+  return new Promise((resolve) => {
+    const child = spawn(executable, args, { cwd, stdio: 'inherit' });
+    child.on('error', (error) => {
+      console.error(chalk.red('Impossible de lancer PowerShell:'), error.message);
+      resolve(1);
+    });
+    child.on('close', (code) => resolve(code || 0));
+  });
 }
 
 async function updateDocName(_docDir, _name) {
@@ -611,9 +659,17 @@ async function generateGuide(projectDir, projectName, docName, targetConfig) {
 
     if (await fs.pathExists(destPath)) {
       const existingContent = await fs.readFile(destPath, 'utf-8');
+      const memoryOnlyPattern = /^<claude-mem-context>[\s\S]*<\/claude-mem-context>\s*$/;
+      if (memoryOnlyPattern.test(existingContent.trim())) {
+        await fs.writeFile(destPath, templateContent, 'utf-8');
+        return { action: 'replaced', path: targetConfig.guideFileName, reason: 'memory context only' };
+      }
+
+      const requiredMarkers = targetConfig.target === 'codex'
+        ? ['## Documentation Requirements', '## UX DesignOps', '## Feature Workflow Skills']
+        : ['## Documentation Requirements', '## Feature Workflow Skills'];
       if (
-        existingContent.includes('## Feature Workflow Skills') &&
-        existingContent.includes('## RÈGLE CRITIQUE : Suivre la Documentation Obsidian')
+        requiredMarkers.every((marker) => existingContent.includes(marker))
       ) {
         return { action: 'exists', path: targetConfig.guideFileName, reason: 'content already present' };
       }
@@ -634,6 +690,7 @@ module.exports = {
   initProject,
   installGlobal,
   syncProject,
+  runMojibakeCheck,
   getTargetConfig,
   normalizeTarget
 };
