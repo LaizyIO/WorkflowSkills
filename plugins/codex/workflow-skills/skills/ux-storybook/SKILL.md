@@ -31,4 +31,4 @@ Use Storybook when present to document, test, and verify UI component states.
 - Storybook is useful but optional unless the project already relies on it.
 - Do not add Storybook dependencies unless explicitly requested.
 - Cover loading, error, empty, disabled, focus, selected, and responsive variants where relevant.
-- Visual verification still requires rendering through Playwright, Browser plugin, or equivalent.
+- Visual verification still requires rendering through the Codex Browser plugin by default, or Playwright/Storybook/equivalent when needed.

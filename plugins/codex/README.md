@@ -62,7 +62,7 @@ There is no runtime fallback to `docs/obsidian`.
 
 ## Visual Verification
 
-UI changes must be verified with Playwright, the Codex Browser plugin, Storybook rendered through browser automation, or an equivalent rendering/capture tool.
+UI changes must be verified with the Codex Browser plugin by default in Codex, or with Storybook rendered through browser automation, Playwright, or an equivalent rendering/capture tool when needed.
 
 If no rendering tool is available, the UX verification is blocked until the project has one.
 

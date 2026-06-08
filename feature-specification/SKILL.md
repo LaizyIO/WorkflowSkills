@@ -168,7 +168,7 @@ Adapt questions based on discovered project context:
 > "This feature will need new database tables. Have you thought about the data model?"
 
 **If React + TypeScript detected:**
-> "Should we include E2E tests with Playwright for this feature?"
+> "Should we include visual verification with Codex Browser, or committed E2E tests with Playwright/Cypress for this feature?"
 
 **If similar feature found:**
 > "I found a similar feature in `src/modules/orders`. Should we follow the same pattern?"

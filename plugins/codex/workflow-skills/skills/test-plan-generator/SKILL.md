@@ -242,7 +242,7 @@ Create `test-plan.md` with structure:
 - [ ] Admin can view all submissions for a form
 ```
 
-**How to Execute:** Browser automation (Playwright, Cypress, etc.)
+**How to Execute:** Browser rendering/automation (Codex Browser plugin for visual checks; Playwright, Cypress, etc. for committed E2E suites)
 
 ### API Tests
 

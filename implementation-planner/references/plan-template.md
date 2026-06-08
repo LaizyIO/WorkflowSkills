@@ -166,7 +166,7 @@ Integrer le travail UX/UI dans le plan principal quand la feature modifie une su
   - **Dependencies**: Steps UX.2/UX.3 as needed
 
 - [ ] **Step UX.5**: Verifier visuellement
-  - **Location**: Playwright, Browser plugin, Storybook rendered, or equivalent
+  - **Location**: Codex Browser plugin by default, Storybook rendered, Playwright, or equivalent
   - **Details**: Utiliser `ux-visual-verification`; desktop, mobile, focus, overflow, states et accessibilite basics.
   - **Dependencies**: Step UX.4
 

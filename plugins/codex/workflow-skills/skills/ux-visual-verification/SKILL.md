@@ -1,6 +1,6 @@
 ---
 name: ux-visual-verification
-description: Verify UI changes with Playwright, Browser plugin, screenshots, responsive checks, focus states, and accessibility basics. Blocks if no rendering tool is available.
+description: Verify UI changes with the Codex Browser plugin by default, or Playwright/Storybook/equivalent rendering tools when needed, using screenshots, responsive checks, focus states, and accessibility basics. Blocks if no rendering tool is available.
 ---
 
 # UX Visual Verification Skill
@@ -20,14 +20,14 @@ Validate that UI changes render correctly and preserve UX quality across states 
 
 ## Required Rendering Tool
 
-Use at least one:
+Use at least one rendering tool:
 
-- Playwright.
-- Codex Browser plugin.
+- Codex Browser plugin (preferred in Codex).
 - Existing project visual test runner.
 - Storybook rendered with browser automation.
+- Playwright when the project already uses it, Browser plugin is unavailable, or automated E2E evidence is explicitly required.
 
-If no rendering tool is available, do not downgrade to code-only review. Mark verification as blocked and add setup work for Playwright, Browser plugin, or equivalent.
+If no rendering tool is available, do not downgrade to code-only review. Mark verification as blocked and add setup work for the Codex Browser plugin or an equivalent renderer. Do not require Playwright just to satisfy visual verification when Browser plugin can render the app.
 
 ## Checks
 

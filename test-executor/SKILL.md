@@ -564,7 +564,7 @@ Optional strategy for critical tests:
 
 When executing tests for UI changes, run the visual verification step from the test plan:
 
-- use Playwright, Codex Browser plugin, Storybook rendered through browser automation, or equivalent;
+- use the Codex Browser plugin by default, or Playwright/Storybook/equivalent rendering when needed;
 - verify desktop and mobile viewports;
 - verify focus, keyboard, overflow, layout stability, and required UI states;
 - capture or reference screenshots when available;

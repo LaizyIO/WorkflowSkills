@@ -3,7 +3,7 @@ title: ADR-003 Structure documentaire UX DesignOps
 type: adr
 status: approved
 created: 2026-06-07
-updated: 2026-06-07
+updated: 2026-06-08
 decision-date: 2026-06-07
 decision-makers:
   - Guillaume
@@ -59,7 +59,9 @@ Les MOC et templates restent dans les dossiers standards du vault. `11-UX-Design
 
 Les skills UX ne doivent jamais ecrire dans `docs/obsidian` comme fallback. Si aucun dossier `[DOC]-*` n'existe, ils doivent demander l'initialisation de la documentation projet avant de produire une documentation persistante.
 
-La verification UI ne doit pas proposer de mode "sans Playwright" comme workflow normal. Le skill source `ux-review-no-playwright` doit etre remplace par un skill de verification visuelle, par exemple `ux-visual-verification`, utilisant Playwright, Browser plugin, ou un outil equivalent de rendu/capture.
+La verification UI ne doit pas proposer de mode sans rendu comme workflow normal. Dans Codex, le runtime de verification visuelle par defaut est le Codex Browser plugin. Playwright reste utile quand le projet possede deja une suite E2E, quand le Browser plugin n'est pas disponible, ou quand une preuve automatisee versionnee est explicitement requise.
+
+Le skill source `ux-review-no-playwright` doit etre remplace par un skill de verification visuelle, par exemple `ux-visual-verification`, utilisant le Codex Browser plugin par defaut, Playwright/Storybook si necessaire, ou un outil equivalent de rendu/capture.
 
 ## Consequences
 
@@ -81,7 +83,7 @@ Note 2026-06-07: `source-command-doc-manager` et la commande `/doc-manager` ont 
 ### Risques
 
 - Les projets deja initialises avec l'ancien pack global peuvent encore exposer des skills obsoletes localement.
-- Si Playwright/browser n'est pas disponible dans un projet, les tests UI seront bloques jusqu'a installation ou configuration de l'outillage.
+- Si aucun outil de rendu n'est disponible dans un projet, les tests UI seront bloques jusqu'a installation ou configuration de l'outillage. Dans Codex, la configuration du Browser plugin doit etre privilegiee avant d'ajouter Playwright uniquement pour une verification visuelle ponctuelle.
 
 ## Alternatives considerees
 
@@ -93,7 +95,7 @@ Rejete. Cette structure est moins visible et melange une memoire UX projet vivan
 
 Rejete. Ce chemin cree une seconde source de verite et contredit les conventions WorkflowSkills.
 
-### Mode review sans Playwright
+### Mode review sans rendu
 
 Rejete. Une review statique peut aider ponctuellement, mais elle ne doit pas etre formalisee comme workflow de verification UI.
 

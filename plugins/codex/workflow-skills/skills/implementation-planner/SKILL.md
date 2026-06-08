@@ -529,7 +529,7 @@ For UI features, integrate UX work into the same `FEAT-XXX-Plan.md`; do not crea
 - `ux-audit` when modifying an existing surface;
 - Stitch MCP sync/generation when visual exploration or design system application is needed;
 - UI implementation via `ux-polish` or `ux-implement-from-stitch`;
-- `ux-visual-verification` with Playwright, Browser plugin, Storybook rendering, or equivalent;
+- `ux-visual-verification` with the Codex Browser plugin by default, or Storybook/Playwright/equivalent rendering when needed;
 - `ux-design-sync` to update `DESIGN.md`, `MOC-UX.md`, and `[DOC]-*/11-UX-DesignOps/`.
 
-If no visual rendering tool is available, mark UI verification as blocked and add setup work. Do not plan a no-Playwright fallback.
+If no visual rendering tool is available, mark UI verification as blocked and add setup work. Do not plan a code-only fallback. Prefer Codex Browser plugin setup over adding Playwright unless the project needs committed E2E tests.
