@@ -247,16 +247,6 @@ Si des modifications ont été nécessaires pendant l'implémentation :
 
 ---
 
-## Output Styles
-
-Des styles de sortie personnalisés sont disponibles dans `.codex/output-styles/`:
-
-- **non-dev-explanatory.md** - Explications techniques pour non-développeurs
-
-Pour utiliser un style, référencez-le dans vos conversations avec Codex.
-
----
-
 ## Git Workflow
 
 Si vous utilisez `git-workflow-manager` skill:
@@ -292,7 +282,7 @@ Pour importer cette suite dans Codex comme marketplace:
 <claude-mem-context>
 # Memory Context
 
-# [WorkflowSkills] recent context, 2026-06-07 2:58pm GMT+2
+# [WorkflowSkills] recent context, 2026-09-08 5:52pm GMT+2
 
 Legend: 🎯session 🔴bugfix 🟣feature 🔄refactor ✅change 🔵discovery ⚖️decision 🚨security_alert 🔐security_note
 Format: ID TIME TYPE TITLE
@@ -316,3 +306,10 @@ S273 Implement dual-target (Claude/Codex) migration for clai CLI and Feature Wor
 
 Access 357k tokens of past work via get_observations([IDs]) or mem-search skill.
 </claude-mem-context>
+
+
+## Codex Image Mockups
+
+Whenever a UI/UX mockup is needed, use ux-mockup-generate and Codex's built-in image generation tool. Use ux-mockup-brief for the prompt and ux-mockup-iterate for revisions. Inspect the images, preserve existing product constraints and tokens, and save actual deliverables under design/mockups/images/. Record prompts, selected versions and rationale in [DOC]-WorkflowSkills/11-UX-DesignOps/07-Mockups/Mockup_Index.md.
+
+If image generation is unavailable, say the mockup is blocked; do not claim a written prompt is a generated image. API/CLI fallback requires explicit user authorization. Use ux-implement-from-mockup to build the selected direction with real components, then ux-visual-verification on the rendered app. Generated images are proposals, never proof of implementation or accessibility.

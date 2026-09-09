@@ -98,14 +98,14 @@ For any user-visible interface change, Codex must use the UX DesignOps workflow.
 | `ux-audit` | Audit an existing UI before planning or coding |
 | `ux-flow` | Define user flow and state matrix |
 | `ux-component-spec` | Specify reusable UI components |
-| `ux-stitch-brief` | Prepare Stitch-ready design brief |
-| `ux-stitch-generate` | Prepare or run Stitch exploration |
-| `ux-stitch-iterate` | Iterate an existing Stitch direction |
-| `ux-code-to-stitch` | Translate current code into Stitch inputs |
-| `ux-implement-from-stitch` | Implement selected Stitch direction |
+| `ux-mockup-brief` | Prepare image-generation brief |
+| `ux-mockup-generate` | Generate UI mockup images with Codex |
+| `ux-mockup-iterate` | Iterate an existing mockup image |
+| `ux-code-to-mockup` | Translate current code into image-generation inputs |
+| `ux-implement-from-mockup` | Implement selected mockup image |
 | `ux-polish` | Improve UI quality without changing behavior |
 | `ux-visual-verification` | Verify UI with rendered desktop/mobile checks |
-| `ux-design-sync` | Sync code, DESIGN.md, UX docs and Stitch map |
+| `ux-design-sync` | Sync code, DESIGN.md, UX docs and mockup index |
 | `ux-storybook` | Use Storybook as component state catalog |
 
 ### Required UI Verification
@@ -114,15 +114,11 @@ UI changes must be visually verified with the Codex Browser plugin by default in
 
 If no rendering tool is available, mark verification as blocked and add setup work. Do not validate UI changes through code-only review.
 
-### Stitch MCP
+### Codex Image Mockups
 
-When Stitch MCP is configured, use it for project, screen, and design system context. Store Stitch IDs and mappings in:
+Whenever a UI/UX mockup is needed, use ux-mockup-generate and Codex's built-in image generation tool. Use ux-mockup-brief for the prompt and ux-mockup-iterate for revisions. Inspect the images, preserve existing product constraints and tokens, and save actual deliverables under design/mockups/images/. Record prompts, selected versions and rationale in [DOC]-{{PROJECT_NAME}}/11-UX-DesignOps/07-Mockups/Mockup_Index.md.
 
-```text
-[DOC]-{{PROJECT_NAME}}/11-UX-DesignOps/07-Stitch/Project_Map.md
-```
-
-Never store API keys in repository files or documentation.
+If image generation is unavailable, say the mockup is blocked; do not claim a written prompt is a generated image. API/CLI fallback requires explicit user authorization. Use ux-implement-from-mockup to build the selected direction with real components, then ux-visual-verification on the rendered app. Generated images are proposals, never proof of implementation or accessibility.
 
 ---
 
@@ -327,16 +323,6 @@ Pour intégrer Ruflo plus tard :
 clai ruflo install   # install global si nécessaire
 clai ruflo init      # intégration safe-merge dans ce projet
 ```
-
----
-
-## Output Styles
-
-Des styles de sortie personnalisés sont disponibles dans `.codex/output-styles/`:
-
-- **non-dev-explanatory.md** - Explications techniques pour non-développeurs
-
-Pour utiliser un style, référencez-le dans vos conversations avec Codex.
 
 ---
 

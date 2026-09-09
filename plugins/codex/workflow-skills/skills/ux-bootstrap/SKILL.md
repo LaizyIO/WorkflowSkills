@@ -35,7 +35,7 @@ Create a repo-native UX/UI operating system without changing product behavior.
    - `04-Screens`
    - `05-Components`
    - `06-Flows`
-   - `07-Stitch`
+   - `07-Mockups`
    - `08-Audits`
    - `09-Debt`
    - `10-Decisions`
@@ -50,12 +50,12 @@ Create a repo-native UX/UI operating system without changing product behavior.
    - `03-Interaction/Interaction_Patterns.md`
    - `03-Interaction/Responsive_Adaptive_Rules.md`
    - `03-Interaction/Desktop_Mobile_Patterns.md`
-   - `07-Stitch/Project_Map.md`
+   - `07-Mockups/Mockup_Index.md`
    - `08-Audits/Project_Scan_Report.md`
    - `09-Debt/Visual_Debt.md`
    - `10-Decisions/Decision_Log.md`
 8. If `scripts/ux/uxkit-lite.mjs` exists, run `node scripts/ux/uxkit-lite.mjs scan`.
-9. Prepare `design/stitch/prompts`, `design/stitch/exports`, and `design/stitch/screenshots`.
+9. Prepare `design/mockups/images` and `design/mockups/references`.
 
 ## Rules
 

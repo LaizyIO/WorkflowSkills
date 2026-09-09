@@ -527,8 +527,8 @@ For UI features, integrate UX work into the same `FEAT-XXX-Plan.md`; do not crea
 
 - `ux-flow` and `ux-component-spec` when flows or shared components are unclear;
 - `ux-audit` when modifying an existing surface;
-- Stitch MCP sync/generation when visual exploration or design system application is needed;
-- UI implementation via `ux-polish` or `ux-implement-from-stitch`;
+- Codex image mockup generation whenever a visual mockup is needed;
+- UI implementation via `ux-polish` or `ux-implement-from-mockup`;
 - `ux-visual-verification` with the Codex Browser plugin by default, or Storybook/Playwright/equivalent rendering when needed;
 - `ux-design-sync` to update `DESIGN.md`, `MOC-UX.md`, and `[DOC]-*/11-UX-DesignOps/`.
 

@@ -5,6 +5,17 @@ Toutes les modifications notables de ce projet seront documentées dans ce fichi
 Le format est basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/),
 et ce projet adhère au [Versioning Sémantique](https://semver.org/lang/fr/).
 
+## [1.2.0] - 2026-09-09
+
+### Modifie
+- Maquettage Stitch remplace par la generation d'images Codex et cinq skills ux-mockup.
+- Prompts, variantes et decisions locales sous 07-Mockups ; verification du frontend toujours requise.
+- Synchronisation des anciens guides sans ecrasement des instructions projet.
+- Templates UX et fichiers d'execution de la CLI inclus dans le depot.
+
+### Supprime
+- Installation des output styles pour les deux cibles.
+
 ## [Unreleased]
 
 ### Supprimé

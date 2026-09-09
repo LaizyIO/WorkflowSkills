@@ -134,7 +134,7 @@
 
 ---
 
-## Phase UX: DesignOps, Stitch & Visual Verification (conditional)
+## Phase UX: DesignOps, Image Mockups & Visual Verification (conditional)
 
 ### Goals
 Integrer le travail UX/UI dans le plan principal quand la feature modifie une surface visible par l'utilisateur.
@@ -155,14 +155,14 @@ Integrer le travail UX/UI dans le plan principal quand la feature modifie une su
   - **Details**: Utiliser `ux-flow` ou `ux-component-spec` pour states, responsive, accessibilite et criteres UX.
   - **Dependencies**: Step UX.1
 
-- [ ] **Step UX.3**: Synchroniser ou explorer avec Stitch si necessaire
-  - **Location**: `[DOC]-*/11-UX-DesignOps/07-Stitch/`
-  - **Details**: Utiliser Stitch MCP quand disponible; documenter project IDs, screen IDs, design systems et limites MCP.
+- [ ] **Step UX.3**: Generer une maquette image avec Codex si une maquette est necessaire
+  - **Location**: `[DOC]-*/11-UX-DesignOps/07-Mockups/`
+  - **Details**: Utiliser ux-mockup-generate; conserver image, prompt, viewport, etat et justification. Ne pas confondre maquette et capture du frontend.
   - **Dependencies**: Step UX.1
 
 - [ ] **Step UX.4**: Implementer ou polir l'UI
   - **Location**: Frontend files
-  - **Details**: Utiliser `ux-polish` ou `ux-implement-from-stitch`, preserver logique metier, composants et tokens.
+  - **Details**: Utiliser `ux-polish` ou `ux-implement-from-mockup`, preserver logique metier, composants et tokens.
   - **Dependencies**: Steps UX.2/UX.3 as needed
 
 - [ ] **Step UX.5**: Verifier visuellement

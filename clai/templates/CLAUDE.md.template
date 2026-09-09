@@ -282,16 +282,6 @@ clai ruflo init      # intégration safe-merge dans ce projet
 
 ---
 
-## Output Styles
-
-Des styles de sortie personnalisés sont disponibles dans `.claude/output-styles/`:
-
-- **non-dev-explanatory.md** - Explications techniques pour non-développeurs
-
-Pour utiliser un style, référencez-le dans vos conversations avec Claude Code.
-
----
-
 ## Git Workflow
 
 Si vous utilisez `git-workflow-manager` skill:

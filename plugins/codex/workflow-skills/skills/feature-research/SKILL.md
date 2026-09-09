@@ -313,4 +313,4 @@ When research touches UI, add a `UX/UI Research` section to findings. Read:
 - related CDC, FEAT, ADR, DB, and meeting notes;
 - existing components, tokens, styles, routes, and Storybook if present.
 
-Identify whether the feature needs `ux-audit`, `ux-flow`, `ux-component-spec`, Stitch MCP exploration, Storybook coverage, or visual verification. Record accessibility, responsive, anti-slop, and design-system risks in the findings.
+Identify whether the feature needs `ux-audit`, `ux-flow`, `ux-component-spec`, Codex image mockup generation, Storybook coverage, or visual verification. Record accessibility, responsive, anti-slop, and design-system risks in the findings.

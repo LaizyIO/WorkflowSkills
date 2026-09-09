@@ -45,7 +45,6 @@ clai setup
 ### `clai init [name]`
 Initialise un projet (nouveau ou existant) avec:
 - Commandes Claude dans `.claude/commands/`
-- Output-styles dans `.claude/output-styles/`
 - Structure de cache dans `.claude/cache/`
 - (Optionnel) Structure documentation Obsidian `[DOC]-{name}/`
 
@@ -158,7 +157,6 @@ my-project/
 ├── .claude/
 │   ├── commands/
 │   ├── agents/
-│   ├── output-styles/
 │   │   └── non-dev-explanatory.md
 │   └── cache/
 └── [DOC]-MyProject/          # Si création demandée
@@ -257,3 +255,12 @@ Dans Codex, ajouter une place de marche avec:
 - Chemins partiels: `plugins/codex`
 
 Le chemin `plugins/codex` contient le `marketplace.json` Codex, qui pointe vers le plugin `workflow-skills`.
+
+
+## Maquettes UI avec Codex (clai 1.2.0)
+
+Le workflow UX conserve audit, flux, composants, implementation et verification visuelle. Des qu'une maquette est necessaire, utiliser `ux-mockup-generate` pour generer une image avec Codex. Preparer le brief avec `ux-mockup-brief`, iterer avec `ux-mockup-iterate`, puis implementer via `ux-implement-from-mockup`.
+
+Les images vivent dans `design/mockups/images/`, les prompts et decisions dans `[DOC]-*/11-UX-DesignOps/07-Mockups/`. Les skills proviennent du plugin WorkflowSkills 1.5.0 ; clai configure le projet. La generation exige un outil image disponible ; un prompt seul ne constitue pas une maquette.
+
+`clai sync --target codex` actualise les sections de guide et le contrat de maquettage. Les anciennes images et les fichiers personnalises restent conserves ; leur archivage est explicite. Aucun style de sortie n'est installe ni impose.

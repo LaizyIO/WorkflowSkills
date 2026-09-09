@@ -6,12 +6,12 @@
   },
   "metadata": {
     "description": "Complete workflow suite for feature implementation with specification, research, planning, implementation, testing, fixing, and critical review phases",
-    "version": "1.2.0"
+    "version": "1.5.0"
   },
   "plugins": [
     {
       "name": "feature-workflow-suite",
-      "description": "Complete feature implementation workflow suite with 10 specialized skills covering specification, research, planning, implementation, testing, fixing, git workflow, test planning, and critical review/challenge",
+      "description": "Feature delivery and UX DesignOps skills: specification, research, planning, implementation, image mockups, visual verification, testing, Git workflows and review.",
       "source": "./",
       "strict": false,
       "skills": [
@@ -25,7 +25,20 @@
         "./test-fixer",
         "./git-workflow-manager",
         "./workflow-challenger",
-        "./linear-issue-creator"
+        "./linear-issue-creator",
+        "./ux-audit",
+        "./ux-bootstrap",
+        "./ux-code-to-mockup",
+        "./ux-component-spec",
+        "./ux-design-sync",
+        "./ux-flow",
+        "./ux-implement-from-mockup",
+        "./ux-mockup-brief",
+        "./ux-mockup-generate",
+        "./ux-mockup-iterate",
+        "./ux-polish",
+        "./ux-storybook",
+        "./ux-visual-verification"
       ]
     }
   ]

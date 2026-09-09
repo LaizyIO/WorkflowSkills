@@ -776,8 +776,8 @@ When orchestrating a user-visible feature, include UX DesignOps in the normal wo
 
 1. Specification: capture UI impact, target surfaces, states, accessibility, and responsive constraints.
 2. Research: read `DESIGN.md` and `[DOC]-*/11-UX-DesignOps/`; run `ux-audit` if an existing surface is modified.
-3. Planning: add UX, Stitch, implementation, visual verification, and design sync steps to the same `FEAT-XXX-Plan.md`.
-4. Implementation: use `ux-polish` or `ux-implement-from-stitch` when appropriate.
+3. Planning: add UX, image mockups, implementation, visual verification, and design sync steps to the same `FEAT-XXX-Plan.md`.
+4. Implementation: use `ux-polish` or `ux-implement-from-mockup` when appropriate.
 5. Testing: run `ux-visual-verification`; if no rendering tool exists, mark the verification blocked.
 6. Documentation: run `ux-design-sync` and keep `MOC-UX.md` current.
 

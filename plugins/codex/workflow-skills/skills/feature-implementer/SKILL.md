@@ -556,10 +556,10 @@ For UI implementation:
 
 - read `DESIGN.md`, related `[DOC]-*/11-UX-DesignOps/` docs, and the implementation plan before editing;
 - use `ux-polish` for focused UI refinement;
-- use `ux-implement-from-stitch` when implementing a selected Stitch direction;
+- use `ux-implement-from-mockup` when implementing a selected mockup image;
 - preserve business logic, routes, APIs, validation, state management, and existing component architecture;
 - reuse existing components and tokens;
-- do not paste raw Stitch HTML when the project has reusable UI architecture;
+- implement real semantic components; never use the mockup as a full-screen image of working controls;
 - update UX docs and visual debt after changes;
 - run `ux-visual-verification` before marking UI work complete.
 

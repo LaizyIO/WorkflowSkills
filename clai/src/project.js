@@ -214,9 +214,10 @@ tags:
 async function installUxDesignOps(cwd, docName, projectName, templatesDir, force = false) {
   const uxTemplateRoot = path.join(templatesDir, 'codex', 'ux-designops');
   const today = new Date().toISOString().split('T')[0];
+  const docRoot = await findDocRoot(cwd, docName);
   const replacements = {
     DATE: today,
-    PROJECT_NAME: docName || projectName || 'Project'
+    PROJECT_NAME: docRoot ? path.basename(docRoot).slice(6) : docName || projectName || 'Project'
   };
 
   const result = {
@@ -227,7 +228,6 @@ async function installUxDesignOps(cwd, docName, projectName, templatesDir, force
     reason: null
   };
 
-  const docRoot = await findDocRoot(cwd, docName);
   if (!docRoot) {
     result.skipped = true;
     result.reason = 'no [DOC]-* directory found';
@@ -236,6 +236,19 @@ async function installUxDesignOps(cwd, docName, projectName, templatesDir, force
 
   result.doc = await copyTemplateTree(path.join(uxTemplateRoot, 'doc'), docRoot, replacements, force);
   result.moc = await ensureMocUxLink(docRoot, today);
+  const designPath = path.join(cwd, 'DESIGN.md');
+  const design = await fs.readFile(designPath, 'utf-8');
+  const designTemplate = await fs.readFile(path.join(uxTemplateRoot, 'root', 'DESIGN.md'), 'utf-8');
+  const mockupSection = designTemplate.match(/^## Codex Image Mockups\r?\n[\s\S]*?(?=^## Documentation)/m)[0]
+    .replace(/\{\{PROJECT_NAME\}\}/g, path.basename(docRoot).slice(6));
+  let updatedDesign = design.replace(/^## Stitch\r?\n[\s\S]*?(?=^## |(?![\s\S]))/gm, mockupSection);
+  updatedDesign = updatedDesign.replace('Codex, Stitch, and frontend agents', 'Codex and frontend agents');
+  if (!updatedDesign.includes('## Codex Image Mockups')) updatedDesign += '\n\n' + mockupSection;
+  if (updatedDesign !== design) await fs.writeFile(designPath, updatedDesign, 'utf-8');
+  const uxMocPath = path.join(docRoot, '00-MOC', 'MOC-UX.md');
+  const uxMoc = await fs.readFile(uxMocPath, 'utf-8');
+  const updatedMoc = uxMoc.replace('## Stitch', '## Maquettes image').replace('[[Project_Map]]', '[[Mockup_Index]]');
+  if (updatedMoc !== uxMoc) await fs.writeFile(uxMocPath, updatedMoc, 'utf-8');
   return result;
 }
 
@@ -295,7 +308,6 @@ async function initProject(projectName, options = {}) {
     const results = {
       commands: null,
       agents: null,
-      outputStyles: null,
       cache: null,
       projectTools: null,
       doc: null,
@@ -319,15 +331,6 @@ async function initProject(projectName, options = {}) {
       path.join(targetTemplatesRoot, 'agents'),
       path.join(runtimeDir, 'agents'),
       'Agents',
-      spinner,
-      forceOverwrite
-    );
-
-    spinner.text = 'Installation des output-styles...';
-    results.outputStyles = await smartCopy(
-      path.join(targetTemplatesRoot, 'output-styles'),
-      path.join(runtimeDir, 'output-styles'),
-      'Output-styles',
       spinner,
       forceOverwrite
     );
@@ -382,6 +385,9 @@ async function initProject(projectName, options = {}) {
         if (results.doc.action === 'created') {
           await updateDocName(docDir, docName);
         }
+        for (const folder of ['00-MOC', '01-Specs', '02-Database', '03-Architecture', '04-Features', '05-API', '06-ADR', '07-Meetings', '08-Dev', '09-Resources', '10-Archives']) {
+          await fs.ensureDir(path.join(docDir, folder));
+        }
         spinner.succeed('Structure [DOC]-' + docName + ' configurée');
       } else {
         spinner.warn('Template Obsidian non trouvé');
@@ -426,7 +432,6 @@ async function initProject(projectName, options = {}) {
 
     printResult(targetConfig.runtimeDirName + '/commands/', results.commands, 'Créées', 'Mises à jour', 'Ignorées');
     printResult(targetConfig.runtimeDirName + '/agents/', results.agents, 'Créés', 'Mis à jour', 'Ignorés');
-    printResult(targetConfig.runtimeDirName + '/output-styles/', results.outputStyles, 'Créés', 'Mis à jour', 'Ignorés');
     printResult(targetConfig.runtimeDirName + '/cache/', results.cache, 'Créé', 'Mis à jour', 'Ignoré');
     printResult('scripts/', results.projectTools, 'Créés', 'Mis à jour', 'Ignorés');
 
@@ -593,7 +598,8 @@ async function syncProject(options = {}) {
       await installUxDesignOps(cwd, null, path.basename(cwd), templatesDir, false);
     }
 
-    const guideResult = await generateGuide(cwd, path.basename(cwd), null, targetConfig);
+    const docRoot = await findDocRoot(cwd);
+    const guideResult = await generateGuide(cwd, path.basename(cwd), docRoot ? path.basename(docRoot).slice(6) : null, targetConfig);
     if (guideResult.action === 'error') {
       spinner.warn(targetConfig.guideFileName + ' non synchronisé: ' + guideResult.reason);
     }
@@ -638,6 +644,35 @@ async function updateDocName(_docDir, _name) {
   return true;
 }
 
+function migrateDesignGuide(content, templateContent) {
+  // Replace retired generated sections while preserving project-specific instructions.
+  let result = content.replace(/^## Output Styles\r?\n[\s\S]*?(?=^## |^---\s*$|(?![\s\S]))/gm, '');
+  const imageSection = templateContent.match(/^### Codex Image Mockups\r?\n[\s\S]*?(?=^---\s*$)/m);
+  if (imageSection) {
+    result = result.replace(/^### Stitch MCP\r?\n[\s\S]*?(?=^---\s*$|^## )/gm, imageSection[0]);
+    if (result.includes('## UX DesignOps') && !result.includes('### Codex Image Mockups')) {
+      result += '\n\n' + imageSection[0];
+    }
+  }
+  const renames = {
+    'ux-stitch-brief': 'ux-mockup-brief',
+    'ux-stitch-generate': 'ux-mockup-generate',
+    'ux-stitch-iterate': 'ux-mockup-iterate',
+    'ux-code-to-stitch': 'ux-code-to-mockup',
+    'ux-implement-from-stitch': 'ux-implement-from-mockup',
+    '07-Stitch/Project_Map.md': '07-Mockups/Mockup_Index.md',
+    'Stitch-ready design brief': 'image-generation brief',
+    'Prepare or run Stitch exploration': 'Generate UI mockup images with Codex',
+    'Stitch direction': 'mockup image',
+    'Stitch inputs': 'image-generation inputs',
+    'Stitch map': 'mockup index'
+  };
+  for (const [before, after] of Object.entries(renames)) {
+    result = result.split(before).join(after);
+  }
+  return result;
+}
+
 async function generateGuide(projectDir, projectName, docName, targetConfig) {
   try {
     const templatesDir = path.resolve(__dirname, '../templates');
@@ -658,7 +693,11 @@ async function generateGuide(projectDir, projectName, docName, targetConfig) {
       .replace(/\{\{CLAI_VERSION\}\}/g, pkg.version);
 
     if (await fs.pathExists(destPath)) {
-      const existingContent = await fs.readFile(destPath, 'utf-8');
+      const originalContent = await fs.readFile(destPath, 'utf-8');
+      const existingContent = migrateDesignGuide(originalContent, templateContent);
+      if (existingContent !== originalContent) {
+        await fs.writeFile(destPath, existingContent, 'utf-8');
+      }
       const memoryOnlyPattern = /^<claude-mem-context>[\s\S]*<\/claude-mem-context>\s*$/;
       if (memoryOnlyPattern.test(existingContent.trim())) {
         await fs.writeFile(destPath, templateContent, 'utf-8');

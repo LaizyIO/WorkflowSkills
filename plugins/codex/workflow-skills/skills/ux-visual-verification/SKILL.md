@@ -40,7 +40,7 @@ If no rendering tool is available, do not downgrade to code-only review. Mark ve
 7. No incoherent overlap.
 8. No accidental layout shift from dynamic text.
 9. No anti-slop violations.
-10. Comparison against Stitch screenshot or prompt if relevant.
+10. Comparison against selected generated mockup image (not verification evidence) if relevant.
 
 ## Output
 

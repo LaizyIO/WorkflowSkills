@@ -1,6 +1,6 @@
 ---
 name: ux-design-sync
-description: Synchronize DESIGN.md, UX DesignOps docs, Stitch mappings, visual debt, and implementation reality after UI changes.
+description: Synchronize DESIGN.md, UX DesignOps docs, mockup references, visual debt, and implementation reality after UI changes.
 ---
 
 # UX Design Sync Skill
@@ -16,20 +16,20 @@ Before acting, resolve project documentation roots:
 
 ## Goal
 
-Keep UX documentation, `DESIGN.md`, Stitch metadata, and implemented UI aligned.
+Keep UX documentation, `DESIGN.md`, mockup metadata, and implemented UI aligned.
 
 ## Process
 
 1. Read changed UI files, tokens, components, routes, and tests.
 2. Compare code with `DESIGN.md` and UX docs.
-3. Update screen, component, flow, decision, visual debt, and Stitch project map docs.
+3. Update screen, component, flow, decision, visual debt, and mockup index docs.
 4. Update frontmatter `updated` dates.
 5. Update `MOC-UX.md` and `MOC-Principal.md` when new docs are created.
-6. If Stitch context exists, verify IDs with MCP tools when available.
+6. Verify that referenced mockup images exist locally and distinguish proposed designs from implemented screens.
 
-## Stitch MCP Usage
+## Image references
 
-Use `list_projects`, `get_project`, `list_screens`, `list_design_systems`, `upload_design_md`, `create_design_system_from_design_md`, and `apply_design_system` when the sync concerns Stitch project or design system state.
+Update 07-Mockups/Mockup_Index.md with selected image paths, exact prompts, route/component mapping, implementation status and intentional deviations. Keep rendered application screenshots separate from generated mockups.
 
 ## Rules
 

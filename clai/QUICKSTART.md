@@ -94,7 +94,6 @@ votre-projet/
 ├── .claude/
 │   ├── commands/
 │   ├── agents/
-│   ├── output-styles/
 │   │   └── non-dev-explanatory.md
 │   └── cache/
 └── [DOC]-VotreProjet/
@@ -130,3 +129,12 @@ Pour plus de détails, voir [README.md](./README.md)
 - `--target claude`: initialise `.claude/` et g?n?re/maj `CLAUDE.md`
 - `--target codex`: initialise `.codex/` et g?n?re/maj `AGENTS.md`
 - Ruflo reste disponible uniquement en target Claude
+
+
+## Maquettes UI avec Codex (clai 1.2.0)
+
+Le workflow UX conserve audit, flux, composants, implementation et verification visuelle. Des qu'une maquette est necessaire, utiliser `ux-mockup-generate` pour generer une image avec Codex. Preparer le brief avec `ux-mockup-brief`, iterer avec `ux-mockup-iterate`, puis implementer via `ux-implement-from-mockup`.
+
+Les images vivent dans `design/mockups/images/`, les prompts et decisions dans `[DOC]-*/11-UX-DesignOps/07-Mockups/`. Les skills proviennent du plugin WorkflowSkills 1.5.0 ; clai configure le projet. La generation exige un outil image disponible ; un prompt seul ne constitue pas une maquette.
+
+`clai sync --target codex` actualise les sections de guide et le contrat de maquettage. Les anciennes images et les fichiers personnalises restent conserves ; leur archivage est explicite. Aucun style de sortie n'est installe ni impose.

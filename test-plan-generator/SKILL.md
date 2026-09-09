@@ -529,7 +529,7 @@ For UI changes, add UX test coverage without duplicating lower-level tests:
 - desktop and mobile responsive checks;
 - keyboard navigation and focus-visible checks;
 - accessibility basics: labels, contrast, ARIA for icon-only controls, non-color-only errors;
-- visual comparison against Stitch screenshot or prompt when relevant;
+- visual comparison against selected generated mockup image (not verification evidence) when relevant;
 - Storybook state coverage when Storybook exists;
 - anti-slop checks against `DESIGN.md` and `[DOC]-*/11-UX-DesignOps/`.
 

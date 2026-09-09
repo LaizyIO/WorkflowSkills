@@ -22,7 +22,7 @@ plugins/codex/workflow-skills/.codex-plugin/plugin.json
 
 - Feature specification, research, implementation planning, implementation, testing, fixing, Git worktrees, and Linear issue creation.
 - UX DesignOps workflow for product UI work.
-- Stitch MCP-aware design exploration and synchronization.
+- Codex-generated image mockups, focused iteration and implementation handoff.
 - Visual verification workflow for UI changes.
 
 ## UX DesignOps Skills
@@ -34,11 +34,11 @@ ux-bootstrap
 ux-audit
 ux-flow
 ux-component-spec
-ux-stitch-brief
-ux-stitch-generate
-ux-stitch-iterate
-ux-code-to-stitch
-ux-implement-from-stitch
+ux-mockup-brief
+ux-mockup-generate
+ux-mockup-iterate
+ux-code-to-mockup
+ux-implement-from-mockup
 ux-polish
 ux-visual-verification
 ux-design-sync
@@ -66,8 +66,8 @@ UI changes must be verified with the Codex Browser plugin by default in Codex, o
 
 If no rendering tool is available, the UX verification is blocked until the project has one.
 
-## Stitch MCP
+## Codex Image Mockups
 
-When Stitch MCP is configured, the UX Stitch skills should use available MCP tools for projects, screens, design systems, `DESIGN.md` upload, and design system application.
+Whenever a UI/UX mockup is needed, use ux-mockup-generate and Codex's built-in image generation tool. Use ux-mockup-brief for the prompt and ux-mockup-iterate for revisions. Inspect the images, preserve existing product constraints and tokens, and save actual deliverables under design/mockups/images/. Record prompts, selected versions and rationale in [DOC]-<Project>/11-UX-DesignOps/07-Mockups/Mockup_Index.md.
 
-Some advanced operations may not be exposed by the current MCP namespace, including direct screen generation, HTML upload/extraction, React/shadcn conversion, and `stitch-loop`. Delegate those operations to the official `google-labs-code/stitch-skills` ecosystem when needed.
+If image generation is unavailable, say the mockup is blocked; do not claim a written prompt is a generated image. API/CLI fallback requires explicit user authorization. Use ux-implement-from-mockup to build the selected direction with real components, then ux-visual-verification on the rendered app. Generated images are proposals, never proof of implementation or accessibility.

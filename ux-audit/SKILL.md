@@ -28,7 +28,7 @@ Find concrete UX/UI problems and produce actionable findings for `feature-resear
 - Related docs in `UX_DOCS_ROOT`.
 - Related CDC, FEAT, ADR, DB, or meeting notes when they exist.
 - Existing code.
-- Optional Stitch project, screen, or screenshot references.
+- Optional selected mockup images or rendered screenshot references.
 
 ## Audit Dimensions
 
