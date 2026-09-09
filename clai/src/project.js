@@ -1,7 +1,6 @@
 const fs = require('fs-extra');
 const path = require('path');
 const os = require('os');
-const { spawn } = require('child_process');
 const chalk = require('chalk');
 const ora = require('ora');
 const inquirer = require('inquirer');
@@ -249,6 +248,12 @@ async function installUxDesignOps(cwd, docName, projectName, templatesDir, force
   const uxMoc = await fs.readFile(uxMocPath, 'utf-8');
   const updatedMoc = uxMoc.replace('## Stitch', '## Maquettes image').replace('[[Project_Map]]', '[[Mockup_Index]]');
   if (updatedMoc !== uxMoc) await fs.writeFile(uxMocPath, updatedMoc, 'utf-8');
+  const scanPath = path.join(cwd, 'scripts', 'ux', 'uxkit-lite.mjs');
+  if (await fs.pathExists(scanPath)) {
+    const scan = await fs.readFile(scanPath, 'utf-8');
+    const migrated = scan.split('ux-stitch-generate').join('ux-mockup-generate');
+    if (migrated !== scan) await fs.writeFile(scanPath, migrated, 'utf-8');
+  }
   return result;
 }
 
@@ -613,40 +618,51 @@ async function syncProject(options = {}) {
   }
 }
 
-async function runMojibakeCheck(paths = []) {
-  const cwd = process.cwd();
-  const localScript = path.join(cwd, 'scripts', 'check-mojibake.ps1');
-  const bundledScript = path.resolve(__dirname, '../templates/project/scripts/check-mojibake.ps1');
-  const scriptPath = await fs.pathExists(localScript) ? localScript : bundledScript;
-
-  if (!(await fs.pathExists(scriptPath))) {
-    console.error(chalk.red('Script check-mojibake introuvable'));
-    return 1;
-  }
-
-  const executable = process.platform === 'win32' ? 'powershell' : 'pwsh';
-  const args = ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', scriptPath];
-  if (paths.length > 0) {
-    args.push('-Paths', ...paths);
-  }
-
-  return new Promise((resolve) => {
-    const child = spawn(executable, args, { cwd, stdio: 'inherit' });
-    child.on('error', (error) => {
-      console.error(chalk.red('Impossible de lancer PowerShell:'), error.message);
-      resolve(1);
-    });
-    child.on('close', (code) => resolve(code || 0));
-  });
+async function runMojibakeCheck() {
+  console.log('Controle mojibake desactive. Aucun controle execute. Utilisez clai remove-mojibake pour retirer le script local.');
+  return 0;
 }
 
 async function updateDocName(_docDir, _name) {
   return true;
 }
 
+function stripEncodingGuard(content) {
+  return content.replace(/^## Encoding Guard\r?\n[\s\S]*?(?=^---\s*$|^## |(?![\s\S]))/gm, '');
+}
+
+async function removeMojibake(directory = process.cwd()) {
+  const root = await fs.realpath(path.resolve(directory));
+  const script = path.join(root, 'scripts', 'check-mojibake.ps1');
+  if (await fs.pathExists(script)) {
+    // Reject redirected paths: removal is confined to this project's named file.
+    const actual = await fs.realpath(script);
+    const relative = path.relative(root, actual);
+    if (relative.startsWith('..') || path.isAbsolute(relative)) throw new Error('Script hors du projet');
+    await fs.unlink(script);
+    console.log('Supprime: ' + script);
+  } else {
+    console.log('Script deja absent: ' + script);
+  }
+  for (const name of ['AGENTS.md', 'CLAUDE.md', 'CODEX.md']) {
+    const guide = path.join(root, name);
+    if (!(await fs.pathExists(guide))) continue;
+    if ((await fs.lstat(guide)).isSymbolicLink()) throw new Error('Guide symbolique non modifie: ' + guide);
+    const content = await fs.readFile(guide, 'utf8');
+    const updated = stripEncodingGuard(content);
+    if (updated !== content) {
+      await fs.writeFile(guide, updated, 'utf8');
+      console.log('Consignes retirees: ' + guide);
+    }
+    if (/check-mojibake/i.test(updated)) {
+      console.log('Reference personnalisee a verifier manuellement: ' + guide);
+    }
+  }
+}
+
 function migrateDesignGuide(content, templateContent) {
   // Replace retired generated sections while preserving project-specific instructions.
-  let result = content.replace(/^## Output Styles\r?\n[\s\S]*?(?=^## |^---\s*$|(?![\s\S]))/gm, '');
+  let result = stripEncodingGuard(content).replace(/^## Output Styles\r?\n[\s\S]*?(?=^## |^---\s*$|(?![\s\S]))/gm, '');
   const imageSection = templateContent.match(/^### Codex Image Mockups\r?\n[\s\S]*?(?=^---\s*$)/m);
   if (imageSection) {
     result = result.replace(/^### Stitch MCP\r?\n[\s\S]*?(?=^---\s*$|^## )/gm, imageSection[0]);
@@ -730,6 +746,7 @@ module.exports = {
   installGlobal,
   syncProject,
   runMojibakeCheck,
+  removeMojibake,
   getTargetConfig,
   normalizeTarget
 };

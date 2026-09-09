@@ -19,7 +19,7 @@ tags:
 - Les templates Codex doivent inclure le guide `AGENTS.md`, les artefacts `.codex/`, `DESIGN.md`, `design/mockups/`, `scripts/ux/`, et la memoire UX dans `[DOC]-*/11-UX-DesignOps/`.
 - La verification visuelle Codex doit citer le Codex Browser plugin comme outil par defaut; Playwright reste un outil E2E ou fallback selon le contexte projet.
 - Les outils projet communs vivent dans `clai/templates/project/` et doivent etre installes par `clai init` et `clai sync`, quelle que soit la cible.
-- `scripts/check-mojibake.ps1` est l'outil standard de detection mojibake; il doit rester accessible via `clai check-mojibake`.
+- Controle mojibake suspendu : ne pas installer ni executer le script. Utiliser `clai remove-mojibake [directory]` pour retirer le controle d'un projet existant. Voir [[DEV-Desactivation-Mojibake]].
 
 ## Guides racine
 - Claude: `CLAUDE.md`.

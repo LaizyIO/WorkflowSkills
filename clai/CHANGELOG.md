@@ -5,6 +5,12 @@ Toutes les modifications notables de ce projet seront documentées dans ce fichi
 Le format est basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/),
 et ce projet adhère au [Versioning Sémantique](https://semver.org/lang/fr/).
 
+## [1.2.1] - 2026-09-09
+
+- Controle mojibake desactive temporairement : ni installation ni execution.
+- Commande remove-mojibake [directory] pour supprimer le script local et les consignes generees, sans toucher aux autres scripts.
+- Source conservee sous disabled/ pour une eventuelle reactivation explicite.
+
 ## [1.2.0] - 2026-09-09
 
 ### Modifie

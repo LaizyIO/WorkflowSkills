@@ -264,3 +264,18 @@ Le workflow UX conserve audit, flux, composants, implementation et verification 
 Les images vivent dans `design/mockups/images/`, les prompts et decisions dans `[DOC]-*/11-UX-DesignOps/07-Mockups/`. Les skills proviennent du plugin WorkflowSkills 1.5.0 ; clai configure le projet. La generation exige un outil image disponible ; un prompt seul ne constitue pas une maquette.
 
 `clai sync --target codex` actualise les sections de guide et le contrat de maquettage. Les anciennes images et les fichiers personnalises restent conserves ; leur archivage est explicite. Aucun style de sortie n'est installe ni impose.
+
+
+## Controle mojibake desactive (1.2.1)
+
+Le controle automatique est suspendu. init et sync n'installent plus le script ni la consigne Encoding Guard. L'ancienne commande check-mojibake affiche uniquement sa desactivation, sans executer PowerShell.
+
+Pour un projet existant :
+
+```powershell
+node D:\WorkflowSkills\clai\bin\clai.js remove-mojibake "D:\MonProjet"
+# Ou avec clai disponible dans le PATH :
+clai remove-mojibake "D:\MonProjet"
+```
+
+Sans argument, le dossier courant est utilise. La commande supprime seulement scripts/check-mojibake.ps1 et la section generee Encoding Guard dans AGENTS.md, CLAUDE.md et CODEX.md. Elle signale les autres references personnalisees dans ces guides sans les modifier. Les hooks CI ou scripts npm personnalises restent a retirer manuellement s'ils existent.

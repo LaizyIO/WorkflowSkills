@@ -2,7 +2,7 @@ const { program } = require('commander');
 const chalk = require('chalk');
 const { checkClaude, installClaude } = require('./checker');
 const { setupMarketplace } = require('./marketplace');
-const { initProject, installGlobal, syncProject, runMojibakeCheck } = require('./project');
+const { initProject, installGlobal, syncProject, runMojibakeCheck, removeMojibake } = require('./project');
 const {
   checkRufloInstalled,
   installRufloGlobal,
@@ -132,16 +132,29 @@ program
   .option('--no-ux', 'Ne pas synchroniser UX DesignOps pour la cible Codex')
   .action(async (options) => {
     console.log(chalk.blue('Synchronisation...\n'));
-    await syncProject(options);
-    console.log(chalk.green('\nSynchronisation terminee!'));
+    const success = await syncProject(options);
+    if (success) console.log(chalk.green('\nSynchronisation terminee!'));
+    else process.exitCode = 1;
   });
 
 program
   .command('check-mojibake [paths...]')
-  .description('Detecte les sequences mojibake dans les fichiers texte du projet')
+  .description('Desactive temporairement : aucun controle execute')
   .action(async (paths) => {
     const code = await runMojibakeCheck(paths);
     process.exitCode = code;
+  });
+
+program
+  .command('remove-mojibake [directory]')
+  .description('Retire le script mojibake et les sections Encoding Guard du projet (dossier courant par defaut)')
+  .action(async (directory) => {
+    try {
+      await removeMojibake(directory);
+    } catch (error) {
+      console.error(chalk.red(error.message));
+      process.exitCode = 1;
+    }
   });
 
 program

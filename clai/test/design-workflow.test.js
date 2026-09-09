@@ -35,6 +35,8 @@ test('fresh Codex init provides local image workflow without retired assets', t 
     assert.ok(!fs.existsSync(path.join(cwd, file)), file);
   }
   assert.match(read(cwd, 'AGENTS.md'), /image generation tool/);
+  assert.ok(!fs.existsSync(path.join(cwd, 'scripts/check-mojibake.ps1')));
+  assert.doesNotMatch(read(cwd, 'AGENTS.md'), /check-mojibake|Encoding Guard/);
   const scan = spawnSync(process.execPath, ['scripts/ux/uxkit-lite.mjs', 'scan'], { cwd, encoding: 'utf8' });
   assert.equal(scan.status, 0, scan.stderr);
   assert.match(read(cwd, '[DOC]-Demo/11-UX-DesignOps/08-Audits/Project_Scan_Report.md'), /ux-mockup-generate/);
@@ -48,6 +50,7 @@ test('sync migrates old guide and design policy, preserving custom content and i
   put(cwd, '[DOC]-Demo/00-MOC/MOC-UX.md', '# Custom MOC\n\n## Stitch\n\n- [[Project_Map]]\n');
   put(cwd, 'design/stitch/user-image.txt', 'Existing user artifact');
   put(cwd, '[DOC]-Demo/01-Specs/CDC-001.md', 'Existing specification');
+  put(cwd, 'scripts/ux/uxkit-lite.mjs', '// custom scan logic\nconst skill = "ux-stitch-generate";\n');
   run(cwd, 'sync', '--target', 'codex');
   const guide = read(cwd, 'AGENTS.md');
   assert.doesNotMatch(guide, /Stitch|output.styles/i);
@@ -60,6 +63,7 @@ test('sync migrates old guide and design policy, preserving custom content and i
   assert.doesNotMatch(read(cwd, 'DESIGN.md'), /Stitch/);
   assert.equal(read(cwd, 'design/stitch/user-image.txt'), 'Existing user artifact');
   assert.equal(read(cwd, '[DOC]-Demo/01-Specs/CDC-001.md'), 'Existing specification');
+  assert.equal(read(cwd, 'scripts/ux/uxkit-lite.mjs'), '// custom scan logic\nconst skill = "ux-mockup-generate";\n');
   const design = read(cwd, 'DESIGN.md');
   run(cwd, 'sync', '--target', 'codex');
   assert.equal(read(cwd, 'AGENTS.md'), guide);
@@ -79,4 +83,41 @@ test('Codex --no-ux does not create mockup assets', t => {
   run(cwd, 'init', 'Demo', '--target', 'codex', '--doc', 'Demo', '--no-ruflo', '--no-ux', '--force');
   assert.ok(!fs.existsSync(path.join(cwd, 'design/mockups')));
   assert.ok(!fs.existsSync(path.join(cwd, 'DESIGN.md')));
+});
+
+test('remove-mojibake targets one project, preserves other scripts and is idempotent', t => {
+  const cwd = workspace(t);
+  const other = workspace(t);
+  put(cwd, 'scripts/check-mojibake.ps1', 'throw "must not run"');
+  put(cwd, 'scripts/keep.ps1', 'keep');
+  put(cwd, 'AGENTS.md', '# Project\n\n## Encoding Guard\n\nRun clai check-mojibake.\n\n---\n\n## Custom\n\nPreserve this.\n');
+  put(other, 'scripts/check-mojibake.ps1', 'preserve other project');
+  run(other, 'remove-mojibake', cwd);
+  assert.ok(!fs.existsSync(path.join(cwd, 'scripts/check-mojibake.ps1')));
+  assert.equal(read(cwd, 'scripts/keep.ps1'), 'keep');
+  assert.match(read(cwd, 'AGENTS.md'), /Preserve this/);
+  assert.doesNotMatch(read(cwd, 'AGENTS.md'), /Encoding Guard|check-mojibake/);
+  assert.equal(read(other, 'scripts/check-mojibake.ps1'), 'preserve other project');
+  run(other, 'remove-mojibake', cwd);
+  fs.mkdirSync(path.join(cwd, '.codex'));
+  fs.mkdirSync(path.join(cwd, '[DOC]-Demo'));
+  run(cwd, 'sync', '--target', 'codex');
+  assert.ok(!fs.existsSync(path.join(cwd, 'scripts/check-mojibake.ps1')));
+  assert.doesNotMatch(read(cwd, 'AGENTS.md'), /Encoding Guard|check-mojibake/);
+});
+
+test('legacy check command reports disabled without executing the local script', t => {
+  const cwd = workspace(t);
+  put(cwd, 'scripts/check-mojibake.ps1', 'Set-Content executed.txt yes; exit 42');
+  const result = spawnSync(process.execPath, [cli, 'check-mojibake'], { cwd, encoding: 'utf8' });
+  assert.equal(result.status, 0);
+  assert.match(result.stdout, /Aucun controle execute/);
+  assert.ok(!fs.existsSync(path.join(cwd, 'executed.txt')));
+});
+
+test('sync failure returns a nonzero status without a success message', t => {
+  const cwd = workspace(t);
+  const result = spawnSync(process.execPath, [cli, 'sync', '--target', 'codex'], { cwd, encoding: 'utf8' });
+  assert.equal(result.status, 1);
+  assert.doesNotMatch(result.stdout, /Synchronisation terminee!/);
 });

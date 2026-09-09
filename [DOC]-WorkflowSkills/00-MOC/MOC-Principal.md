@@ -29,4 +29,5 @@ tags:
 - [[ADR-004-Suppression-doc-manager-workflow]]
 
 ## Dev
+- [[DEV-Desactivation-Mojibake]]
 - [[DEV-Maintenance-templates-et-skills-dual-target]]

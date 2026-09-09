@@ -60,22 +60,6 @@ Templates are available in `_Templates/` for each document type.
 
 ---
 
-## Encoding Guard
-
-After any documentation edit, Markdown edit, or localized user-facing text edit, run:
-
-```bash
-clai check-mojibake
-```
-
-If `clai` is not available in the current shell, run:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File scripts/check-mojibake.ps1
-```
-
-Do not finalize changes that introduce mojibake candidates.
-
 ---
 
 ## Feature Workflow Skills

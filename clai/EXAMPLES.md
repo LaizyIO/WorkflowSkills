@@ -37,8 +37,8 @@ clai init MonProjet --target claude --doc MonProjet --no-ruflo
 
 La cible Claude conserve son guide et ses commandes. Pour la generation d'images, utiliser Codex si l'environnement courant ne fournit pas l'outil requis ; ne pas simuler une generation reussie.
 
-## Encodage
+## Retirer le controle d'encodage
 
 ```powershell
-clai check-mojibake
+clai remove-mojibake "D:\MonProjet"
 ```
