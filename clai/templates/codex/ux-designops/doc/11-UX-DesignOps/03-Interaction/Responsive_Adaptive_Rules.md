@@ -11,4 +11,4 @@ tags:
 
 # Responsive Adaptive Rules
 
-Verifier desktop et mobile. Eviter les debordements, chevauchements, reductions de texte illegibles et controles instables.
+Vérifier les plateformes, fenêtres/appareils et entrées de [[Platform_Profile]]. Adapter présentation, navigation et densité, plutôt que réduire simplement une composition desktop. Préserver zoom et texte agrandi ; une typographie fluide bornée reste possible si vérifiée. Contrôler débordements, chevauchements et stabilité avec le contenu réel.

@@ -189,7 +189,7 @@ For each document found:
   - Code exists, no Doc → **CREATE** new document
   - Doc exists, code removed → **ARCHIVE** (move to 10-Archives/)
 
-**Critical:** NEVER trust only plan descriptions. Always verify actual file contents with the Read tool. The code is the source of truth.
+**Critical:** Verify actual file contents before claiming implementation. Code provides evidence of the current state; compare it with approved requirements to identify gaps.
 
 #### 4. Execute Documentation Changes
 
@@ -241,7 +241,7 @@ For each document found:
 - **Naming**: `PREFIX-XXX-Titre.md` (3-digit zero-padded numbers)
 - **Frontmatter**: Required fields: title, type, status, created, updated, tags
 - **Links**: `[[Document-Name]]` format (no .md extension, no path prefix)
-- **Philosophy**: Code = Source de Vérité. Documentation = Reflet du Code.
+- **Philosophy**: Document actual implementation separately from approved intent; preserve requirement precedence and unresolved discrepancies.
 
 ## Handling Different Project Types
 
@@ -534,7 +534,7 @@ feature-research → implementation-planner → feature-implementer → test-exe
 10. **Communicate Progress**: Keep plan updated for visibility
 11. **Update Documentation Last**: Documentation phase runs after code is stable and all tests pass
 12. **Follow Templates**: Always use `[DOC]-*/_Templates/TPL-*.md` when creating new documentation
-13. **Code is Truth**: Documentation must reflect actual code, not plans or intentions
+13. **Evidence and requirements**: Code documents the implemented state; approved requirements define the intended state. Record and resolve discrepancies instead of rewriting requirements to conceal defects.
 
 ## Bundled Resources
 
@@ -557,6 +557,8 @@ For UI implementation:
 - read `DESIGN.md`, related `[DOC]-*/11-UX-DesignOps/` docs, and the implementation plan before editing;
 - use `ux-polish` for focused UI refinement;
 - use `ux-implement-from-mockup` when implementing a selected mockup image;
+- when no mockup is needed, implement from the approved flow/component specifications and documented direction; creation is not automatically a polish task;
+- map visual intent to actual platform conventions and controls; do not transfer another project's style or treat a web preview as native verification;
 - preserve business logic, routes, APIs, validation, state management, and existing component architecture;
 - reuse existing components and tokens;
 - implement real semantic components; never use the mockup as a full-screen image of working controls;

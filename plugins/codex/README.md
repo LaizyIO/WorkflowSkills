@@ -20,6 +20,10 @@ plugins/codex/workflow-skills/.codex-plugin/plugin.json
 
 ## Included Workflows
 
+Version 1.6.0 adds contextual design across the existing 13 UX skills. New/redesigned surfaces connect product facts to observable visual decisions and task outcomes. Focused corrections reuse the selected direction. Shared methods do not prescribe a palette, font or style.
+
+Detailed context and vocabulary references are bundled with `ux-mockup-brief`; platform verification guidance is bundled with `ux-visual-verification`. Project decisions live in Product_Context, Design_Direction and Platform_Profile (or existing equivalents).
+
 - Feature specification, research, implementation planning, implementation, testing, fixing, Git worktrees, and Linear issue creation.
 - UX DesignOps workflow for product UI work.
 - Codex-generated image mockups, focused iteration and implementation handoff.
@@ -62,7 +66,7 @@ There is no runtime fallback to `docs/obsidian`.
 
 ## Visual Verification
 
-UI changes must be verified with the Codex Browser plugin by default in Codex, or with Storybook rendered through browser automation, Playwright, or an equivalent rendering/capture tool when needed.
+UI changes need rendering on each affected runtime: Codex Browser or existing browser tooling for web; native emulator/simulator/device evidence for native UI. A web preview does not validate a native app. Report visual direction, interactions, accessibility and task outcomes separately.
 
 If no rendering tool is available, the UX verification is blocked until the project has one.
 

@@ -314,3 +314,5 @@ When research touches UI, add a `UX/UI Research` section to findings. Read:
 - existing components, tokens, styles, routes, and Storybook if present.
 
 Identify whether the feature needs `ux-audit`, `ux-flow`, `ux-component-spec`, Codex image mockup generation, Storybook coverage, or visual verification. Record accessibility, responsive, anti-slop, and design-system risks in the findings.
+
+For creation/redesign or unresolved identity, read the contextual-design and relevant vocabulary references bundled with ux-mockup-brief. Connect source facts to composition, type, imagery, component choice and platform behavior; document direction and tradeoffs in Design_Direction. Annotate references by useful properties rather than copying a previous project's look. For a focused correction, reuse existing decisions instead of restarting exploration. Evaluate contextual fit with evidence, not a generic anti-slop score.

@@ -25,6 +25,7 @@ Create a repo-native UX/UI operating system without changing product behavior.
 
 1. Inspect the frontend stack, routes, layouts, components, styling system, tokens, and available tools.
 2. Read existing `AGENTS.md`, `DESIGN.md`, CDC, FEAT, ADR, and UX docs when present.
+   Establish the relevant product facts: public/expertise, task/frequency, content/volume, use conditions, brand, platforms/inputs and observable success. Cite sources and separate unknowns from evidence. Ask only for missing facts that materially affect the requested work; empty templates do not establish context.
 3. Create or update `DESIGN.md` at project root.
 4. Create `DOC_ROOT/00-MOC/MOC-UX.md`.
 5. Create UX templates in `DOC_ROOT/_Templates/`.
@@ -41,6 +42,8 @@ Create a repo-native UX/UI operating system without changing product behavior.
    - `10-Decisions`
 7. Create or update core docs:
    - `01-Product/Product_Context.md`
+   - `01-Product/Design_Direction.md`
+   - `01-Product/Platform_Profile.md`
    - `01-Product/UX_Principles.md`
    - `01-Product/UI_Principles.md`
    - `01-Product/Anti_Slop_Vocabulary.md`
@@ -63,5 +66,6 @@ Create a repo-native UX/UI operating system without changing product behavior.
 - Do not change behavior.
 - Do not add dependencies unless explicitly requested.
 - Mark uncertain findings as assumptions.
+- Preserve existing project decisions. Shared methodology and platform conventions do not prescribe a visual style. For unresolved direction, use the contextual-design reference bundled with ux-mockup-brief when available; record decisions with visible effects and product reasons.
 - End with a prioritized next-action list.
 - Never use `docs/obsidian` as fallback storage.

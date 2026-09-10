@@ -16,3 +16,5 @@ tags:
 - Focus-visible clair.
 - Contraste suffisant.
 - Erreurs non indiquees uniquement par couleur.
+
+Utiliser la sémantique et les outils du runtime ciblé : ARIA pour le web, sémantique native et technologies d'assistance de la plateforme pour le natif. Vérifier texte agrandi, navigation, focus et récupération selon les parcours. Une capture seule ne prouve pas la conformité.

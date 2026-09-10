@@ -4,6 +4,22 @@ const os = require('os');
 const chalk = require('chalk');
 const ora = require('ora');
 const inquirer = require('inquirer');
+const crypto = require('crypto');
+
+// Only migrate the exact previously shipped scanner. Preserve custom project scripts.
+const legacyUxScannerHashes = new Set([
+  'c28e59fbf435137aff39e9124ead8843773eaa3efb6c5dba90f4af01087340c5'
+]);
+
+function mergeContextualDesignMethod(content, template) {
+  const block = /<!-- workflow-skills:contextual-design:start -->[\s\S]*?<!-- workflow-skills:contextual-design:end -->/;
+  const incoming = template.match(block);
+  if (!incoming) return content;
+  if (block.test(content)) return content.replace(block, () => incoming[0]);
+  // A damaged/user-edited delimiter must not cause an unbounded replacement.
+  if (content.includes('<!-- workflow-skills:contextual-design:')) return content;
+  return content.trimEnd() + '\n\n' + incoming[0] + '\n';
+}
 
 function normalizeTarget(target) {
   if (!target) return null;
@@ -243,15 +259,23 @@ async function installUxDesignOps(cwd, docName, projectName, templatesDir, force
   let updatedDesign = design.replace(/^## Stitch\r?\n[\s\S]*?(?=^## |(?![\s\S]))/gm, mockupSection);
   updatedDesign = updatedDesign.replace('Codex, Stitch, and frontend agents', 'Codex and frontend agents');
   if (!updatedDesign.includes('## Codex Image Mockups')) updatedDesign += '\n\n' + mockupSection;
+  updatedDesign = mergeContextualDesignMethod(updatedDesign,
+    designTemplate.replace(/\{\{PROJECT_NAME\}\}/g, path.basename(docRoot).slice(6)));
   if (updatedDesign !== design) await fs.writeFile(designPath, updatedDesign, 'utf-8');
   const uxMocPath = path.join(docRoot, '00-MOC', 'MOC-UX.md');
   const uxMoc = await fs.readFile(uxMocPath, 'utf-8');
-  const updatedMoc = uxMoc.replace('## Stitch', '## Maquettes image').replace('[[Project_Map]]', '[[Mockup_Index]]');
+  let updatedMoc = uxMoc.replace('## Stitch', '## Maquettes image').replace('[[Project_Map]]', '[[Mockup_Index]]');
+  const missingLinks = ['Design_Direction', 'Platform_Profile'].filter(name => !updatedMoc.includes('[[' + name + ']]'));
+  if (missingLinks.length) updatedMoc += '\n\n## Design contextuel\n\n' + missingLinks.map(name => '- [[' + name + ']]').join('\n') + '\n';
   if (updatedMoc !== uxMoc) await fs.writeFile(uxMocPath, updatedMoc, 'utf-8');
   const scanPath = path.join(cwd, 'scripts', 'ux', 'uxkit-lite.mjs');
   if (await fs.pathExists(scanPath)) {
     const scan = await fs.readFile(scanPath, 'utf-8');
-    const migrated = scan.split('ux-stitch-generate').join('ux-mockup-generate');
+    let migrated = scan.split('ux-stitch-generate').join('ux-mockup-generate');
+    const fingerprint = crypto.createHash('sha256').update(migrated.replace(/\r\n/g, '\n')).digest('hex');
+    if (legacyUxScannerHashes.has(fingerprint)) {
+      migrated = await fs.readFile(path.join(uxTemplateRoot, 'root', 'scripts', 'ux', 'uxkit-lite.mjs'), 'utf-8');
+    }
     if (migrated !== scan) await fs.writeFile(scanPath, migrated, 'utf-8');
   }
   return result;
@@ -686,6 +710,7 @@ function migrateDesignGuide(content, templateContent) {
   for (const [before, after] of Object.entries(renames)) {
     result = result.split(before).join(after);
   }
+  result = mergeContextualDesignMethod(result, templateContent);
   return result;
 }
 
@@ -715,7 +740,7 @@ async function generateGuide(projectDir, projectName, docName, targetConfig) {
         await fs.writeFile(destPath, existingContent, 'utf-8');
       }
       const memoryOnlyPattern = /^<claude-mem-context>[\s\S]*<\/claude-mem-context>\s*$/;
-      if (memoryOnlyPattern.test(existingContent.trim())) {
+      if (memoryOnlyPattern.test(originalContent.trim())) {
         await fs.writeFile(destPath, templateContent, 'utf-8');
         return { action: 'replaced', path: targetConfig.guideFileName, reason: 'memory context only' };
       }

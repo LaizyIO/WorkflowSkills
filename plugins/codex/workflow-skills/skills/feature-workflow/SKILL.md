@@ -774,11 +774,11 @@ User: "Something feels off about this plan, can you review it?"
 
 When orchestrating a user-visible feature, include UX DesignOps in the normal workflow:
 
-1. Specification: capture UI impact, target surfaces, states, accessibility, and responsive constraints.
-2. Research: read `DESIGN.md` and `[DOC]-*/11-UX-DesignOps/`; run `ux-audit` if an existing surface is modified.
+1. Specification: capture users/expertise, task/frequency, content, brand, use conditions, target platforms/inputs, states and success criteria from available evidence.
+2. Research: read `DESIGN.md` and `[DOC]-*/11-UX-DesignOps/`; run `ux-audit` where needed. For new or unresolved direction, follow ux-mockup-brief's contextual-design reference and record choices with reasons. A focused correction reuses the selected direction.
 3. Planning: add UX, image mockups, implementation, visual verification, and design sync steps to the same `FEAT-XXX-Plan.md`.
-4. Implementation: use `ux-polish` or `ux-implement-from-mockup` when appropriate.
-5. Testing: run `ux-visual-verification`; if no rendering tool exists, mark the verification blocked.
-6. Documentation: run `ux-design-sync` and keep `MOC-UX.md` current.
+4. Implementation: use approved flow/component specifications, `ux-polish` for local finish, or `ux-implement-from-mockup` for a selected image. Do not require an image for every UI edit.
+5. Testing: run `ux-visual-verification` on each affected platform; if a required renderer is unavailable, mark those checks blocked. Separate visual fidelity, interactions, accessibility and task outcomes.
+6. Documentation: run `ux-design-sync`, preserving project identity, requirement precedence and unresolved discrepancies; keep `MOC-UX.md` current.
 
 Never route persistent UX docs to `docs/obsidian`.

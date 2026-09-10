@@ -14,6 +14,8 @@ tags:
 ## Produit
 
 - [[Product_Context]]
+- [[Design_Direction]]
+- [[Platform_Profile]]
 - [[UX_Principles]]
 - [[UI_Principles]]
 - [[Anti_Slop_Vocabulary]]

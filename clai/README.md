@@ -10,6 +10,16 @@ npm install -g clai
 
 ## Commandes
 
+### Design contextuel (1.3.0)
+
+`clai init --target codex` fournit un contexte produit structuré, un support de direction artistique et un profil de plateformes. Le workflow relie les choix visuels aux tâches, contenus et marques, puis vérifie le runtime concerné (web ou natif).
+
+`clai sync --target codex` ajoute les supports manquants et actualise la section de méthode identifiée dans les guides et `DESIGN.md`. Il conserve les documents personnalisés, palettes, directions retenues et historiques. Les anciens templates de contexte déjà présents sont conservés ; les skills les enrichissent au prochain travail pertinent. Les guides Claude reçoivent aussi la méthode lors de leur synchronisation, sans changer le périmètre d'installation des assets UX Codex.
+
+Le scanner standard antérieur est mis à jour seulement si son empreinte correspond à la version distribuée ; un scanner modifié localement est conservé. `node scripts/ux/uxkit-lite.mjs scan --json` expose les candidats et limites sans écrire de rapport. Les indices de stack et les previews ne prouvent ni le support d'une plateforme ni la qualité UX.
+
+Mettre à jour le plugin WorkflowSkills séparément de la CLI : `sync` actualise les guides/templates, pas le cache des skills du plugin.
+
 ### `clai check`
 Vérifie si Claude Code CLI est installé sur votre système.
 

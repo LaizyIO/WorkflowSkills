@@ -23,9 +23,10 @@ Create a component contract before implementation or refactor.
 ## Process
 
 1. Identify the component role, users, context, and parent flows.
+   Justify the component choice using data volume, search/comparison needs, selection scope, frequency, expertise and error recovery. Compare plausible alternatives when the choice is unresolved; do not replace a familiar native control solely for visual novelty.
 2. Define props or inputs at a behavioral level without inventing backend contracts.
 3. Define visual states, validation states, loading, disabled, selected, empty, and error variants.
-4. Define keyboard, focus, labels, ARIA needs, and motion constraints.
+4. Define keyboard, focus, labels, motion and platform accessibility semantics (ARIA for web, native semantics for native UI). Include system navigation and software keyboard behavior when relevant.
 5. Define responsive behavior and layout constraints.
 6. Map required tokens and existing components to reuse.
 7. Save the output under `UX_DOCS_ROOT/05-Components/`.
@@ -52,5 +53,6 @@ tags:
 
 - Do not code unless explicitly asked.
 - Prefer existing components and tokens.
+- Reuse documented design direction and platform constraints. If existing primitives cannot support the specified task, document the needed extension rather than forcing every task into the same component.
 - If Storybook exists, include story coverage recommendations.
 - Update `DOC_ROOT/00-MOC/MOC-UX.md`.

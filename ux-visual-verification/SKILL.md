@@ -1,6 +1,6 @@
 ---
 name: ux-visual-verification
-description: Verify UI changes with the Codex Browser plugin by default, or Playwright/Storybook/equivalent rendering tools when needed, using screenshots, responsive checks, focus states, and accessibility basics. Blocks if no rendering tool is available.
+description: Verify rendered UI and representative tasks on affected web or native platforms, with appropriate browser, emulator, simulator or device evidence. Report unavailable verification as blocked.
 ---
 
 # UX Visual Verification Skill
@@ -20,26 +20,27 @@ Validate that UI changes render correctly and preserve UX quality across states 
 
 ## Required Rendering Tool
 
-Use at least one rendering tool:
+Read [platform-verification.md](references/platform-verification.md) for the affected targets. Use a rendering tool appropriate to each claimed platform:
 
-- Codex Browser plugin (preferred in Codex).
+- Codex Browser plugin (preferred for web in Codex).
 - Existing project visual test runner.
 - Storybook rendered with browser automation.
 - Playwright when the project already uses it, Browser plugin is unavailable, or automated E2E evidence is explicitly required.
+- Native emulator, simulator, device or native rendering/test runner for native targets. Layout previews alone do not validate runtime interactions.
 
-If no rendering tool is available, do not downgrade to code-only review. Mark verification as blocked and add setup work for the Codex Browser plugin or an equivalent renderer. Do not require Playwright just to satisfy visual verification when Browser plugin can render the app.
+If the required renderer is unavailable, mark the affected checks blocked and name the missing setup; complete independent checks. Do not downgrade to code-only review or require Playwright when an available tool can render the target. A web build or narrow browser viewport does not validate a native app.
 
 ## Checks
 
-1. Desktop viewport.
-2. Mobile viewport.
+1. Supported platforms, relevant window/device configurations and input methods from the project profile.
+2. Representative task completion and recovery, with expected outcomes from the feature/flow.
 3. Responsive overflow and clipping.
 4. Loading, empty, error, success, disabled, selected, hover, focus, active states when applicable.
 5. Keyboard navigation and focus-visible.
 6. Contrast and readable typography.
 7. No incoherent overlap.
 8. No accidental layout shift from dynamic text.
-9. No anti-slop violations.
+9. Contextual fit: composition, content, component choice and identity have documented product reasons. Distinguish preferences from defects; common platform patterns are not violations.
 10. Comparison against selected generated mockup image (not verification evidence) if relevant.
 
 ## Output
@@ -47,12 +48,14 @@ If no rendering tool is available, do not downgrade to code-only review. Mark ve
 Create or update `UX_DOCS_ROOT/08-Audits/[target]-Visual-Verification.md` with:
 
 - rendered targets;
-- viewport matrix;
+- platform/device/window/input/state matrix;
 - screenshots or capture references when available;
 - pass/fail checklist;
 - issues by priority;
 - required fixes;
 - blocked items.
+
+Report visual direction, interaction, accessibility checks and task outcomes separately. Record what was actually observed; no invented user feedback, blanket compliance claims or unmeasured efficiency gains.
 
 ## Rules
 

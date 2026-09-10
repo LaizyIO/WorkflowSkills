@@ -3,7 +3,7 @@ title: ADR-003 Structure documentaire UX DesignOps
 type: adr
 status: approved
 created: 2026-06-07
-updated: 2026-09-09
+updated: 2026-09-10
 decision-date: 2026-06-07
 decision-makers:
   - Guillaume
@@ -17,6 +17,8 @@ tags:
 # ADR-003 - Structure documentaire UX DesignOps
 
 Actualisation du 2026-09-09 : le maquettage utilise des images generees par Codex. Les references historiques a Stitch sont remplacees dans le workflow actif par [[ADR-005-Maquettes-Images-Codex]].
+
+Précision du 2026-09-10 : les recommandations Browser/Playwright ci-dessous concernent le web. Les applications natives exigent un rendu et des vérifications sur leur runtime cible ; voir [[ADR-006-Methode-Design-Contextuel]]. Le code prouve l'état implémenté, sans remplacer la hiérarchie des exigences approuvées.
 
 ## Contexte
 

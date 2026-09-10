@@ -5,6 +5,14 @@ Toutes les modifications notables de ce projet seront documentées dans ce fichi
 Le format est basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/),
 et ce projet adhère au [Versioning Sémantique](https://semver.org/lang/fr/).
 
+## [1.3.0] - 2026-09-10
+
+- Contexte produit, direction artistique et profil de plateforme dans les templates UX.
+- Méthode contextuelle ajoutée aux guides Claude/Codex et à DESIGN.md, sans imposer une identité visuelle.
+- Synchronisation additive des supports manquants ; documents projet et scanners personnalisés préservés.
+- Migration du scanner standard reconnu par empreinte ; inventaire web/natif, limites et troncature explicites, sortie JSON disponible.
+- Tests de migration, préservation, inventaire et parité des ressources du plugin.
+
 ## [1.2.1] - 2026-09-09
 
 - Controle mojibake desactive temporairement : ni installation ni execution.

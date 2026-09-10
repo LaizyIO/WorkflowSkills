@@ -528,8 +528,9 @@ For UI features, integrate UX work into the same `FEAT-XXX-Plan.md`; do not crea
 - `ux-flow` and `ux-component-spec` when flows or shared components are unclear;
 - `ux-audit` when modifying an existing surface;
 - Codex image mockup generation whenever a visual mockup is needed;
-- UI implementation via `ux-polish` or `ux-implement-from-mockup`;
-- `ux-visual-verification` with the Codex Browser plugin by default, or Storybook/Playwright/equivalent rendering when needed;
+- context/direction work via ux-mockup-brief's references for creation or redesign when unresolved; do not impose new variants for focused corrections;
+- UI implementation from approved flow/component specifications; use `ux-polish` for finish or `ux-implement-from-mockup` for a selected image. An implementation without a mockup is not automatically polish;
+- `ux-visual-verification` with a renderer for each affected platform and representative tasks, inputs and states;
 - `ux-design-sync` to update `DESIGN.md`, `MOC-UX.md`, and `[DOC]-*/11-UX-DesignOps/`.
 
-If no visual rendering tool is available, mark UI verification as blocked and add setup work. Do not plan a code-only fallback. Prefer Codex Browser plugin setup over adding Playwright unless the project needs committed E2E tests.
+If a required renderer is unavailable, mark its checks blocked and add setup work. Do not plan a code-only fallback. Prefer Codex Browser for web when available; native targets need a native renderer/device. Preserve the user's existing authorization and selected direction.

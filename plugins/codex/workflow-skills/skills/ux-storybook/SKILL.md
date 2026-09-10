@@ -29,6 +29,7 @@ Use Storybook when present to document, test, and verify UI component states.
 ## Rules
 
 - Storybook is useful but optional unless the project already relies on it.
+- This skill covers Storybook, not every native state catalog. If the project uses native previews or another catalog, retain it and route its target to ux-visual-verification; runtime flows still need runtime evidence.
 - Do not add Storybook dependencies unless explicitly requested.
 - Cover loading, error, empty, disabled, focus, selected, and responsive variants where relevant.
-- Visual verification still requires rendering through the Codex Browser plugin by default, or Playwright/Storybook/equivalent when needed.
+- Web Storybook verification requires actual browser rendering; do not treat web stories as proof of a separate native runtime.

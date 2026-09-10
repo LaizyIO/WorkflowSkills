@@ -66,6 +66,14 @@ Templates are available in `_Templates/` for each document type.
 
 For any user-visible interface change, Codex must use the UX DesignOps workflow.
 
+<!-- workflow-skills:contextual-design:start -->
+### Contextual design
+
+Use sourced Product_Context, Design_Direction and Platform_Profile in [DOC]-{{PROJECT_NAME}}/11-UX-DesignOps/01-Product/ (or existing equivalents). For creation/redesign, follow ux-mockup-brief's contextual-design reference: turn context into observable choices with product reasons. Use relevant vocabulary and annotated references; do not impose a common style. A focused correction reuses existing decisions and authorization.
+
+Implement from approved flow/component specs, with a mockup only when needed. Verify the actual platform: browser for web, native renderer/device for native. Separate visual direction, interaction, accessibility and task outcomes. Code is evidence of the current implementation; approved requirements define intent. Document discrepancies without silently rewriting requirements.
+<!-- workflow-skills:contextual-design:end -->
+
 ### Sources
 
 - `DESIGN.md` at project root is the portable design contract.
@@ -94,7 +102,7 @@ For any user-visible interface change, Codex must use the UX DesignOps workflow.
 
 ### Required UI Verification
 
-UI changes must be visually verified with the Codex Browser plugin by default in Codex, or with Storybook rendered through browser automation, Playwright, or an equivalent rendering/capture tool when needed.
+UI changes require rendering on the affected platform: Codex Browser by default for web in Codex, an existing browser runner/Storybook/Playwright when appropriate, and native emulator/simulator/device evidence for native UI. A web viewport does not validate a native runtime.
 
 If no rendering tool is available, mark verification as blocked and add setup work. Do not validate UI changes through code-only review.
 

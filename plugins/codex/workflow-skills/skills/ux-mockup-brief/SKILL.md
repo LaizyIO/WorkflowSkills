@@ -11,6 +11,10 @@ Read AGENTS.md, DESIGN.md, the relevant CDC/FEAT/ADR and existing UX screen, flo
 
 ## Prepare the brief
 
+For a new surface, redesign or unresolved direction, read [contextual-design.md](references/contextual-design.md). Use [design-vocabulary.md](references/design-vocabulary.md) for the relevant visual and interaction axes. For a small revision, reuse the documented context and selected direction; do not restart discovery.
+
+Record sourced user/context facts, the target platform and inputs, brand constraints, intended task outcome and unresolved material questions. Each major visual choice needs an observable interpretation and product reason. Keep the reusable direction in `01-Product/Design_Direction.md` (or the existing equivalent) and platform requirements in `01-Product/Platform_Profile.md`. A filled template is not proof of user research.
+
 Identify the user task, target route/component, viewport, content hierarchy, real labels, density, design tokens, reusable components and constraints. Include loading, empty, error, permission and success states when relevant, keyboard/focus behavior and responsive requirements. Keep unsupported product decisions explicitly unresolved.
 
 For an existing interface, inspect its code and rendered screenshot. Preserve its identity unless a redesign is requested. State exact copy and distinguish illustrative sample content from real data. Avoid invented metrics and decorative effects without a product purpose.
@@ -20,6 +24,8 @@ Write the prompt in this form:
 - Use case: ui-mockup.
 - Target, user goal, viewport and fidelity.
 - Reference images and their roles, if any.
+- Direction and rationale: selected terms translated into visible choices, reference properties to adapt and properties to exclude.
+- Target platform/input behavior and observable task success criteria.
 - Information hierarchy, layout, typography, palette and component states.
 - Text verbatim, constraints to preserve, changes requested and elements to avoid.
 

@@ -2,6 +2,16 @@
 
 Ce document décrit les conventions et workflows pour travailler sur ce projet avec Claude Code.
 
+<!-- workflow-skills:contextual-design:start -->
+## Design contextuel
+
+Pour une UI, réutiliser les faits et décisions du projet : public, expertise, tâche, contenu, marque, conditions d'usage, plateformes/entrées et réussite attendue. Documenter le contexte, la direction et le profil de plateforme dans [DOC]-{{PROJECT_NAME}}/11-UX-DesignOps/ lorsque ce domaine existe, ou suivre ux-bootstrap. Un template vide n'établit pas le contexte.
+
+Pour création/refonte, utiliser les références de ux-mockup-brief pour traduire les termes de design en décisions visibles avec raisons produit. Une retouche réutilise les choix existants ; aucun style commun ni exploration systématique. Implémenter les spécifications de parcours/composants avec une maquette seulement si nécessaire. Ne pas assimiler absence de maquette et polish.
+
+Vérifier sur le runtime concerné, navigateur pour le web et rendu/appareil natif pour le natif. Séparer rendu, interactions, accessibilité et réussite des tâches. Le code décrit l'existant ; les exigences approuvées définissent l'attendu. Conserver les écarts explicites jusqu'à résolution.
+<!-- workflow-skills:contextual-design:end -->
+
 ## Documentation Requirements
 
 **All technical decisions and implementations must be documented** in the Obsidian vault `[DOC]-{{PROJECT_NAME}}/` following the conventions below.

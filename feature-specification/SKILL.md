@@ -235,12 +235,15 @@ The CDC becomes input for `feature-research`, providing clear requirements for t
 
 When a feature affects a user-visible interface, capture UX requirements during specification:
 
-- user goal and primary task;
+- user goal, expertise, frequency, conditions of use, primary task and observable success;
 - target routes, screens, components, and flows;
 - required loading, empty, error, success, disabled, permission, and offline states;
 - accessibility and keyboard/focus constraints;
-- desktop and mobile responsive constraints;
+- supported platforms, input methods and adaptive/native behavior;
 - design system, token, and component reuse constraints;
+- brand identity, content/data characteristics and freedom to change the existing direction;
 - expected UX documents under `[DOC]-*/11-UX-DesignOps/`.
 
 Use `ux-flow` for feature journeys and `ux-component-spec` for shared UI components. Persistent UX docs require a `[DOC]-*` vault; never use `docs/obsidian` as fallback.
+
+Reuse sourced project facts and distinguish unknowns from assumptions; ask only for missing information that materially changes the design. A template or simulated persona is not user research. Keep the context in Product_Context and the platform profile in Platform_Profile (or existing equivalents).

@@ -1,1 +1,9 @@
-clai
+# Keep local CLI assets ignored while making new contextual-design deliverables reviewable.
+clai/**
+!clai/**/
+!clai/test/contextual-design.test.js
+!clai/test/fixtures/uxkit-lite-v1.mjs
+!clai/templates/codex/ux-designops/doc/11-UX-DesignOps/01-Product/Design_Direction.md
+!clai/templates/codex/ux-designops/doc/11-UX-DesignOps/01-Product/Platform_Profile.md
+clai/node_modules/
+clai/templates/obsidian/.obsidian/

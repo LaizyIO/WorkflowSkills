@@ -436,7 +436,9 @@ When challenging UI work, verify:
 - findings include UX/UI research when the feature is user-visible;
 - plans include visual verification and UX doc sync;
 - implementation preserves business logic and design system constraints;
-- tests include state matrix, desktop/mobile, keyboard/focus, and accessibility basics;
+- tests include the affected platforms/inputs, state matrix, representative task outcomes and actual accessibility checks;
+- context is sourced, identity choices have observable product reasons, and platform conventions are preserved;
+- code/spec discrepancies remain explicit until resolved; a documentation sync must not legitimize a defect;
 - `[DOC]-*/11-UX-DesignOps/`, `MOC-UX.md`, and `DESIGN.md` are updated when required.
 
 Flag any no-rendering UI validation as a blocker.

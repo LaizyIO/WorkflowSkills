@@ -564,10 +564,11 @@ Optional strategy for critical tests:
 
 When executing tests for UI changes, run the visual verification step from the test plan:
 
-- use the Codex Browser plugin by default, or Playwright/Storybook/equivalent rendering when needed;
-- verify desktop and mobile viewports;
+- use an appropriate renderer per target: Codex Browser or existing browser tools for web, native emulator/simulator/device for native UI;
+- verify the planned platform/window/input matrix; web evidence does not validate native behavior;
 - verify focus, keyboard, overflow, layout stability, and required UI states;
 - capture or reference screenshots when available;
 - write results to the test results document and related UX audit doc.
+- report visual direction, interaction, accessibility and task outcomes separately, with actual evidence and explicit untested or blocked checks.
 
 If no rendering tool is available, do not mark the UI tests as passed. Report a blocked verification with the missing tool/configuration.

@@ -25,8 +25,8 @@ Turn a UI feature request into a clear flow document usable by `feature-specific
 1. Identify user goal, entry point, primary task, secondary tasks, and exit point.
 2. Map happy path, alternative paths, blocked paths, and recovery paths.
 3. Define required states: loading, empty, error, success, permission, disabled, offline or network if relevant.
-4. Define responsive behavior for desktop and mobile.
-5. Define keyboard and focus requirements.
+4. Define adaptation for supported platforms, input methods and window/device configurations. Include interruptions, offline recovery and cross-device continuity only when relevant to the product.
+5. Define keyboard/focus and native navigation/accessibility requirements as applicable. Use the user's mental model and task frequency to choose navigation and disclosure.
 6. Define UX acceptance criteria and test implications.
 7. Save the output under `UX_DOCS_ROOT/06-Flows/`.
 

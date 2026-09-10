@@ -526,11 +526,12 @@ def generate_test_plan(changes):
 For UI changes, add UX test coverage without duplicating lower-level tests:
 
 - state matrix: loading, empty, error, success, disabled, selected, permission, offline when relevant;
-- desktop and mobile responsive checks;
+- checks for each affected platform, relevant window/device configurations and input methods;
 - keyboard navigation and focus-visible checks;
-- accessibility basics: labels, contrast, ARIA for icon-only controls, non-color-only errors;
+- accessibility checks: labels, contrast, non-color-only errors and target semantics (web ARIA or native accessibility); include text enlargement and system interactions when relevant;
 - visual comparison against selected generated mockup image (not verification evidence) when relevant;
 - Storybook state coverage when Storybook exists;
-- anti-slop checks against `DESIGN.md` and `[DOC]-*/11-UX-DesignOps/`.
+- contextual fit against the documented direction: task/content hierarchy, appropriate components and identity rationale;
+- representative task completion and recovery outcomes, separate from visual fidelity and accessibility evidence. Do not infer user metrics from a screenshot.
 
 Always include `ux-visual-verification` in the test plan for user-visible UI changes.

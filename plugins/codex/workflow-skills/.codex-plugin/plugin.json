@@ -1,7 +1,7 @@
 {
   "name": "workflow-skills",
-  "version": "1.5.0",
-  "description": "Feature workflow suite for Codex: specification, research, planning, implementation, UX DesignOps, Codex image mockup workflows, visual verification, testing, fixing, and Git workflows.",
+  "version": "1.6.0",
+  "description": "Feature workflow suite for Codex: specification, research, planning, implementation, contextual UX design for web and native apps, image mockups, platform verification, testing and Git workflows.",
   "author": {
     "name": "Guillaume",
     "email": "guillaume@bovis.com",
@@ -24,7 +24,7 @@
   "interface": {
     "displayName": "Workflow Skills",
     "shortDescription": "Structured feature delivery skills for Codex.",
-    "longDescription": "A complete Codex-compatible workflow suite covering specification, research, planning, implementation, UX DesignOps, Codex image mockup workflows, visual verification, test planning, test execution, test fixing, Git worktrees, critical review, and Linear issue creation.",
+    "longDescription": "Feature delivery with contextual UX design: sourced product context, project-specific art direction, component selection, web and native platform verification, image mockups, implementation, testing, Git workflows and critical review. Shared methods preserve each project's identity.",
     "developerName": "Guillaume",
     "category": "Productivity",
     "capabilities": [

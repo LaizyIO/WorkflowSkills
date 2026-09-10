@@ -40,7 +40,7 @@ Find concrete UX/UI problems and produce actionable findings for `feature-resear
 6. Responsive and adaptive behavior.
 7. Accessibility basics and keyboard flow.
 8. Component and token consistency.
-9. Anti-slop violations.
+9. Contextual fit: composition follows the actual content/task, identity choices have project reasons, and components match the data and platform. Repeated standard patterns are not defects by themselves.
 10. Impact on implementation plan and test plan.
 
 ## Output
@@ -66,6 +66,8 @@ Use these sections:
 
 - Do not code unless explicitly asked.
 - Prioritize issues by user impact.
+- For each finding record the source/screen, scenario, observation, consequence, severity and recommended check. Separate aesthetic preference from usability defects and requirement violations.
+- Read Product_Context, Design_Direction and Platform_Profile (or existing equivalents). Evaluate the actual target platform, not only desktop/mobile sizes. Distinguish expert inference, rendered evidence and user observations.
 - Prefer specific recommendations over generic advice.
 - Identify quick wins and structural fixes separately.
 - If a feature workflow is active, summarize the UX findings in `FEAT-XXX-Findings.md`.
