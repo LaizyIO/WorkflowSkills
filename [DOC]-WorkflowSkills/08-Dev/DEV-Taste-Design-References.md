@@ -50,7 +50,7 @@ La source canonique est `ux-design-direction/assets/design-sources/` : manifest,
 
 Une mise à jour amont nécessite une revue du périmètre, des règles et des conflits du routage. Copier la nouvelle licence si nécessaire, mettre à jour le manifest et les copies, puis exécuter les tests et un import réseau. Ne pas suivre `main` silencieusement au moment de la conception.
 
-Les versions préparées sont plugin 1.7.0 et CLI 1.4.0. Une publication npm ou un push/actualisation du marketplace sont distincts de cette modification locale. Pour l'installation amont non adaptée, Taste documente `npx skills add Leonxlnx/taste-skill --skill design-taste-frontend -a codex` ; elle n'est pas nécessaire en plus de cette intégration.
+Les versions livrées sont plugin 1.7.0 et CLI 1.4.0. Le 2026-10-05, après autorisation de Guillaume, la feature est poussée sur main, le plugin Codex installé/activé et la CLI installée localement ; seul Running est synchronisé. Voir [[DEV-Deploiement-Taste-Codex-Running]]. Le registre npm n'est pas mis à jour. Pour l'installation amont non adaptée, Taste documente `npx skills add Leonxlnx/taste-skill --skill design-taste-frontend -a codex` ; elle n'est pas nécessaire en plus de cette intégration.
 
 ## Liens
 

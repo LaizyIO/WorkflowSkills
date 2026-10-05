@@ -38,6 +38,7 @@ tags:
 - [[ADR-004-Suppression-doc-manager-workflow]]
 
 ## Dev
+- [[DEV-Deploiement-Taste-Codex-Running]]
 - [[DEV-Taste-Design-References]]
 - [[DEV-Audit-Skills-Design-Contextuel]]
 - [[DEV-Lexique-Design-Contextuel]]

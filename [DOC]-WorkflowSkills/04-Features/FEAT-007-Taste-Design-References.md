@@ -31,7 +31,7 @@ Catalogue disponible hors ligne ; installation Taste idempotente ; import résea
 
 ## Liens
 
-Livraison préparée localement : plugin 1.7.0, CLI 1.4.0, 21 skills existants enrichis et nouvel adaptateur. Voir les tests techniques et la passe indépendante. Une publication ou un push ne sont pas inclus dans cette livraison locale.
+Livraison : plugin 1.7.0, CLI 1.4.0, 21 skills existants enrichis et nouvel adaptateur. Après autorisation supplémentaire de Guillaume, commit/push réalisés, plugin Codex installé et activé, CLI installée localement et seul Running synchronisé. Voir [[DEV-Deploiement-Taste-Codex-Running]], les tests techniques et la passe indépendante. Pas de publication npm.
 
 - [[ADR-007-Integration-Taste-Awesome-Design]]
 - [[FEAT-007-Findings]]
