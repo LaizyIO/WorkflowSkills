@@ -54,3 +54,8 @@ tags:
 - Do not invent product rules absent from CDC or FEAT docs.
 - If product rules are missing, list open questions explicitly.
 - Update `DOC_ROOT/00-MOC/MOC-UX.md`.
+
+
+## Taste and design references
+
+Reuse the contract and source decisions established through ux-design-direction. Choose flows for tasks, data and platform behavior; a Taste marketing-page recipe is not a product workflow.

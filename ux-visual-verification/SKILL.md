@@ -62,3 +62,8 @@ Report visual direction, interaction, accessibility checks and task outcomes sep
 - Do not mark UI work complete without rendered verification.
 - If verification is blocked, say exactly which tool/configuration is missing.
 - Keep findings actionable and tied to files or screens.
+
+
+## Taste and design references
+
+Verify the adopted source properties and intentional deviations from Design_References as well as task/state/platform checks. Taste preflight and imported tokens are not evidence of accessibility compliance or runtime behavior.

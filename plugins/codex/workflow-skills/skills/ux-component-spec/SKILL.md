@@ -56,3 +56,8 @@ tags:
 - Reuse documented design direction and platform constraints. If existing primitives cannot support the specified task, document the needed extension rather than forcing every task into the same component.
 - If Storybook exists, include story coverage recommendations.
 - Update `DOC_ROOT/00-MOC/MOC-UX.md`.
+
+
+## Taste and design references
+
+Use the selected contract and Design_References from ux-design-direction. Adapt reference component properties to the task and native/web semantics; do not replace functional controls for novelty.

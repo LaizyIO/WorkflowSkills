@@ -534,3 +534,8 @@ For UI features, integrate UX work into the same `FEAT-XXX-Plan.md`; do not crea
 - `ux-design-sync` to update `DESIGN.md`, `MOC-UX.md`, and `[DOC]-*/11-UX-DesignOps/`.
 
 If a required renderer is unavailable, mark its checks blocked and add setup work. Do not plan a code-only fallback. Prefer Codex Browser for web when available; native targets need a native renderer/device. Preserve the user's existing authorization and selected direction.
+
+
+## Taste and design references
+
+For unresolved UI direction, plan ux-design-direction before brief/component implementation. Include relevant Taste sources, reference selection, project contract changes and their rendered checks; reuse decisions on focused corrections.

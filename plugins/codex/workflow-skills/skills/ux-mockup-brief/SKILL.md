@@ -30,3 +30,8 @@ Write the prompt in this form:
 - Text verbatim, constraints to preserve, changes requested and elements to avoid.
 
 Save the brief in UX_DOCS_ROOT/07-Mockups/Prompts/<target>-brief.md. Record the target in Mockup_Index.md. When a rendered mockup is requested, continue with ux-mockup-generate; a written prompt alone does not satisfy a mockup request.
+
+
+## Taste and design references
+
+For creation/redesign or unresolved direction, follow ux-design-direction to select relevant Taste guidance and inspect Awesome DESIGN.md candidates. Include adopted properties, adaptations and exclusions in the brief; preserve the project contract for focused revisions.

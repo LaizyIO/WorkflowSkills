@@ -72,6 +72,8 @@ For any user-visible interface change, Codex must use the UX DesignOps workflow.
 Use sourced Product_Context, Design_Direction and Platform_Profile in [DOC]-{{PROJECT_NAME}}/11-UX-DesignOps/01-Product/ (or existing equivalents). For creation/redesign, follow ux-mockup-brief's contextual-design reference: turn context into observable choices with product reasons. Use relevant vocabulary and annotated references; do not impose a common style. A focused correction reuses existing decisions and authorization.
 
 Implement from approved flow/component specs, with a mockup only when needed. Verify the actual platform: browser for web, native renderer/device for native. Separate visual direction, interaction, accessibility and task outcomes. Code is evidence of the current implementation; approved requirements define intent. Document discrepancies without silently rewriting requirements.
+Pour création/refonte ou direction non résolue, utiliser ux-design-direction : sélectionner les instructions Taste selon la surface, lire des références Awesome DESIGN.md pertinentes, puis consigner sources/commits, propriétés utiles, adaptations et exclusions dans Design_References. DESIGN.md reste le contrat projet ; les imports sont des candidates sous design/references/. Pour un produit dense ou du natif, les tâches/composants et conventions de plateforme gouvernent le design. Réutiliser les choix retenus pour les corrections ciblées.
+
 <!-- workflow-skills:contextual-design:end -->
 
 ### Sources

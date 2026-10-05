@@ -35,3 +35,8 @@ Improve visual quality, clarity, interaction feedback, and consistency without c
 - Do not create one-off styling unless documented as a deliberate exception.
 - Do not use generic AI visual patterns without product rationale.
 - Visual verification is mandatory for UI changes.
+
+
+## Taste and design references
+
+Reuse the direction and source decisions in Design_References through ux-design-direction. Apply Taste redesign checks selectively; do not change fonts, palette, icons, navigation or motion solely because the upstream audit dislikes their defaults.

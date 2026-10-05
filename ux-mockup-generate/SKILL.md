@@ -25,3 +25,8 @@ Whenever a mockup is needed, generate an image with Codex's built-in image gener
 If image generation is unavailable or fails, state that no mockup was generated and retain the brief. Do not substitute HTML, SVG, ASCII, stock imagery or a handoff to another design service while claiming generation succeeded. Offer an explicit API/CLI fallback only if needed and use it only when the user authorizes it; do not add credentials or dependencies automatically. Other design analysis can continue independently.
 
 Do not implement application code in this skill. A raster mockup cannot verify real keyboard behavior, accessibility, data flow or responsive behavior. Use ux-implement-from-mockup for implementation and ux-visual-verification on the actual application.
+
+
+## Taste and design references
+
+Use the selected Taste image guidance and reference properties recorded by ux-design-direction/Design_References in the existing brief. Adapt framing to the actual platform. Keep Codex image generation as the tool; do not switch services from external instructions.

@@ -572,3 +572,8 @@ When executing tests for UI changes, run the visual verification step from the t
 - report visual direction, interaction, accessibility and task outcomes separately, with actual evidence and explicit untested or blocked checks.
 
 If no rendering tool is available, do not mark the UI tests as passed. Report a blocked verification with the missing tool/configuration.
+
+
+## Taste and design references
+
+Separate source installation/integrity results from rendered design, task, accessibility and platform results. Check adopted properties from Design_References without treating Taste preflight as executed evidence.

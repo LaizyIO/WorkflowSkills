@@ -12,6 +12,7 @@ const {
 } = require('./ruflo');
 
 const pkg = require('../package.json');
+const design = require('./design');
 
 program
   .name('clai')
@@ -176,6 +177,27 @@ program
   .description('Alias pour: sync')
   .action(() => {
     program.commands.find((cmd) => cmd.name() === 'sync').action({});
+  });
+
+const designCmd = program.command('design').description('Sources Taste et références Awesome DESIGN.md');
+designCmd.command('catalog').description('Liste les références disponibles à la révision auditée')
+  .option('--json', 'Sortie JSON')
+  .option('--filter <text>', 'Filtre les IDs et résumés des analyses (anglais)')
+  .action(options => {
+    const result = design.catalog(options.filter);
+    console.log(options.json ? JSON.stringify(result, null, 2) :
+      result.references.map(entry => entry.id + ' - ' + entry.summary).join('\n') + '\nCommit : ' + result.commit);
+  });
+designCmd.command('install').description('Installe les sources Taste auditées dans design/references, hors ligne')
+  .action(async () => {
+    try { console.log(JSON.stringify(await design.installSources(), null, 2)); }
+    catch (error) { console.error(error.message); process.exitCode = 1; }
+  });
+designCmd.command('import <id>').description('Importe une référence vérifiée comme candidate sans remplacer DESIGN.md')
+  .option('--doc <name>', 'Nom du vault [DOC]- à utiliser')
+  .action(async (id, options) => {
+    try { console.log(JSON.stringify(await design.importReference(id, options), null, 2)); }
+    catch (error) { console.error(error.message); process.exitCode = 1; }
   });
 
 program.parse(process.argv);

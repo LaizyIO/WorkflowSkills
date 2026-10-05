@@ -1,0 +1,10 @@
+# Pinned upstream snapshots and hash inputs must keep their exact bytes on Windows too.
+ux-design-direction/assets/design-sources/** -text
+plugins/codex/workflow-skills/skills/ux-design-direction/assets/design-sources/** -text
+clai/templates/design-sources/** -text
+clai/test/fixtures/awesome-ibm-DESIGN.md -text
+clai/test/fixtures/awesome-design-md-LICENSE -text
+# Preserve upstream Markdown hard line breaks while checking our own files normally.
+ux-design-direction/assets/design-sources/taste/*.md whitespace=cr-at-eol,-blank-at-eol
+plugins/codex/workflow-skills/skills/ux-design-direction/assets/design-sources/taste/*.md whitespace=cr-at-eol,-blank-at-eol
+clai/templates/design-sources/taste/*.md whitespace=cr-at-eol,-blank-at-eol

@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Complete workflow suite for feature implementation with specification, research, planning, implementation, testing, fixing, and critical review phases",
-    "version": "1.6.0"
+    "version": "1.7.0"
   },
   "plugins": [
     {
@@ -38,7 +38,8 @@
         "./ux-mockup-iterate",
         "./ux-polish",
         "./ux-storybook",
-        "./ux-visual-verification"
+        "./ux-visual-verification",
+        "./ux-design-direction"
       ]
     }
   ]

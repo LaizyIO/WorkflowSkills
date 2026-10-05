@@ -235,6 +235,8 @@ async function installUxDesignOps(cwd, docName, projectName, templatesDir, force
     PROJECT_NAME: docRoot ? path.basename(docRoot).slice(6) : docName || projectName || 'Project'
   };
 
+  await require('./design').installSources(cwd);
+
   const result = {
     root: await copyTemplateTree(path.join(uxTemplateRoot, 'root'), cwd, replacements, force),
     doc: null,
@@ -265,7 +267,7 @@ async function installUxDesignOps(cwd, docName, projectName, templatesDir, force
   const uxMocPath = path.join(docRoot, '00-MOC', 'MOC-UX.md');
   const uxMoc = await fs.readFile(uxMocPath, 'utf-8');
   let updatedMoc = uxMoc.replace('## Stitch', '## Maquettes image').replace('[[Project_Map]]', '[[Mockup_Index]]');
-  const missingLinks = ['Design_Direction', 'Platform_Profile'].filter(name => !updatedMoc.includes('[[' + name + ']]'));
+  const missingLinks = ['Design_Direction', 'Platform_Profile', 'Design_References'].filter(name => !updatedMoc.includes('[[' + name + ']]'));
   if (missingLinks.length) updatedMoc += '\n\n## Design contextuel\n\n' + missingLinks.map(name => '- [[' + name + ']]').join('\n') + '\n';
   if (updatedMoc !== uxMoc) await fs.writeFile(uxMocPath, updatedMoc, 'utf-8');
   const scanPath = path.join(cwd, 'scripts', 'ux', 'uxkit-lite.mjs');

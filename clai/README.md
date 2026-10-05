@@ -1,5 +1,7 @@
 # CLAI - Claude AI Workflow Skills CLI
 
+La version 1.4.0 ajoute les sources de design Taste et Awesome DESIGN.md : `clai design catalog [--filter <texte>]`, `clai design install` (snapshots Taste hors ligne) et `clai design import <id> [--doc <nom>]` (référence vérifiée, conservée comme candidate). `init/sync --target codex` installent les sources et les supports Design_References, sans sélectionner une marque ni remplacer le DESIGN.md vivant. Le skill de routage `ux-design-direction` vient du plugin WorkflowSkills 1.7.0 ; les règles de composition sont adaptées aux tâches et plateformes. Les fichiers externes et leurs licences sont versionnés dans `design/references/`.
+
 CLI simple et puissant pour installer et configurer Workflow Skills Suite pour Claude Code.
 
 ## Installation

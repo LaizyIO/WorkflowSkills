@@ -18,3 +18,8 @@ Check whether the feedback concerns local finish or a structural mismatch with t
 Use the built-in image generation editing capability and its supported references, following imagegen if available. State change only X and preserve Y in the prompt. Generate a sibling version, inspect it, and present the actual result. Follow the capability boundary in ux-mockup-generate if generation is unavailable; never claim a prompt-only edit produced an image.
 
 Save the image in design/mockups/images/ and the exact prompt in UX_DOCS_ROOT/07-Mockups/Prompts/. Update Mockup_Index.md and 10-Decisions/Decision_Log.md with the parent reference, changes, selected/rejected status and rationale. Keep prior versions; do not implement code or infer approval from a generated variant.
+
+
+## Taste and design references
+
+Preserve the source properties, adaptations and exclusions recorded in Design_References through ux-design-direction. Change them only within the authorized revision; do not pick another brand for each iteration.

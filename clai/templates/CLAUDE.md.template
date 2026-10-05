@@ -10,6 +10,8 @@ Pour une UI, réutiliser les faits et décisions du projet : public, expertise, 
 Pour création/refonte, utiliser les références de ux-mockup-brief pour traduire les termes de design en décisions visibles avec raisons produit. Une retouche réutilise les choix existants ; aucun style commun ni exploration systématique. Implémenter les spécifications de parcours/composants avec une maquette seulement si nécessaire. Ne pas assimiler absence de maquette et polish.
 
 Vérifier sur le runtime concerné, navigateur pour le web et rendu/appareil natif pour le natif. Séparer rendu, interactions, accessibilité et réussite des tâches. Le code décrit l'existant ; les exigences approuvées définissent l'attendu. Conserver les écarts explicites jusqu'à résolution.
+Pour création/refonte ou direction non résolue, utiliser ux-design-direction : sélectionner les instructions Taste selon la surface, lire des références Awesome DESIGN.md pertinentes, puis consigner sources/commits, propriétés utiles, adaptations et exclusions dans Design_References. DESIGN.md reste le contrat projet ; les imports sont des candidates sous design/references/. Pour un produit dense ou du natif, les tâches/composants et conventions de plateforme gouvernent le design. Réutiliser les choix retenus pour les corrections ciblées.
+
 <!-- workflow-skills:contextual-design:end -->
 
 ## Documentation Requirements

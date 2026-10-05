@@ -247,3 +247,8 @@ When a feature affects a user-visible interface, capture UX requirements during 
 Use `ux-flow` for feature journeys and `ux-component-spec` for shared UI components. Persistent UX docs require a `[DOC]-*` vault; never use `docs/obsidian` as fallback.
 
 Reuse sourced project facts and distinguish unknowns from assumptions; ask only for missing information that materially changes the design. A template or simulated persona is not user research. Keep the context in Product_Context and the platform profile in Platform_Profile (or existing equivalents).
+
+
+## Taste and design references
+
+For UI creation/redesign, establish the context and platform constraints that ux-design-direction will use to select Taste guidance and Awesome DESIGN.md references. Preserve known identity decisions for focused corrections.

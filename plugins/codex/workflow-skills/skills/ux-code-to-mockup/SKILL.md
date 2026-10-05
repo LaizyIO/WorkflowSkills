@@ -18,3 +18,8 @@ Use rendering appropriate to the target platform. Distinguish approved invariant
 Prepare a brief that records current behavior, screenshot paths, components to reuse, exact requested changes and invariants. Do not export invented HTML or imply that an image contains source code. Keep real user data out of illustrative mockups unless needed and authorized.
 
 Save UX_DOCS_ROOT/07-Mockups/Prompts/<target>-from-code.md and reference the current screenshot in Mockup_Index.md. If a mockup is requested, invoke ux-mockup-generate using the screenshot as a reference rather than stopping at a prompt. Existing implementation remains evidence of current behavior, while CDC and feature requirements define desired behavior.
+
+
+## Taste and design references
+
+Describe the existing contract and selected source properties from Design_References/ux-design-direction. Keep observed implementation and proposed source-driven changes distinct.

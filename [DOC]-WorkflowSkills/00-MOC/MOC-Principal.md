@@ -3,7 +3,7 @@ title: MOC-Principal
 type: moc
 status: approved
 created: 2026-05-17
-updated: 2026-09-10
+updated: 2026-10-05
 tags:
   - moc
 ---
@@ -11,6 +11,11 @@ tags:
 # MOC Principal
 
 ## Features
+- [[FEAT-007-Taste-Design-References]]
+- [[FEAT-007-Findings]]
+- [[FEAT-007-Plan]]
+- [[FEAT-007-Test-Results]]
+- [[FEAT-007-Forward-Test]]
 - [[FEAT-006-Design-Contextuel]]
 - [[FEAT-006-Test-Results]]
 - [[FEAT-005-Maquettes-Images-Codex]]
@@ -25,6 +30,7 @@ tags:
 - [[FEAT-004-Test-Results]]
 
 ## ADR
+- [[ADR-007-Integration-Taste-Awesome-Design]]
 - [[ADR-006-Methode-Design-Contextuel]]
 - [[ADR-005-Maquettes-Images-Codex]]
 - [[ADR-002-Architecture-dual-target-Claude-Codex]]
@@ -32,6 +38,7 @@ tags:
 - [[ADR-004-Suppression-doc-manager-workflow]]
 
 ## Dev
+- [[DEV-Taste-Design-References]]
 - [[DEV-Audit-Skills-Design-Contextuel]]
 - [[DEV-Lexique-Design-Contextuel]]
 - [[DEV-Desactivation-Mojibake]]

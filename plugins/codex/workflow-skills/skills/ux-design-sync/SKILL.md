@@ -37,3 +37,8 @@ Update 07-Mockups/Mockup_Index.md with selected image paths, exact prompts, rout
 - Documentation content must be in French.
 - Do not invent implementation details absent from code.
 - Archive obsolete UX docs if the related code no longer exists.
+
+
+## Taste and design references
+
+Maintain Design_References with source URLs/commits, candidate/selected/rejected status, adopted properties, adaptations, exclusions and evidence. Keep immutable source snapshots separate from the live DESIGN.md contract; use ux-design-direction when revising a direction.

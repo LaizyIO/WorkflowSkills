@@ -20,6 +20,8 @@ plugins/codex/workflow-skills/.codex-plugin/plugin.json
 
 ## Included Workflows
 
+Version 1.7.0 adds `ux-design-direction`: audited Taste guidance plus the pinned Awesome DESIGN.md catalog, adapted to each project's task, brand and web/native platform. Taste snapshots are bundled as scoped references; Awesome documents are imported as candidates, without replacing the project's DESIGN.md. Project decisions and source provenance live in Design_Direction and Design_References. Use `clai design catalog`, `clai design install` and `clai design import <id>` for project source files.
+
 Version 1.6.0 adds contextual design across the existing 13 UX skills. New/redesigned surfaces connect product facts to observable visual decisions and task outcomes. Focused corrections reuse the selected direction. Shared methods do not prescribe a palette, font or style.
 
 Detailed context and vocabulary references are bundled with `ux-mockup-brief`; platform verification guidance is bundled with `ux-visual-verification`. Project decisions live in Product_Context, Design_Direction and Platform_Profile (or existing equivalents).
@@ -35,6 +37,7 @@ The previous `ux-refactor` skill is replaced by specialized skills:
 
 ```text
 ux-bootstrap
+ux-design-direction
 ux-audit
 ux-flow
 ux-component-spec

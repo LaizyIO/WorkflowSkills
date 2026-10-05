@@ -442,3 +442,8 @@ When challenging UI work, verify:
 - `[DOC]-*/11-UX-DesignOps/`, `MOC-UX.md`, and `DESIGN.md` are updated when required.
 
 Flag any no-rendering UI validation as a blocker.
+
+
+## Taste and design references
+
+Challenge the contextual fit and documented adaptations of Taste/Awesome sources through ux-design-direction and Design_References. Check whether marketing recipes, arbitrary bans, source tokens or motion defaults displaced actual tasks, brand or platform requirements.

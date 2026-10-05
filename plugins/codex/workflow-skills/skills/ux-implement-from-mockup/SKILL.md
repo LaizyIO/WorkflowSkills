@@ -19,3 +19,8 @@ Read AGENTS.md, DESIGN.md, the relevant CDC/FEAT/ADR and existing UX screen, flo
 6. Run ux-design-sync to record the implemented route/components, image reference, intentional deviations and remaining visual debt.
 
 Respect existing user authorization for implementation; ask for a design choice only if multiple unresolved directions materially block the work. If rendering is unavailable, report visual verification as blocked rather than claiming completion.
+
+
+## Taste and design references
+
+Read the project contract and Design_References established through ux-design-direction. Implement adopted properties with the existing stack and platform components; the upstream Taste stack is not an automatic migration.

@@ -71,3 +71,8 @@ Use these sections:
 - Prefer specific recommendations over generic advice.
 - Identify quick wins and structural fixes separately.
 - If a feature workflow is active, summarize the UX findings in `FEAT-XXX-Findings.md`.
+
+
+## Taste and design references
+
+Read the selected Taste/reference decisions through ux-design-direction and Design_References. Audit adopted properties against project requirements; upstream aesthetic bans are not defects by themselves.

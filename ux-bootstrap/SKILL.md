@@ -43,6 +43,7 @@ Create a repo-native UX/UI operating system without changing product behavior.
 7. Create or update core docs:
    - `01-Product/Product_Context.md`
    - `01-Product/Design_Direction.md`
+   - `01-Product/Design_References.md`
    - `01-Product/Platform_Profile.md`
    - `01-Product/UX_Principles.md`
    - `01-Product/UI_Principles.md`
@@ -69,3 +70,8 @@ Create a repo-native UX/UI operating system without changing product behavior.
 - Preserve existing project decisions. Shared methodology and platform conventions do not prescribe a visual style. For unresolved direction, use the contextual-design reference bundled with ux-mockup-brief when available; record decisions with visible effects and product reasons.
 - End with a prioritized next-action list.
 - Never use `docs/obsidian` as fallback storage.
+
+
+## Taste and design references
+
+Use ux-design-direction when establishing a new direction. Create Design_References.md with source provenance, selected properties, adaptations and exclusions; a template or imported candidate is not a selected identity.

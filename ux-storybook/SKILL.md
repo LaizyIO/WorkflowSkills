@@ -33,3 +33,8 @@ Use Storybook when present to document, test, and verify UI component states.
 - Do not add Storybook dependencies unless explicitly requested.
 - Cover loading, error, empty, disabled, focus, selected, and responsive variants where relevant.
 - Web Storybook verification requires actual browser rendering; do not treat web stories as proof of a separate native runtime.
+
+
+## Taste and design references
+
+Include the adopted reference properties and documented exceptions from Design_References in relevant stories. Taste source checks do not replace behavioral, accessibility or native runtime verification.

@@ -566,3 +566,8 @@ For UI implementation:
 - run `ux-visual-verification` before marking UI work complete.
 
 If visual verification cannot run because no rendering tool is available, mark the plan step blocked and document the missing setup.
+
+
+## Taste and design references
+
+Read the selected contract and Design_References from ux-design-direction. Preserve the existing stack and native resources; adopt the documented source properties, not an unadapted upstream page recipe.

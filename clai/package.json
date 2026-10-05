@@ -1,6 +1,6 @@
 {
   "name": "@glamazere/clai",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "CLI pour installer et configurer Workflow Skills Suite pour Claude Code et Codex",
   "main": "src/cli.js",
   "bin": {

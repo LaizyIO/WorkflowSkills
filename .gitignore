@@ -7,3 +7,9 @@ clai/**
 !clai/templates/codex/ux-designops/doc/11-UX-DesignOps/01-Product/Platform_Profile.md
 clai/node_modules/
 clai/templates/obsidian/.obsidian/
+!clai/src/design.js
+!clai/test/design-sources.test.js
+!clai/test/fixtures/awesome-ibm-DESIGN.md
+!clai/test/fixtures/awesome-design-md-LICENSE
+!clai/templates/design-sources/**
+!clai/templates/codex/ux-designops/doc/11-UX-DesignOps/01-Product/Design_References.md

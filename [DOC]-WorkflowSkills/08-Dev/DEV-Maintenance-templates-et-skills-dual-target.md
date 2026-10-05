@@ -3,7 +3,7 @@ title: DEV-Maintenance-templates-et-skills-dual-target
 type: dev
 status: approved
 created: 2026-05-17
-updated: 2026-09-10
+updated: 2026-10-05
 tags:
   - dev
   - codex
@@ -27,6 +27,7 @@ tags:
 - `clai sync --target codex` doit aussi synchroniser `AGENTS.md`; un fichier qui ne contient qu'un bloc `<claude-mem-context>` doit etre remplace par le guide Codex complet.
 
 ## Skills
+- Sources de design : [[FEAT-007-Taste-Design-References]] et [[DEV-Taste-Design-References]]. `ux-design-direction` route les sources Taste et les candidates Awesome DESIGN.md. Les assets sous `ux-design-direction/assets/design-sources/` sont canoniques ; maintenir leurs copies plugin et `clai/templates/design-sources/` identiques, avec commits, empreintes, notices MIT et protection des octets dans `.gitattributes`.
 - Design contextuel : [[FEAT-006-Design-Contextuel]]. Méthode et vocabulaire sous `ux-mockup-brief/references/`, vérification des plateformes sous `ux-visual-verification/references/`. Copier les ressources avec leurs skills dans le plugin.
 - `Product_Context`, `Design_Direction` et `Platform_Profile` sont des documents vivants. La CLI ne les écrase pas pendant sync ; elle actualise seulement le bloc de méthode délimité et ajoute les supports absents. Un scanner personnalisé reste conservé ; seule l'empreinte d'une version standard autorise sa migration automatique.
 - Maquettage : utiliser les cinq skills `ux-mockup-brief`, `ux-mockup-generate`, `ux-mockup-iterate`, `ux-code-to-mockup`, `ux-implement-from-mockup`. L'outil image natif Codex produit les maquettes ; la verification navigateur controle l'implementation.

@@ -782,3 +782,8 @@ When orchestrating a user-visible feature, include UX DesignOps in the normal wo
 6. Documentation: run `ux-design-sync`, preserving project identity, requirement precedence and unresolved discrepancies; keep `MOC-UX.md` current.
 
 Never route persistent UX docs to `docs/obsidian`.
+
+
+## Taste and design references
+
+Use ux-design-direction in UI research for creation/redesign or unresolved identity, then reuse its project contract and Design_References in flow/component specs, briefs, implementation and verification. Taste supplies scoped design guidance; Awesome supplies candidates to adapt. Source imports do not silently select a design.

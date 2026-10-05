@@ -535,3 +535,8 @@ For UI changes, add UX test coverage without duplicating lower-level tests:
 - representative task completion and recovery outcomes, separate from visual fidelity and accessibility evidence. Do not infer user metrics from a screenshot.
 
 Always include `ux-visual-verification` in the test plan for user-visible UI changes.
+
+
+## Taste and design references
+
+Include rendered checks of the adopted Taste/Awesome properties and their documented exceptions in Design_References. Test actual tasks, states and platforms; source integrity tests cannot demonstrate visual quality.
