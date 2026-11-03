@@ -261,23 +261,6 @@ Si des modifications ont été nécessaires pendant l'implémentation :
 
 ---
 
-## Ruflo - Orchestration Multi-Agents (Optionnel)
-
-Si Ruflo a été intégré (`clai ruflo init` ou prompt accepté lors de `clai init`), une section dédiée **"## Ruflo - Orchestration Multi-Agents"** est ajoutée plus bas dans ce fichier.
-
-Vérification rapide :
-```bash
-clai ruflo status
-```
-
-Pour intégrer Ruflo plus tard :
-```bash
-clai ruflo install   # install global si nécessaire
-clai ruflo init      # intégration safe-merge dans ce projet
-```
-
----
-
 ## Git Workflow
 
 Si vous utilisez `git-workflow-manager` skill:

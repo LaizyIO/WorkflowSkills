@@ -183,6 +183,20 @@ async function appendRufloSection(claudeMdPath, projectName) {
   return { action: 'appended' };
 }
 
+// Ruflo-only commands live outside templates/commands so a plain init never installs them.
+async function installRufloCommands(projectDir) {
+  const src = path.resolve(__dirname, '../templates/ruflo/commands');
+  if (!(await fs.pathExists(src))) return { count: 0 };
+
+  const dest = path.join(projectDir, '.claude', 'commands');
+  await fs.ensureDir(dest);
+  const files = (await fs.readdir(src)).filter((f) => f.endsWith('.md'));
+  for (const file of files) {
+    await fs.copy(path.join(src, file), path.join(dest, file), { overwrite: true });
+  }
+  return { count: files.length };
+}
+
 async function initRufloInProject(options = {}) {
   const cwd = process.cwd();
   if (await fs.pathExists(path.join(cwd, '.codex'))) {
@@ -261,6 +275,11 @@ async function initRufloInProject(options = {}) {
     console.log(chalk.gray('   ✓ .mcp.json original restauré'));
   } else if (mcpResult.action === 'error') {
     console.log(chalk.red(`   ✗ .mcp.json: ${mcpResult.reason}`));
+  }
+
+  const commandsResult = await installRufloCommands(cwd);
+  if (commandsResult.count > 0) {
+    console.log(chalk.gray(`   ✓ ${commandsResult.count} commande(s) Ruflo installée(s) dans .claude/commands/`));
   }
 
   const projectName = options.projectName || path.basename(cwd);

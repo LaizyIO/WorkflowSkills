@@ -5,6 +5,13 @@ Toutes les modifications notables de ce projet seront documentées dans ce fichi
 Le format est basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/),
 et ce projet adhère au [Versioning Sémantique](https://semver.org/lang/fr/).
 
+## [1.4.1] - 2026-11-03
+
+### Corrigé
+- `clai init --no-ruflo` (cible Claude) installait quand même `.claude/commands/ruflo-status.md`. La commande vit désormais sous `templates/ruflo/commands/` et n'est installée que par `clai ruflo init` ou par l'acceptation du prompt Ruflo.
+- La cible Codex n'installe plus `ruflo-status.md`, Ruflo restant réservé à Claude.
+- Le `CLAUDE.md` généré ne contient plus la section « Ruflo (Optionnel) » quand Ruflo n'est pas intégré.
+
 ## [1.3.0] - 2026-09-10
 
 - Contexte produit, direction artistique et profil de plateforme dans les templates UX.
