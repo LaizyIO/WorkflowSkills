@@ -1,6 +1,6 @@
 {
   "name": "workflow-skills",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "description": "Feature workflow suite with project-specific design using Taste guidance and Awesome DESIGN.md references, web/native UX, Codex image mockups and runtime verification.",
   "author": {
     "name": "Guillaume",

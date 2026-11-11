@@ -20,6 +20,8 @@ plugins/codex/workflow-skills/.codex-plugin/plugin.json
 
 ## Included Workflows
 
+Version 1.8.0 renames `linear-issue-creator` to `ticket-creator`: tickets are created in the project's shared tracking (Slipstream suivi) through the `suivi` MCP server, and Linear is no longer used.
+
 Version 1.7.0 adds `ux-design-direction`: audited Taste guidance plus the pinned Awesome DESIGN.md catalog, adapted to each project's task, brand and web/native platform. Taste snapshots are bundled as scoped references; Awesome documents are imported as candidates, without replacing the project's DESIGN.md. Project decisions and source provenance live in Design_Direction and Design_References. Use `clai design catalog`, `clai design install` and `clai design import <id>` for project source files.
 
 Version 1.6.0 adds contextual design across the existing 13 UX skills. New/redesigned surfaces connect product facts to observable visual decisions and task outcomes. Focused corrections reuse the selected direction. Shared methods do not prescribe a palette, font or style.

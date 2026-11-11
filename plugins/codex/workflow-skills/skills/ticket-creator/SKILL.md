@@ -1,15 +1,15 @@
 ---
-name: linear-issue-creator
-description: Create well-formed tickets in the project's shared tracking (Slipstream "suivi") on command. Accepts a GitHub URL or local disk path as project context, explores the codebase and documentation adaptively, then creates a structured ticket (Bug, Feature, Tech-Debt, Idée, Hotfix templates) via the "suivi" MCP server. Linear is no longer used; the skill keeps its historical name.
+name: ticket-creator
+description: Create well-formed tickets in the project's shared tracking (Slipstream "suivi") on command. Accepts a GitHub URL or local disk path as project context, explores the codebase and documentation adaptively, then creates a structured ticket (Bug, Feature, Tech-Debt, Idée, Hotfix templates) via the "suivi" MCP server. Replaces the former linear-issue-creator skill: Linear is no longer used.
 ---
 
-# Ticket Creator Skill (formerly Linear Issue Creator)
+# Ticket Creator Skill
 
 ## Purpose
 
 Transform a natural-language request into a fully-structured ticket in the **suivi** of the project: the shared tracking that Slipstream keeps in the `suivi` branch of the project's repository (tickets, journal, state). The skill discovers and explores the target project — from GitHub or a local path — before writing, so the ticket contains real, sourced technical content rather than placeholders.
 
-**Linear is abandoned** (agency decision of 2026-11-10: tickets live in the project's suivi). This skill no longer calls any Linear tool. It keeps the name `linear-issue-creator` so that existing installs and habits keep working.
+**Linear is abandoned** (agency decision of 2026-11-10: tickets live in the project's suivi). This skill replaces `linear-issue-creator` (renamed on 2026-11-11) and calls no Linear tool.
 
 **Always runs in the main Claude Code session** (never as a sub-agent), because it calls the `suivi` MCP tools directly (`suivi_projets`, `suivi_lister_tickets`, `suivi_creer_ticket`).
 
@@ -379,7 +379,7 @@ If `gh api` returns an error (not installed, not authenticated, repo not found):
 This skill is standalone. Once a ticket exists and the lead decides to take it, the standard feature workflow begins:
 
 ```
-linear-issue-creator  →  ticket T-AAMMJJ-XXX, open, in the project's suivi
+ticket-creator        →  ticket T-AAMMJJ-XXX, open, in the project's suivi
                           ↓ Lead: decides to take it
 feature-specification →  CDC.md
 feature-research      →  Findings.md
