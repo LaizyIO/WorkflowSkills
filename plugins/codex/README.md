@@ -26,7 +26,7 @@ Version 1.6.0 adds contextual design across the existing 13 UX skills. New/redes
 
 Detailed context and vocabulary references are bundled with `ux-mockup-brief`; platform verification guidance is bundled with `ux-visual-verification`. Project decisions live in Product_Context, Design_Direction and Platform_Profile (or existing equivalents).
 
-- Feature specification, research, implementation planning, implementation, testing, fixing, Git worktrees, and Linear issue creation.
+- Feature specification, research, implementation planning, implementation, testing, fixing, Git worktrees, and ticket creation in the project's shared tracking (Slipstream suivi).
 - UX DesignOps workflow for product UI work.
 - Codex-generated image mockups, focused iteration and implementation handoff.
 - Visual verification workflow for UI changes.

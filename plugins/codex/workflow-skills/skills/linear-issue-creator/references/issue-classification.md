@@ -16,6 +16,20 @@ Everything else (vague/exploratory) → IDÉE
 
 ---
 
+## From classification to the suivi
+
+The classification chooses the body template. The suivi itself has four types:
+
+| Classification | `type` | Default `priorite` |
+|----------------|--------|--------------------|
+| BUG | `bug` | `haute` |
+| HOTFIX | `bug` | `haute` |
+| TECH-DEBT | `tache` | `basse` |
+| FEATURE | `tache` | `normale` |
+| IDÉE | `idee` | `normale` |
+
+---
+
 ## Examples by Type
 
 ### BUG

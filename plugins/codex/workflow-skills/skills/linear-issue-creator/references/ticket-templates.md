@@ -1,19 +1,18 @@
-# Linear Issue Templates — DEV-007
+# Ticket Body Templates
 
-Source: `[DOC]-Laizy/08-Dev/Linear/DEV-007-Linear-Templates.md`
-Last sync: 2026-05-13
+Five templates for the body (`corps`) of a ticket in the suivi. They come from the agency's former Linear templates (DEV-007, 2026-05-13), adapted on 2026-11-11: no label, no state, no `le ticket` number.
 
-Copy the section headers **exactly** when filling templates. Do not rename, reorder, or skip sections.
+Copy the section headers **exactly** when filling templates. Do not rename, reorder, or skip sections. The title, type and priority shown above each template are the fields to pass to `suivi_creer_ticket`, not text of the body.
 
 ---
 
 ## Template 1 — Feature
 
-**Labels**: `Feature` | **Priority**: Medium (3) | **State**: `À clarifier`
+**type**: `tache` | **priorite**: `normale`
 
 ### Title
 ```
-[Feature] Titre court et clair
+Titre court et clair
 ```
 
 ### Description
@@ -45,7 +44,7 @@ _Description fonctionnelle de la feature en quelques phrases._
 - [ ] Plan : `FEAT-XXX-Plan.md`
 
 ### Phase Implémentation
-- [ ] Branche : `feature/LAI-XXX-slug-feature`
+- [ ] Branche : `feature/slug-feature`
 - [ ] Test plan : `FEAT-XXX-Test-Plan.md`
 
 ### Phase Tests
@@ -64,11 +63,11 @@ _Description fonctionnelle de la feature en quelques phrases._
 
 ## Template 2 — Bug
 
-**Labels**: `Bug` | **Priority**: High (2) | **State**: `À clarifier`
+**type**: `bug` | **priorite**: `haute`
 
 ### Title
 ```
-[Bug] Description courte du symptôme
+Description courte du symptôme
 ```
 
 ### Description
@@ -107,7 +106,7 @@ _Que se passe-t-il ? Décrire ce qui ne marche pas._
 - [ ] Analyse cause racine : `[DOC]-Laizy/10-Archives/BUG-XXX-NomBug/BUG-XXX-Analysis.md`
 
 ### Phase Implémentation
-- [ ] Branche : `fix/LAI-XXX-slug-bug`
+- [ ] Branche : `fix/slug-bug`
 - [ ] Test de non-régression ajouté
 
 ### Phase Tests
@@ -128,11 +127,11 @@ _Que se passe-t-il ? Décrire ce qui ne marche pas._
 
 ## Template 3 — Tech-Debt
 
-**Labels**: `tech-debt`, `refactor` | **Priority**: Low (4) | **State**: `À clarifier`
+**type**: `tache` | **priorite**: `basse`
 
 ### Title
 ```
-[Tech-Debt] Description courte du problème technique
+Description courte du problème technique
 ```
 
 ### Description
@@ -183,7 +182,7 @@ _Comment on aimerait que ce soit après ?_
 - [ ] Plan de refacto : `[DOC]-Laizy/10-Archives/TECH-XXX-NomRefacto/TECH-XXX-Plan.md`
 
 ### Phase Implémentation
-- [ ] Branche : `refactor/LAI-XXX-slug`
+- [ ] Branche : `refactor/slug`
 - [ ] Tests de non-régression couvrant les zones touchées
 
 ### Phase Tests
@@ -194,11 +193,11 @@ _Comment on aimerait que ce soit après ?_
 
 ## Template 4 — Idée
 
-**Labels**: `Improvement` | **Priority**: No priority (0) | **State**: `À clarifier`
+**type**: `idee` | **priorite**: `normale`
 
 ### Title
 ```
-[Idée] Description courte de l'idée
+Description courte de l'idée
 ```
 
 ### Description
@@ -241,11 +240,11 @@ _Si l'idée est déjà un peu cuite, listez les directions._
 
 ## Template 5 — Hotfix
 
-**Labels**: `Bug` | **Priority**: Urgent (1) | **State**: `À clarifier`
+**type**: `bug` | **priorite**: `haute` (titre commençant par « Urgence : »)
 
 ### Title
 ```
-[Hotfix] Description courte de l'urgence
+Urgence : description courte
 ```
 
 ### Description
@@ -278,7 +277,7 @@ _Y a-t-il un contournement provisoire pour les users en attendant le fix ?_
 
 > ⚠️ Pour les hotfix, on **court-circuite** la phase Spec/Plan complète. L'implémentation peut commencer immédiatement.
 
-- [ ] Branche : `hotfix/LAI-XXX-slug`
+- [ ] Branche : `hotfix/slug`
 - [ ] Tag de release prévu : `vX.Y.Z+1` (patch version)
 - [ ] Communication client / interne envoyée
 - [ ] Post-mortem prévu après le fix

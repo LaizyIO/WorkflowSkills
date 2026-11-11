@@ -1,15 +1,19 @@
 ---
 name: linear-issue-creator
-description: Create well-formed Linear issues on command for any project. Accepts a GitHub URL or local disk path as project context, explores the codebase and documentation adaptively, then creates a structured issue using DEV-007 templates (Bug, Feature, Tech-Debt, Idée, Hotfix) via the Linear MCP.
+description: Create well-formed tickets in the project's shared tracking (Slipstream "suivi") on command. Accepts a GitHub URL or local disk path as project context, explores the codebase and documentation adaptively, then creates a structured ticket (Bug, Feature, Tech-Debt, Idée, Hotfix templates) via the "suivi" MCP server. Linear is no longer used; the skill keeps its historical name.
 ---
 
-# Linear Issue Creator Skill
+# Ticket Creator Skill (formerly Linear Issue Creator)
 
 ## Purpose
 
-Transform a natural-language request into a fully-structured Linear issue. The skill discovers and explores the target project — from GitHub or a local path — before writing, so the issue description contains real, sourced technical content rather than placeholders.
+Transform a natural-language request into a fully-structured ticket in the **suivi** of the project: the shared tracking that Slipstream keeps in the `suivi` branch of the project's repository (tickets, journal, state). The skill discovers and explores the target project — from GitHub or a local path — before writing, so the ticket contains real, sourced technical content rather than placeholders.
 
-**Always runs in the main Claude Code session** (never as a sub-agent), because it calls `mcp__linear-server__save_issue` directly.
+**Linear is abandoned** (agency decision of 2026-11-10: tickets live in the project's suivi). This skill no longer calls any Linear tool. It keeps the name `linear-issue-creator` so that existing installs and habits keep working.
+
+**Always runs in the main Claude Code session** (never as a sub-agent), because it calls the `suivi` MCP tools directly (`suivi_projets`, `suivi_lister_tickets`, `suivi_creer_ticket`).
+
+**Prerequisite**: the `suivi` MCP server is registered in Claude Code (installed from Slipstream, screen « Poste »). If its tools are not available, stop and tell the user: « Le serveur de suivi n'est pas installé : ouvre Slipstream, écran Poste, ligne Serveur de suivi. » Never fall back to Linear, to a file written by hand, or to git.
 
 ---
 
@@ -17,8 +21,9 @@ Transform a natural-language request into a fully-structured Linear issue. The s
 
 Minimum:
 ```
-"Crée une issue pour [description libre]"
-"Issue sur [sujet]"
+"Crée un ticket pour [description libre]"
+"Ticket sur [sujet]"
+"Crée une issue pour [description libre]"   ← still understood
 ```
 
 Optional enrichments:
@@ -26,13 +31,14 @@ Optional enrichments:
   - GitHub URL: `https://github.com/org/repo`
   - Local path: `D:\Projects\my-app` or `/home/user/my-app`
   - Current working directory (implicit if not specified)
-- **Linear project name**: which Linear project to file the issue under (e.g. `Rikka`, `Desktop App`)
+- **Project name in the suivi**: the name Slipstream knows the project by (e.g. `Rikka`, `NAE`)
 - **Type hint**: "c'est un bug" / "feature" / "tech-debt" / "hotfix" / "idée"
 - **Priority hint**: "urgent" / "important" / "mineur"
-- **Source label**: "remontée client" / "idée PO" / dev interne
+- **Due date**: "pour jeudi", "avant le 20"
+- **Assignee**: "pour Tom"
 
 **If neither a GitHub URL nor a local path is given**, and the request topic does not obviously match the current working directory, ask the user:
-> "Sur quel projet dois-je créer cette issue ? Donne-moi une URL GitHub ou un chemin local."
+> "Sur quel projet dois-je créer ce ticket ? Donne-moi son nom, une URL GitHub ou un chemin local."
 
 ---
 
@@ -98,6 +104,16 @@ This fingerprint guides exploration in Step 2.
 
 ---
 
+#### Resolve the project in the suivi
+
+Call `suivi_projets` once. It lists the projects Slipstream knows, their folder, and whether their suivi is activated.
+
+- Match the target project by folder path first, then by name (case-insensitive).
+- **Suivi not activated** for that project → stop and tell the user: « Le suivi partagé de {projet} n'est pas activé : active-le dans Slipstream (fiche du projet, ligne Suivi partagé). » Do not create the ticket elsewhere.
+- **Project unknown to Slipstream** → ask which project to use, or tell the user to add it in Slipstream. Never file a ticket in another project by default.
+
+---
+
 ### Step 1: Classify the Issue Type
 
 Apply this decision tree (first match wins):
@@ -125,14 +141,27 @@ Otherwise (vague, exploratory, "tester si…", "voir pour…", beneficiary or sc
 
 The user's type hint is a **clue, not a verdict**. Apply the tree and justify any override.
 
+The user's type hint is a **clue, not a verdict**. Apply the tree and justify any override.
+
+The suivi has four ticket types and three priorities. Map the classification onto them:
+
+| Classification | `type` in the suivi | Default `priorite` | Template used for the body |
+|----------------|--------------------|--------------------|----------------------------|
+| BUG | `bug` | `haute` | Bug |
+| HOTFIX | `bug` | `haute` | Hotfix |
+| TECH-DEBT | `tache` | `basse` | Tech-Debt |
+| FEATURE | `tache` | `normale` | Feature |
+| IDÉE | `idee` | `normale` | Idée |
+
+A plain reminder with nothing to specify ("rappelle-moi de…", "prépare-moi ça pour demain") is not this skill's job: create it directly with `suivi_creer_ticket`, type `rappel`, no template.
+
 **Priority mapping:**
 
-| User hint | Value |
-|-----------|-------|
-| "urgent" / "prod cassée" / "bloquant" | 1 (Urgent) |
-| "important" / "high" | 2 (High) |
-| no hint | Template default — Bug→2, Feature→3, Tech-Debt→4, Idée→0, Hotfix→1 |
-| "mineur" / "nice to have" / "low" | 4 (Low) |
+| User hint | `priorite` |
+|-----------|-----------|
+| "urgent" / "prod cassée" / "bloquant" / "important" / "high" | `haute` |
+| no hint | Default of the table above |
+| "mineur" / "nice to have" / "low" | `basse` |
 
 ---
 
@@ -218,11 +247,17 @@ Never invent file paths, function names, table names, or behaviors.
 
 ---
 
-### Step 3: Build the Issue
+#### 2e. Existing tickets
+
+Before writing, call `suivi_lister_tickets` for the project (default: open tickets) and look for one that already covers the subject. See « Potential duplicate » below.
+
+---
+
+### Step 3: Build the Ticket
 
 #### 3a. Fill the correct template
 
-Use the exact template structure from `references/linear-templates.md`. Copy section headers verbatim.
+Use the exact template structure from `references/ticket-templates.md`. Copy section headers verbatim. The filled template is the ticket's body (`corps`).
 
 **Filling rules:**
 
@@ -240,56 +275,57 @@ Use the exact template structure from `references/linear-templates.md`. Copy sec
 - For Hotfix: keep criteria minimal — fix, test, post-mortem
 
 **Artifacts section**:
-- Keep `FEAT-XXX` / `BUG-XXX` / `TECH-XXX` as literal placeholders
-- Branch slug: derive from issue title, kebab-case
-- Write `feature/LAI-XXX-slug` — the actual LAI number is assigned after creation
+- Keep `FEAT-XXX` / `BUG-XXX` / `TECH-XXX` as literal placeholders, unless the feature reference is known
+- Branch slug: derive from the ticket title, kebab-case: `feature/slug-court`, `fix/slug-court`, `hotfix/slug-court`, `refactor/slug-court`
 
 **Links section**:
 - Fill with actual file paths and doc references found
 - Use `(à remplir)` only when genuinely nothing was found
 
-#### 3b. Compose title and labels
+#### 3b. Compose the fields
 
-**Title**: `[{Type}] Titre court et clair` — under 80 characters, correct French, describes the outcome.
-
-**Labels** (from `references/linear-workflow.md`):
-
-| Group | Rule |
+| Field | Rule |
 |-------|------|
-| Type | One — must match template: `Feature` / `Bug` / `Improvement` / `tech-debt` / `refactor` |
-| Area | At most **one** primary area: `frontend` / `backend` / `api` / `infra` |
-| Source | One — default `from-dev` unless user says otherwise |
+| `titre` | Short and clear, under 80 characters, correct French, describes the outcome. No `[Type]` prefix: the type is a field. For a Hotfix, start with « Urgence : ». |
+| `type` | From the table of Step 1 |
+| `priorite` | From the table of Step 1, adjusted by the user's hint |
+| `echeance` | Only if the user gave one. Resolve relative dates ("jeudi", "demain") to `AAAA-MM-JJ` from today's date. Never invent a due date. |
+| `assigne` | Only if the user named someone |
+| `feature` | The `FEAT-XXX` reference when the ticket belongs to a documented feature of the project (found in its vault). This is what links the ticket to its progress in Slipstream. |
+| `corps` | The filled template |
 
-Only use existing Linear labels. Do not invent new ones.
+The area (frontend, backend, api, infra) and the origin (client, PO, dev) are not fields of the suivi: write them in the first lines of the body when they matter.
 
 ---
 
-### Step 4: Create the Issue via MCP
+### Step 4: Create the Ticket via MCP
 
 ```
-mcp__linear-server__save_issue:
-  team: "LaizyDev"
-  project: "{Linear project name}"
-  title: "{normalized title}"
-  description: "{filled template — literal newlines, not \n}"
-  priority: {0–4}
-  labels: ["{type}", "{area if known}", "{source}"]
-  state: "À clarifier"
+suivi_creer_ticket:
+  projet: "{project name from suivi_projets}"
+  titre: "{title}"
+  type: "bug" | "tache" | "idee"
+  priorite: "haute" | "normale" | "basse"
+  echeance: "AAAA-MM-JJ"        ← only if given
+  assigne: "{person}"          ← only if given
+  feature: "FEAT-XXX"           ← only if known
+  corps: "{filled template — literal newlines, not \n}"
 ```
 
 Rules:
-- **No `id` parameter** → creates new issue (never updates)
-- **state always `À clarifier`** → never set another state at creation
-- **project** → ask user if not specified and cannot be inferred
+- **One call, one ticket.** The tool always creates; it never updates an existing ticket.
+- **A new ticket is always open.** Its status is not a parameter; it changes later in Slipstream or with `suivi_clore_ticket`.
+- **Never touch git.** The server writes a file in Slipstream's copy of the suivi; Slipstream sends it to the team at its next synchronisation. Do not commit, push, or edit files of the `suivi` branch by hand.
 
 ---
 
 ### Step 5: Post-Creation Report
 
 Tell the user:
-1. Issue identifier (`LAI-XXX`), title, URL
+1. Ticket identifier (`T-AAMMJJ-XXX`), title, project
 2. Type chosen + one-line justification (especially if it differs from the user's hint)
 3. Any flags: potential duplicate found, sections left as "_à préciser_", uncertain classification
+4. That the ticket is shared with the team at Slipstream's next synchronisation (repeat what the tool answered; if it said the project is read-only or the app is closed, say so)
 
 ---
 
@@ -297,23 +333,25 @@ Tell the user:
 
 ### Potential duplicate
 
-If research reveals an existing issue or feature covering the same topic:
-- Report it before creating: "LAI-XX semble couvrir X — je crée quand même ou je complète celle-là ?"
+If `suivi_lister_tickets` or the research reveals an existing ticket or feature covering the same topic:
+- Report it before creating: "T-261104-K7Q semble couvrir X — je crée quand même ou on complète celui-là ?"
 - Wait for user confirmation before creating.
 
-### Issue spans multiple areas
+### Ticket spans multiple areas
 
-Pick the **primary** area label only. Note the secondary area in the description text.
+Name the primary area first in the body, and the secondary one after it.
 
 ### Request too vague to research
 
-Create the issue with skeleton template, write `"_À préciser avec le PO/dev d'origine — contexte non retrouvé dans le code ou la doc_"` in affected sections. Flag clearly in the post-creation report.
+Create the ticket with the skeleton template, write `"_À préciser avec le PO/dev d'origine — contexte non retrouvé dans le code ou la doc_"` in affected sections. Flag clearly in the post-creation report.
 
-### Project not in Linear
+### Project without suivi, or unknown to Slipstream
 
-If the user names a project that doesn't exist in Linear:
-- Ask: "Le projet '{name}' n'existe pas dans Linear. Quel projet Linear dois-je utiliser ?"
-- Never create an issue in the wrong project.
+See « Resolve the project in the suivi » in Step 0. Never create the ticket in another project.
+
+### The tool refuses
+
+Repeat the tool's message to the user as it is (unknown project, suivi not activated, invalid date). Do not retry with different values to make it pass.
 
 ### GitHub URL — `gh` not available or auth failure
 
@@ -330,19 +368,19 @@ If `gh api` returns an error (not installed, not authenticated, repo not found):
 2. **No product decisions** — classify and structure; never decide priority, scope, or go/no-go
 3. **Correct French** — titles, descriptions, all written content in French (accents required)
 4. **Template fidelity** — copy section headers exactly, do not invent sections
-5. **State is immutable at creation** — always `À clarifier`
-6. **Labels discipline** — only existing Linear labels, at most one Area label
+5. **The suivi only** — never Linear, never a file written by hand, never git
+6. **No invented fields** — no due date, assignee or feature reference the user or the project did not give
 7. **Research before writing** — explore first, fill second
 
 ---
 
 ## Integration with Other Skills
 
-This skill is standalone. Once an issue is created and the lead moves it to `Prêt à prendre`, the standard feature workflow begins:
+This skill is standalone. Once a ticket exists and the lead decides to take it, the standard feature workflow begins:
 
 ```
-linear-issue-creator  →  LAI-XXX created in "À clarifier"
-                          ↓ Lead: moves to "Prêt à prendre"
+linear-issue-creator  →  ticket T-AAMMJJ-XXX, open, in the project's suivi
+                          ↓ Lead: decides to take it
 feature-specification →  CDC.md
 feature-research      →  Findings.md
 implementation-planner→  Plan.md
@@ -350,10 +388,12 @@ feature-implementer   →  Code
 test-executor/fixer   →  Validation
 ```
 
+When the ticket carries a `feature` reference, Slipstream shows its progress from the documents these skills leave in the project's vault.
+
 ---
 
 ## Bundled Resources
 
-- `references/linear-templates.md` — 5 DEV-007 templates (exact structure to copy)
-- `references/linear-workflow.md` — Labels, statuses, projects, GitFlow conventions
+- `references/ticket-templates.md` — 5 templates for the ticket body (exact structure to copy)
+- `references/suivi-conventions.md` — Ticket fields, types, priorities, statuses, branch naming
 - `references/issue-classification.md` — Classification tree with examples and edge cases
